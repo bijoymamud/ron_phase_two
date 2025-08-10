@@ -20,6 +20,7 @@ import {
   DollarSignIcon,
   UsersIcon,
 } from "lucide-react";
+import ActivityTest from "../AdminDashboard/ActivityTest";
 
 // Month names for X-axis
 const monthNames = [
@@ -102,7 +103,6 @@ export default function SuperAdminHome() {
           bgColor="bg-green-50"
         />
       </div>
-
       {/* Revenue Chart */}
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div className="p-6">
@@ -174,9 +174,10 @@ export default function SuperAdminHome() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
+
+          <h1></h1>
         </div>
       </div>
-
       {/* Submissions Chart */}
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div className="p-6">
@@ -256,6 +257,9 @@ export default function SuperAdminHome() {
           </div>
         </div>
       </div>
+
+      {/* tabs */}
+      <ActivityTest />
     </div>
   );
 }
