@@ -366,6 +366,7 @@ import { useGetLoggedUserQuery } from "../../redux/features/baseApi";
 import { setUser } from "../../redux/slice/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Loading/Loading";
+import { CgNotes } from "react-icons/cg";
 
 export default function Dashboard() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -430,6 +431,11 @@ export default function Dashboard() {
           name: "Admin Management",
           icon: <FiUsers size={20} />,
           path: "/super_admin/admin_management",
+        },
+        {
+          name: "Package Management",
+          icon: <CgNotes size={20} />,
+          path: "/super_admin/package_management",
         },
       ],
     },

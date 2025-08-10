@@ -87,6 +87,7 @@ import React from "react";
 import { tr } from "framer-motion/client";
 import SuperAdminHome from "../Pages/AdminLogin/SuperAdminHome";
 import AdminManagment from "../Pages/AdminDashboard/AdminManagment";
+import PackageManagment from "../Pages/AdminDashboard/PackageManagment";
 
 const Home = React.lazy(() => import("../Pages/Home/Home"));
 const AboutUs = React.lazy(() => import("../Pages/AboutUs/AboutUs"));
@@ -554,6 +555,7 @@ export const router = createBrowserRouter([
       { index: true, element: <SuperAdminHome /> },
       { path: "super_admin_home", element: <SuperAdminHome /> },
       { path: "admin_management", element: <AdminManagment /> },
+      { path: "package_management", element: <PackageManagment /> },
     ],
   },
 ]);
