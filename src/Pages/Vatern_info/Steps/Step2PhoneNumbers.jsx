@@ -2,7 +2,13 @@ import { useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-export default function Step2PhoneNumbers({ register, errors, setValue, watch, trigger }) {
+export default function Step2PhoneNumbers({
+  register,
+  errors,
+  setValue,
+  watch,
+  trigger,
+}) {
   const internationalPhoneNumber = watch("International_Phone_Number[0]");
 
   useEffect(() => {
@@ -15,7 +21,6 @@ export default function Step2PhoneNumbers({ register, errors, setValue, watch, t
 
   return (
     <div className="space-y-6">
-
       <div className="form-control">
         <label className="label">
           <span className="label-text font-medium md:text-base dark:text-black text-[12px] pb-1">
@@ -23,27 +28,50 @@ export default function Step2PhoneNumbers({ register, errors, setValue, watch, t
           </span>
         </label>
 
+        {/* <PhoneInput
+          country={"us"}
+          value={internationalPhoneNumber}
+          onChange={(phone) => {
+            const cleanedPhone = phone.replace(/\s+/g, "");
+            setValue("International_Phone_Number[0]", cleanedPhone, {
+              shouldValidate: true,
+              shouldDirty: true,
+            });
+            trigger("International_Phone_Number[0]");
+          }}
+          inputProps={{
+            name: "International_Phone_Number[0]",
+            required: true,
+            className:
+              "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
+          }}
+          containerClass="w-full"
+          specialLabel={false}
+        /> */}
 
-<PhoneInput
-  country={"us"}
-  value={internationalPhoneNumber}
-  onChange={(phone) => {
-    const cleanedPhone = phone.replace(/\s+/g, ""); 
-    setValue("International_Phone_Number[0]", cleanedPhone, {
-      shouldValidate: true,
-      shouldDirty: true,
-    });
-    trigger("International_Phone_Number[0]");
-  }}
-  inputProps={{
-    name: "International_Phone_Number[0]",
-    required: true,
-    className:
-      "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
-  }}
-  containerClass="w-full"
-  specialLabel={false}
-/>
+        <PhoneInput
+          country={"us"}
+          value={internationalPhoneNumber}
+          onChange={(phone) => {
+            const cleanedPhone = phone.replace(/\s+/g, "");
+            setValue("International_Phone_Number[0]", cleanedPhone, {
+              shouldValidate: true,
+              shouldDirty: true,
+            });
+            trigger("International_Phone_Number[0]");
+          }}
+          inputProps={{
+            name: "International_Phone_Number[0]",
+            required: true,
+            className:
+              "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
+          }}
+          containerClass="w-full"
+          buttonClass="!bg-white !text-black" // force dropdown area to have white background and black text
+          dropdownClass="!bg-white !text-black" // force dropdown menu text to be black
+          specialLabel={false}
+        />
+
         <input
           type="hidden"
           {...register("International_Phone_Number[0]", {
@@ -59,8 +87,6 @@ export default function Step2PhoneNumbers({ register, errors, setValue, watch, t
           </label>
         )}
       </div>
-
-   
     </div>
   );
 }

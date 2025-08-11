@@ -89,7 +89,7 @@ export default function Step1PersonalInfo({ register, errors }) {
                 message: "Invalid email format",
               },
             })}
-            className={`input input-bordered py-5 w-full pl-10 focus:ring-2 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-primary focus:border-primary ${
+            className={`input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-0 ${
               errors.EMAIL_ADDRESS?.[0] ? "input-error" : ""
             }`}
             placeholder="Enter your email address"
@@ -126,7 +126,7 @@ export default function Step1PersonalInfo({ register, errors }) {
                 message: "Invalid email format",
               },
             })}
-            className="input input-bordered py-5 w-full pl-10 border-gray-400 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-2 focus:ring-primary focus:border-primary"
+            className="input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-0"
             placeholder="Enter alternate email (optional)"
           />
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">

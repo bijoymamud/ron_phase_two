@@ -1,9 +1,7 @@
-
-
-import React from 'react';
+import React from "react";
 import mentalLogo from "../../assets/mental_health_logo.png";
-import { Link, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const MedicalPositionDetails = () => {
   const {
@@ -24,7 +22,7 @@ const MedicalPositionDetails = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-[85vh] md:min-h-screen bg-gray-100 pt-14 md:pt-0  ">
+    <div className="flex justify-center items-center min-h-[85vh] md:min-h-screen bg-gray-100 pt-14  mt-10 md:pt-20  ">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
         <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
@@ -35,17 +33,25 @@ const MedicalPositionDetails = () => {
               className="w-32 h-32 object-cover"
             />
           </div>
-          <h1 className="text-white text-2xl font-medium mt-2">Mental Health</h1>
+          <h1 className="text-white text-2xl font-medium mt-2">
+            Mental Health
+          </h1>
         </div>
 
         {/* Form Section */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 px-1 md:px-0">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4 px-1 md:px-0"
+        >
           {/* Main Question */}
           <label className="block text-lg font-medium text-gray-700">
-            Did You Work In A Medical Position Or Other Position Where You Witnessed Severe Accidents/Deaths Frequently?
+            Did You Work In A Medical Position Or Other Position Where You
+            Witnessed Severe Accidents/Deaths Frequently?
             <select
-              {...register("livesAccident", { required: "This field is required" })}
-              className={`mt-1 block w-full uppercase p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${
+              {...register("livesAccident", {
+                required: "This field is required",
+              })}
+              className={`mt-1 block w-full uppercase p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md  text-sm ${
                 errors.livesAccident ? "border-red-500" : ""
               }`}
               defaultValue=""
@@ -74,7 +80,7 @@ const MedicalPositionDetails = () => {
                     required: "This field is required",
                   })}
                   type="date"
-                  className={`mt-1 block uppercase w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${
+                  className={`mt-1 block uppercase w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md text-sm [appearance:auto] [&::-webkit-calendar-picker-indicator]:bg-transparent [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-100 dark:[&::-webkit-calendar-picker-indicator]:invert ${
                     errors.incidentDates ? "border-red-500" : ""
                   }`}
                   placeholder="MM/DD/YYYY"
@@ -94,7 +100,7 @@ const MedicalPositionDetails = () => {
                     required: "This field is required",
                   })}
                   type="text"
-                  className={`mt-1 block uppercase w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm ${
+                  className={`mt-1 block uppercase w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md  text-sm ${
                     errors.incidentLocation ? "border-red-500" : ""
                   }`}
                   placeholder="Enter location"
@@ -141,7 +147,7 @@ const MedicalPositionDetails = () => {
                   {...register("incidentDetails", {
                     required: "This field is required",
                   })}
-                  className={`mt-1 block w-full p-2 dark:bg-white uppercase dark:border-black dark:text-black border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm h-32 resize-none ${
+                  className={`mt-1 block w-full p-2 dark:bg-white uppercase dark:border-black dark:text-black border border-gray-300 rounded-md  text-sm h-32 resize-none ${
                     errors.incidentDetails ? "border-red-500" : ""
                   }`}
                   placeholder="Enter details here..."
@@ -157,28 +163,25 @@ const MedicalPositionDetails = () => {
 
           {/* Buttons */}
           <div className="flex justify-center gap-4 md:mt-20 pb-10 md:pb-0 items-center">
-         
-                     <div className="w-[165px] md:w-[200px]">
-                       <Link
-                         to="#"
-                         onClick={() => window.history.back()}
-                         className="w-full block text-center bg-white text-blue-800 py-2 border border-blue-800 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold"
-                       >
-                         Back
-                       </Link>
-                     </div>
-         
-                     <div className="w-[150px] md:w-[200px]">
-                       <button
-                         type="submit"
-                          
-                         className="w-full bg-[#B31942] text-white uppercase py-2 rounded-md hover:bg-[#aa2b4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-semibold"
-                       >
-                         Continue
-                       </button>
-                     </div>
-                    
-                   </div>
+            <div className="w-[165px] md:w-[200px]">
+              <Link
+                to="#"
+                onClick={() => window.history.back()}
+                className="w-full block text-center bg-white text-blue-800 py-2 border border-blue-800 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold"
+              >
+                Back
+              </Link>
+            </div>
+
+            <div className="w-[150px] md:w-[200px]">
+              <button
+                type="submit"
+                className="w-full bg-[#B31942] text-white uppercase py-2 rounded-md hover:bg-[#aa2b4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-semibold"
+              >
+                Continue
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

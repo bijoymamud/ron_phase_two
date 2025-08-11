@@ -124,10 +124,14 @@ export default function Step5Address({ register, errors }) {
           className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
           placeholder="12345"
         />
+
         {errors.MailingAddress_ZIPOrPostalCode_FirstFiveNumbers?.[0] && (
           <label className="label">
             <span className="label-text-alt text-error text-sm md:text-base pt-1">
-              {errors.MailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0].message}
+              {
+                errors.MailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]
+                  .message
+              }
             </span>
           </label>
         )}

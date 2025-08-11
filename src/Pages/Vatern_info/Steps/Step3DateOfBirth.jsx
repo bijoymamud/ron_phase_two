@@ -8,61 +8,73 @@ export default function Step3DateOfBirth({ register, errors }) {
           </span>
         </label>
         <div className="flex space-x-2">
-     
-<input
-  type="text"
-  inputMode="numeric"
-  pattern="\d*"
-  maxLength={2}
-  {...register("DOB_Month[0]", {
-    required: "Month is required",
-    pattern: {
-      value: /^(0[1-9]|1[0-2])$/,
-      message: "Invalid month (01-12)",
-    },
-  })}
-  onInput={(e) => {
-    if (e.target.value.length === 1 && e.target.value > '1') {
-      e.target.value = '0' + e.target.value;
-    }
-    if (parseInt(e.target.value) > 12) {
-      e.target.value = '12';
-    }
-  }}
-  className="input input-bordered dark:bg-white dark:border-black dark:text-black w-1/3 py-5"
-  placeholder="MM"
-/>
-
+          <input
+            type="text"
+            inputMode="numeric"
+            pattern="\d*"
+            maxLength={2}
+            {...register("DOB_Month[0]", {
+              required: "Month is required",
+              pattern: {
+                value: /^(0[1-9]|1[0-2])$/,
+                message: "Invalid month (01-12)",
+              },
+            })}
+            onBeforeInput={(e) => {
+              if (!/^\d$/.test(e.data)) {
+                e.preventDefault(); // block non-digit before it appears
+              }
+            }}
+            onInput={(e) => {
+              const val = e.target.value.replace(/\D/g, ""); // remove non-digits from paste
+              if (val.length === 1 && parseInt(val) > 1) {
+                e.target.value = "0" + val;
+              } else if (parseInt(val) > 12) {
+                e.target.value = "12";
+              } else {
+                e.target.value = val;
+              }
+            }}
+            className="input input-bordered dark:bg-white dark:border-black dark:text-black w-1/3 py-5"
+            placeholder="MM"
+          />
 
           <input
-  type="text"
-  inputMode="numeric"
-  pattern="\d*"
-  maxLength={2}
-  {...register("DOB_Day[0]", {
-    required: "Day is required",
-    pattern: {
-      value: /^(0[1-9]|[12][0-9]|3[01])$/,
-      message: "Invalid day (01-31)",
-    },
-  })}
-  onInput={(e) => {
-    const val = e.target.value.replace(/\D/g, "");
-    if (val.length === 1 && parseInt(val) > 3) {
-      e.target.value = "0" + val;
-    } else if (parseInt(val) > 31) {
-      e.target.value = "31";
-    }
-  }}
-  className="input input-bordered dark:bg-white dark:border-black dark:text-black w-1/3 py-5"
-  placeholder="DD"
-/>
+            type="text"
+            inputMode="numeric"
+            pattern="\d*"
+            maxLength={2}
+            {...register("DOB_Day[0]", {
+              required: "Day is required",
+              pattern: {
+                value: /^(0[1-9]|[12][0-9]|3[01])$/,
+                message: "Invalid day (01-31)",
+              },
+            })}
+            onBeforeInput={(e) => {
+              if (!/^\d$/.test(e.data)) {
+                e.preventDefault();
+              }
+            }}
+            onInput={(e) => {
+              const val = e.target.value.replace(/\D/g, "");
+              if (val.length === 1 && parseInt(val) > 3) {
+                e.target.value = "0" + val;
+              } else if (parseInt(val) > 31) {
+                e.target.value = "31";
+              } else {
+                e.target.value = val;
+              }
+            }}
+            className="input input-bordered dark:bg-white dark:border-black dark:text-black w-1/3 py-5"
+            placeholder="DD"
+          />
 
           <input
-          type="text"
-         inputMode="numeric"
-          pattern="\d*"
-           maxLength={4}
+            type="text"
+            inputMode="numeric"
+            pattern="\d*"
+            maxLength={4}
             {...register("DOB_Year[0]", {
               required: "Year is required",
               pattern: {
@@ -70,7 +82,15 @@ export default function Step3DateOfBirth({ register, errors }) {
                 message: "Invalid year (e.g., 1990)",
               },
             })}
-
+            onBeforeInput={(e) => {
+              if (!/^\d$/.test(e.data)) {
+                e.preventDefault(); // block non-digit characters
+              }
+            }}
+            onInput={(e) => {
+              const val = e.target.value.replace(/\D/g, ""); // remove non-digits
+              e.target.value = val;
+            }}
             className="input input-bordered dark:bg-white dark:border-black dark:text-black w-1/3 py-5"
             placeholder="YYYY"
           />
