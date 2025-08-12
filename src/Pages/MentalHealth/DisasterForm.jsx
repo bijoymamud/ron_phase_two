@@ -23,7 +23,7 @@ const DisasterForm = () => {
     <div className="flex justify-center items-center min-h-[85vh]  md:min-h-screen bg-gray-100  md:pt-0">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
-        <div className="bg-[#002B5C] w-full rounded-lg  p-6  flex flex-col items-center md:mt-32 ">
+        <div className="bg-[#002B5C] w-full rounded-lg  p-6  flex flex-col items-center md:mt-32 mt-28 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -38,9 +38,9 @@ const DisasterForm = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 flex-grow  px-1 md:px-0 md:pt-5 pt-0"
+          className="space-y-4 flex-grow  px-1 md:px-0 md:pt-5 pt-5"
         >
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Did You Ever Experience A Natural Disaster While Serving?
             <select
               {...register("experiencedDisaster", {
@@ -63,7 +63,7 @@ const DisasterForm = () => {
 
           {experiencedDisaster === "yes" && (
             <>
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Dates Of Incident
                 <input
                   type="date"
@@ -81,7 +81,7 @@ const DisasterForm = () => {
                 )}
               </label>
 
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Incident
                 <select
                   {...register("incidentType", {
@@ -107,7 +107,7 @@ const DisasterForm = () => {
               </label>
 
               {/* Names of People Involved */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Names Of Anyone Involved In Incident
                 <input
                   type="text"
@@ -118,7 +118,7 @@ const DisasterForm = () => {
               </label>
 
               {/* Additional Details */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Please Provide As Much Detail As Possible As It Will Help To
                 Strengthen Your Claim.
                 <textarea

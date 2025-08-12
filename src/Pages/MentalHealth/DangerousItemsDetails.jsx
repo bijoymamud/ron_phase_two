@@ -24,7 +24,7 @@ const DangerousItemsDetails = () => {
     <div className="flex justify-center items-center min-h-[85vh]  md:min-h-screen bg-gray-100 pt-14 pb-10 md:pt-32">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section (Centered Image and Text) */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-20 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -40,10 +40,10 @@ const DangerousItemsDetails = () => {
         {/* Form Section */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 flex-grow pt-5 px-1 md:px-0"
+          className="space-y-4 flex-grow md:pt-5 px-1 md:px-0"
         >
           {/* Did You Handle Dangerous Items? */}
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Did You Handle Dangerous Items?
             <select
               {...register("handledDangerousItems", {
@@ -65,7 +65,7 @@ const DangerousItemsDetails = () => {
           {handleDengerousItems === "yes" && (
             <>
               {/* Dates Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Dates Of Incident
                 <input
                   {...register("incidentDates", {
@@ -82,7 +82,7 @@ const DangerousItemsDetails = () => {
               </label>
 
               {/* Location Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Location Of Incident
                 <input
                   {...register("incidentLocation", {
@@ -100,7 +100,7 @@ const DangerousItemsDetails = () => {
               </label>
 
               {/* Type Of Dangerous Items Handled */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Dangerous Items Handled
                 <select
                   {...register("itemType", {
@@ -124,7 +124,7 @@ const DangerousItemsDetails = () => {
                 )}
               </label>
               {/* Names Of Anyone Involved In Incident (If Applicable) */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Names Of Anyone Involved In Incident (If Applicable)
                 <input
                   {...register("involvedNames")}
@@ -140,7 +140,7 @@ const DangerousItemsDetails = () => {
               </label>
 
               {/* Specific Details Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Specific Details Of Incident
                 <textarea
                   {...register("incidentDetails", {

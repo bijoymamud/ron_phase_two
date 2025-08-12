@@ -19,7 +19,7 @@ const ServiceDetails = () => {
     <div className="flex justify-center items-center min-h-[85vh] dark:bg-white md:min-h-screen md:bg-gray-100 ">
       <div className="bg-white md:shadow-md rounded-lg md:p-6 p-2 w-full max-w-4xl space-y-6 pt-14 py-10">
         {/* Header Section */}
-        <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:w-3/6 mx-auto">
+        <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:w-3/6 mx-auto mt-20 md:pt-0">
           <div className="md:w-28 md:h-28 mb-4">
             <img
               src="https://i.ibb.co.com/FLFMyh5F/Group-2147225241.png"

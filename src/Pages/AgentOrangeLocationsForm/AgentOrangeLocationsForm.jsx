@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 function AgentOrangeLocationsForm() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       locations: {
         thailand: false,
@@ -26,38 +30,39 @@ function AgentOrangeLocationsForm() {
       .filter((key) => data.locations[key])
       .map((key) => {
         switch (key) {
-          case 'thailand':
-            return 'Thailand (Any U.S. or Royal Thai Base)';
-          case 'republicOfVietnam':
-            return 'Republic of Vietnam, Including 12 Nautical Miles of Territorial Waters';
-          case 'laos':
-            return 'Laos';
-          case 'cambodia':
-            return 'Cambodia (Mimot, Krek, Kampong Cham Province)';
-          case 'guamOrAmericanSamoa':
-            return 'Guam or American Samoa (Including Territorial Waters)';
-          case 'johnstonAtoll':
-            return 'Johnston Atoll or Any Ship That Visited Johnston Atoll';
-          case 'koreanDMZ':
-            return 'Korean Demilitarized Zone (DMZ)';
-          case 'c123Aircraft':
-            return 'C-123 Aircraft Used For Herbicide Spraying Operations (Air Force and Air Force Reserves)';
+          case "thailand":
+            return "Thailand (Any U.S. or Royal Thai Base)";
+          case "republicOfVietnam":
+            return "Republic of Vietnam, Including 12 Nautical Miles of Territorial Waters";
+          case "laos":
+            return "Laos";
+          case "cambodia":
+            return "Cambodia (Mimot, Krek, Kampong Cham Province)";
+          case "guamOrAmericanSamoa":
+            return "Guam or American Samoa (Including Territorial Waters)";
+          case "johnstonAtoll":
+            return "Johnston Atoll or Any Ship That Visited Johnston Atoll";
+          case "koreanDMZ":
+            return "Korean Demilitarized Zone (DMZ)";
+          case "c123Aircraft":
+            return "C-123 Aircraft Used For Herbicide Spraying Operations (Air Force and Air Force Reserves)";
           default:
             return key;
         }
       });
 
     const submittedData = { locations };
-    console.log('Submitted Data:', submittedData);
-    localStorage.setItem("agentOrangeLocations", JSON.stringify(submittedData))
-    navigate('/toxin_exposure', { state: submittedData });
+    console.log("Submitted Data:", submittedData);
+    localStorage.setItem("agentOrangeLocations", JSON.stringify(submittedData));
+    navigate("/toxin_exposure", { state: submittedData });
   };
 
   return (
     <div className="min-h-screen bg-white flex justify-center items-center  md:p-4 p-2 pt-14 md:mt-10">
       <div className="w-full max-w-4xl md:bg-white md:shadow-md rounded-lg md:p-6">
-        <h1 className="md:text-2xl text-lg font-bold text-blue-800 mb-6 text-center">
-          Did you serve in any of the below herbicide (Agent Orange) hazard locations?
+        <h1 className="md:text-2xl text-lg font-bold text-blue-800 mb-6 text-center pt-20 md:pt-0">
+          Did you serve in any of the below herbicide (Agent Orange) hazard
+          locations?
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -66,23 +71,28 @@ function AgentOrangeLocationsForm() {
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.thailand')}
+                {...register("locations.thailand")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800 ">Thailand (Any U.S. or Royal Thai Base)</span>
+              <span className="text-blue-800 ">
+                Thailand (Any U.S. or Royal Thai Base)
+              </span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.republicOfVietnam')}
+                {...register("locations.republicOfVietnam")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800">Republic of Vietnam, Including 12 Nautical Miles of Territorial Waters</span>
+              <span className="text-blue-800">
+                Republic of Vietnam, Including 12 Nautical Miles of Territorial
+                Waters
+              </span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.laos')}
+                {...register("locations.laos")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
               <span className="text-blue-800">Laos</span>
@@ -90,48 +100,58 @@ function AgentOrangeLocationsForm() {
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.cambodia')}
+                {...register("locations.cambodia")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800">Cambodia (Mimot, Krek, Kampong Cham Province)</span>
+              <span className="text-blue-800">
+                Cambodia (Mimot, Krek, Kampong Cham Province)
+              </span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.guamOrAmericanSamoa')}
+                {...register("locations.guamOrAmericanSamoa")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800">Guam or American Samoa (Including Territorial Waters)</span>
+              <span className="text-blue-800">
+                Guam or American Samoa (Including Territorial Waters)
+              </span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.johnstonAtoll')}
+                {...register("locations.johnstonAtoll")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800">Johnston Atoll or Any Ship That Visited Johnston Atoll</span>
+              <span className="text-blue-800">
+                Johnston Atoll or Any Ship That Visited Johnston Atoll
+              </span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.koreanDMZ')}
+                {...register("locations.koreanDMZ")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800">Korean Demilitarized Zone (DMZ)</span>
+              <span className="text-blue-800">
+                Korean Demilitarized Zone (DMZ)
+              </span>
             </label>
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                {...register('locations.c123Aircraft')}
+                {...register("locations.c123Aircraft")}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <span className="text-blue-800">C-123 Aircraft Used For Herbicide Spraying Operations (Air Force and Air Force Reserves)</span>
+              <span className="text-blue-800">
+                C-123 Aircraft Used For Herbicide Spraying Operations (Air Force
+                and Air Force Reserves)
+              </span>
             </label>
           </div>
 
           {/* Buttons */}
           <div className="flex justify-center gap-5 md:mt-6 md:pt-10 mt-10 pt-10 pb-10 md:pb-0">
-            
             <button
               type="button"
               className="bg-white text-blue-800 py-2 px-6 uppercase md:px-20 md:w-[200px] w-[150px] border border-blue-800 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold"
@@ -154,6 +174,3 @@ function AgentOrangeLocationsForm() {
 }
 
 export default AgentOrangeLocationsForm;
-
-
-

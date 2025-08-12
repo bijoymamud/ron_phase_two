@@ -27,7 +27,7 @@ const CrashAccidentDetails = () => {
     >
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-24 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -43,10 +43,10 @@ const CrashAccidentDetails = () => {
         {/* Form Section */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 flex-grow mt-5 px-1 md:px-0"
+          className="space-y-4 flex-grow  md:mt-5 px-1 md:px-0"
         >
           {/* Question */}
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Did You Ever Clean Up A Crash Or Accident Site?
             <select
               {...register("cleanedCrashSite", {
@@ -69,7 +69,7 @@ const CrashAccidentDetails = () => {
           {cleanedCrashSite === "yes" && (
             <>
               {/* Dates Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Dates Of Incident
                 <input
                   {...register("incidentDates", {
@@ -86,7 +86,7 @@ const CrashAccidentDetails = () => {
               </label>
 
               {/* Location Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Location Of Incident
                 <input
                   {...register("incidentLocation", {
@@ -104,7 +104,7 @@ const CrashAccidentDetails = () => {
               </label>
 
               {/* Type Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Incident
                 <select
                   {...register("incidentType", {
@@ -129,7 +129,7 @@ const CrashAccidentDetails = () => {
               </label>
 
               {/* Names Of Anyone Involved */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Names Of Anyone Involved In Incident (If Applicable)
                 <input
                   {...register("involvedNames")}
@@ -140,7 +140,7 @@ const CrashAccidentDetails = () => {
               </label>
 
               {/* Specific Details */}
-              <label className="block text-lg font-medium text-gray-700 ">
+              <label className="block text-sm font-medium text-gray-700 ">
                 Specific Details Of Incident
                 <textarea
                   {...register("incidentDetails", {

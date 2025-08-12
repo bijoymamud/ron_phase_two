@@ -103,7 +103,7 @@ function IssueDetailsForm() {
     <section className=" md:mb-10 mb-0 px-2 dark:bg-white md:py-28 md:mt-10 mt-0 min-h-[85vh] flex flex-col items-center justify-center">
       <div className=" md:py-20  bg-white flex justify-center items-center md:p-4 p-2">
         <div className="w-full max-w-4xl bg-white md:shadow-md rounded-lg md:p-6">
-          <h1 className="md:text-2xl text-xl font-bold text-blue-800 mb-6 text-center">
+          <h1 className="md:text-2xl text-xl font-bold text-blue-800 mb-6 text-center pt-28 md:pt-0">
             Provide detailed information regarding your selected issue(s)
           </h1>
 

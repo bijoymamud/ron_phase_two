@@ -1,5 +1,3 @@
-
-
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function FormNavigation({
@@ -28,7 +26,7 @@ export default function FormNavigation({
           onClick={onSubmit}
           className="w-full sm:w-[150px] md:w-[180px] bg-[#B31942] hover:bg-[#a52648] text-white py-2 px-4 rounded-md font-semibold flex items-center justify-center gap-2 text-center"
         >
-          <span className="text-sm sm:text-base">Submit</span>
+          <span className="text-sm sm:text-base uppercase">Submit</span>
           <svg
             className="w-4 h-4"
             fill="none"

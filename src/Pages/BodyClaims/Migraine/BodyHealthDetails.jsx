@@ -54,7 +54,7 @@ const BodyHealthDetails = () => {
     <div className="md:min-h-screen min-h-[85vh] dark:bg-white md:bg-gray-100 flex items-center justify-center pt-5 md:p-4">
       <div className="bg-white md:shadow-md rounded-lg md:p-6 p-2 w-full max-w-4xl space-y-6 my-10">
         {/* Header Section */}
-        <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:w-3/6 mx-auto">
+        <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:w-3/6 mx-auto mt-20 md:pt-0">
           <div className="w-28 h-28 mb-4">
             <img
               src="https://i.ibb.co.com/FLFMyh5F/Group-2147225241.png"

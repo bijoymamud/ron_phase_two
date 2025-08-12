@@ -27,7 +27,7 @@ const MedicalTraumaDetails = () => {
     >
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-12 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -45,7 +45,7 @@ const MedicalTraumaDetails = () => {
           className="space-y-4 flex-grow mt-5 px-1 md:px-0"
         >
           {/* Medical Trauma Question */}
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Did You Endure Any Medical Traumas That Still Affect You Mentally
             Today?
             <select
@@ -69,7 +69,7 @@ const MedicalTraumaDetails = () => {
           {endureMedicalTrauma === "yes" && (
             <>
               {/* Dates Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Dates Of Incident
                 <input
                   {...register("incidentDates", {
@@ -86,7 +86,7 @@ const MedicalTraumaDetails = () => {
               </label>
 
               {/* Location Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Location Of Incident
                 <input
                   {...register("incidentLocation", {
@@ -104,7 +104,7 @@ const MedicalTraumaDetails = () => {
               </label>
 
               {/* Type Of Medical Trauma */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Medical Trauma
                 <select
                   {...register("traumaType", {
@@ -125,7 +125,7 @@ const MedicalTraumaDetails = () => {
               </label>
 
               {/* Names Of Anyone Involved */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Names Of Anyone Involved In Incident (If Applicable)
                 <input
                   {...register("involvedNames")}
@@ -136,7 +136,7 @@ const MedicalTraumaDetails = () => {
               </label>
 
               {/* Specific Details */}
-              <label className="block text-lg font-medium text-gray-700 md:pb-10">
+              <label className="block text-sm font-medium text-gray-700 md:pb-10">
                 Specific Details Of Incident
                 <textarea
                   {...register("incidentDetails", {

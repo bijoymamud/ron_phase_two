@@ -44,7 +44,7 @@ const AiNarrativeGen = () => {
       <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
         AI Narrative Generation
       </h2>
-      <p className="text-gray-600 mb-8 text-center max-w-md">
+      <p className="text-gray-600 mb-8 text-center max-w-md md:max-w-lg">
         Use this page to generate AI-powered narratives. Choose an option below
         to continue.
       </p>

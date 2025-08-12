@@ -23,7 +23,7 @@ const AbuseAssaultDetails = () => {
     <div className="flex justify-center items-center min-h-[85vh] md:min-h-screen bg-gray-100 pt-10 md:pb-20 md:pt-32">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-24 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -42,7 +42,7 @@ const AbuseAssaultDetails = () => {
           className="space-y-4 flex-grow md:mt-10 mt-5"
         >
           {/* Abuse Question */}
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Were You Ever Abused/Assaulted During Your Time In Service?
             <select
               {...register("abusedAssaulted", {
@@ -67,7 +67,7 @@ const AbuseAssaultDetails = () => {
           {abusedAssaulted === "yes" && (
             <>
               {/* Date of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Date Of Incident
                 <input
                   {...register("incidentDate", {
@@ -86,7 +86,7 @@ const AbuseAssaultDetails = () => {
               </label>
 
               {/* Type Of Abuse */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Abuse/Assault
                 <select
                   {...register("abuseType", {
@@ -111,7 +111,7 @@ const AbuseAssaultDetails = () => {
               </label>
 
               {/* Names Involved */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Names Of Anyone Involved In Incident
                 <input
                   {...register("involvedNames", {
@@ -131,7 +131,7 @@ const AbuseAssaultDetails = () => {
               </label>
 
               {/* Details */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Specific Details Of Incident
                 <textarea
                   {...register("incidentDetails", {

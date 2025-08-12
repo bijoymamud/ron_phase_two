@@ -106,7 +106,7 @@ export default function Footer() {
         {/* Disclaimer */}
         <div className="text-center">
           <p className="text-gray-400 text-xs leading-relaxed max-w-7xl mx-auto">
-            <span className="text-red-500 font-semibold">DISCLAIMER:</span> VARL
+            <span className="text-red-500 font-semibold">DISCLAIMER:</span> VALR
             IS NOT AN ACCREDITED AGENT AND/OR A POOL OF ATTORNEYS, LAW FIRM OR
             LAW OFFICE. IT IS NOT AN ACCREDITED OR RECOGNIZED VA CLAIM AGENT NOR
             IS IT AN INDIVIDUAL OR ENTITY THAT IS ALLOWED AND ACCREDITED BY THE

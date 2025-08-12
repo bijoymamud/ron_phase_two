@@ -1,7 +1,5 @@
-
-import { Lock, Sparkles } from "lucide-react"
-import { Link } from "react-router-dom"
-
+import { Lock, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NoSubscription = () => {
   return (
@@ -20,10 +18,12 @@ const NoSubscription = () => {
 
           {/* Content */}
           <div className="space-y-3">
-            <h1 className="text-3xl font-bold text-slate-800">Premium Content</h1>
+            <h1 className="text-3xl font-bold text-slate-800">
+              Premium Content
+            </h1>
             <p className="text-slate-600 leading-relaxed">
-              Unlock exclusive features and content with a premium subscription. Join thousands of satisfied users
-              today!
+              Unlock exclusive features and content with a premium subscription.
+              Join thousands of satisfied users today!
             </p>
           </div>
 
@@ -46,16 +46,14 @@ const NoSubscription = () => {
           {/* CTA Button */}
           <button
             asChild
-            className="w-full bg-gradient-to-r from-[#0A3161] to-[#1e40af] hover:from-[#0A3161]/90 hover:to-[#1e40af]/90 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            className="w-full bg-gradient-to-r uppercase from-[#0A3161] to-[#1e40af] hover:from-[#0A3161]/90 hover:to-[#1e40af]/90 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
           >
             <Link to="/">Subscribe Now</Link>
           </button>
-
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NoSubscription
-
+export default NoSubscription;

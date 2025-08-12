@@ -234,8 +234,8 @@ const ESignature = () => {
   };
 
   return (
-    <div className="flex flex-col bg-white dark:bg-white items-center justify-center h-screen py-10 px-4">
-      <h2 className="text-3xl font-bold text-[#0A3161] mb-8 text-center">
+    <div className="flex flex-col bg-white dark:bg-white items-center justify-center min-h-screen py-10 px-4">
+      <h2 className="md:text-3xl text-2xl pt-5 font-bold text-[#0A3161] mb-8 text-center mt-28 md:pt-0">
         SECURE & LEGALLY BINDING E-SIGNATURES <br /> SIGN YOUR VA FORMS WITH
         EASE
       </h2>

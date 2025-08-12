@@ -6,12 +6,12 @@ import reviewThree from "../../assets/review_3.png";
 const EmpoweringVeterans = () => {
   const cards = [
     {
-      title: "TIPS FOR SUCCESSFULLY TRANSITIONING FROM MILITARY TO CIVILIAN LIFE",
+      title:
+        "TIPS FOR SUCCESSFULLY TRANSITIONING FROM MILITARY TO CIVILIAN LIFE",
       description:
         "Transitioning from military to civilian life requires planning, networking, and leveraging available resources to ensure a smooth and successful adjustment.",
       imgSrc: reviewOne,
       alt: "Military to civilian transition",
-      
     },
     {
       title: "HOW TO APPEAL A DENIED CLAIM",
@@ -19,7 +19,6 @@ const EmpoweringVeterans = () => {
         "If your claim has been denied, don’t worry—appealing is your right. Start by reviewing the denial letter to understand the reasons, gather any missing documents or evidence.",
       imgSrc: reviewTwo,
       alt: "Appeal denied claim",
-     
     },
     {
       title: "COMMON MISTAKES VETERANS MAKE WHEN APPLYING FOR BENEFITS",
@@ -27,12 +26,11 @@ const EmpoweringVeterans = () => {
         "Transitioning from military to civilian life requires planning, networking, and leveraging available resources to ensure a smooth and successful adjustment.",
       imgSrc: reviewThree,
       alt: "Mistakes when applying for benefits",
-     
     },
   ];
 
   return (
-    <section className="bg-[#E0F7FF] dark:bg-[#E0F7FF] px-2 md:px-12">
+    <section className="bg-[#E0F7FF] dark:bg-[#E0F7FF] px-2 md:px-12 pt-8">
       <div className="md:container mx-auto text-center">
         <h2 className="md:text-4xl text-2xl font-bold text-[#16437E] mb-8">
           EMPOWERING VETERANS
@@ -58,7 +56,6 @@ const EmpoweringVeterans = () => {
                 width={card.width}
                 height={card.height}
                 loading="lazy" // Lazy-load images below the fold
-                
               />
               <div className="flex-1 md:p-6 p-3">
                 <div>

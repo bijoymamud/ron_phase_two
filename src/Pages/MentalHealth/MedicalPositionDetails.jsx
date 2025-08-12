@@ -25,7 +25,7 @@ const MedicalPositionDetails = () => {
     <div className="flex justify-center items-center min-h-[85vh] md:min-h-screen bg-gray-100 pt-14  mt-10 md:pt-20  ">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-8 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -44,7 +44,7 @@ const MedicalPositionDetails = () => {
           className="space-y-4 px-1 md:px-0"
         >
           {/* Main Question */}
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Did You Work In A Medical Position Or Other Position Where You
             Witnessed Severe Accidents/Deaths Frequently?
             <select
@@ -73,7 +73,7 @@ const MedicalPositionDetails = () => {
           {livesAccident === "yes" && (
             <>
               {/* Dates Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Dates Of Incident
                 <input
                   {...register("incidentDates", {
@@ -93,7 +93,7 @@ const MedicalPositionDetails = () => {
               </label>
 
               {/* Location Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Location Of Incident
                 <input
                   {...register("incidentLocation", {
@@ -113,7 +113,7 @@ const MedicalPositionDetails = () => {
               </label>
 
               {/* Type Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Incident
                 <select
                   {...register("incidentType", {
@@ -141,7 +141,7 @@ const MedicalPositionDetails = () => {
               </label>
 
               {/* Specific Details Of Incident */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Specific Details Of Incident
                 <textarea
                   {...register("incidentDetails", {

@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-import giff_2 from "../../assets/giff_2.mp4"
-
+import giff_2 from "../../assets/giff_2.mp4";
 
 const Banner = () => {
   const user = useSelector((state) => state.chatSlice.user);
@@ -98,7 +97,7 @@ const Banner = () => {
               alt=""
               className="absolute -z-10 "
             />
-            
+
             <video
               autoPlay
               loop
@@ -163,7 +162,7 @@ const Banner = () => {
                 alt=""
                 className="absolute -z-10"
               />
-              
+
               <video
                 autoPlay
                 loop
@@ -198,12 +197,26 @@ const Banner = () => {
             >
               Start Your Claim Now!
             </a>
-            <div className="relative flex justify-center mt-8">
-              <img
-                src="https://i.ibb.co/23fFSDqr/Group-2147226361.png"
-                className="object-cover rounded-2xl px-5"
-                alt="VA Disability Expert"
-              />
+            <div>
+              <div className="relative z-10 basis-6/12 flex items-center justify-center mt-10">
+                <img
+                  src="https://i.ibb.co/4g0GjgTd/Rectangle-22205.png"
+                  loading="lazy"
+                  alt=""
+                  className="absolute -z-10 w-4/5"
+                />
+
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="h-[450px] rounded-[35px] max-w-full "
+                >
+                  <source src={giff_2} type="video/mp4" className="" />
+                  Your browser does not support this video.
+                </video>
+              </div>
             </div>
           </div>
         )}
@@ -213,6 +226,3 @@ const Banner = () => {
 };
 
 export default Banner;
-
-
-

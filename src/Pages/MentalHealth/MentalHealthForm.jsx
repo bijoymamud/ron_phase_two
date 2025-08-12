@@ -20,7 +20,7 @@ export default function MentalHealthForm() {
     <div className="md:min-h-screen min-h-[85vh] p-2 md:p-6 md:pt-32 pt-16 dark:bg-white">
       <div className="max-w-4xl mx-auto">
         {/* Header with Icon */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-20 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -135,7 +135,7 @@ export default function MentalHealthForm() {
             </button>
           </div> */}
 
-          <div className="flex justify-center gap-4 mt-6">
+          <div className="flex justify-center gap-4 mt-6  pb-5 md:pb-0">
             <Link
               to="#"
               className="bg-white text-blue-800 px-6 py-2 border border-blue-800 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[150px] md:w-[200px] text-center font-semibold"

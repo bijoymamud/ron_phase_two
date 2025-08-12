@@ -23,7 +23,7 @@ const RiskDetails = () => {
     <div className="flex justify-center items-center min-h-[85vh] md:min-h-screen bg-gray-100 pt-10 md:pb-10 mt-10 md:pt-20">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-10 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}
@@ -42,7 +42,7 @@ const RiskDetails = () => {
           className="space-y-4 flex-grow md:pt-10 px-1 md:px-0"
         >
           {/* Lives At Risk */}
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Were Others Lives At Risk On A Day To Day Basis Due To The Nature Of
             Your Job?
             <select
@@ -69,7 +69,7 @@ const RiskDetails = () => {
           {livesAtRisk === "yes" && (
             <>
               {/* Job Assignment Dates */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Dates Of Job Assignment
                 <input
                   {...register("jobAssignmentDates", {
@@ -86,7 +86,7 @@ const RiskDetails = () => {
               </label>
 
               {/* Type of Risk */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Risk
                 <select
                   {...register("riskType", {
@@ -115,7 +115,7 @@ const RiskDetails = () => {
               </label>
 
               {/* Stressful Scenarios */}
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Please Provide Any Particular Stressful Scenarios That Stood Out
                 Or Occurred Related To Your Job.
                 <textarea

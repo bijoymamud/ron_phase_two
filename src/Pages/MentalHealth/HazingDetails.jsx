@@ -23,7 +23,7 @@ const HazingDetails = () => {
     <div className="flex justify-center items-center min-h-[85vh] md:pt-32  md:min-h-screen bg-gray-100 pt-10 pb-10">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         {/* Header Section (Centered Image and Text) */}
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-24 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}

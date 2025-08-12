@@ -39,7 +39,7 @@
 //           onSubmit={handleSubmit(onSubmit)}
 //           className="space-y-4 flex-grow px-1 md:px-0"
 //         >
-//           <label className="block text-lg font-medium text-gray-700">
+//           <label className="block text-sm font-medium text-gray-700">
 //             Were You Deployed?
 //             <select
 //               defaultValue=""
@@ -61,7 +61,7 @@
 
 //           {everDeployed === "yes" && (
 //             <>
-//               <label className="block text-lg font-medium text-gray-700">
+//               <label className="block text-sm font-medium text-gray-700">
 //                 Deployed Area Name
 //                 <input
 //                   {...register("deployedArea", {
@@ -78,7 +78,7 @@
 //                 )}
 //               </label>
 
-//               <label className="block text-lg font-medium text-gray-700">
+//               <label className="block text-sm font-medium text-gray-700">
 //                 Duration Of Deployment
 //                 <input
 //                   {...register("duration")}
@@ -93,7 +93,7 @@
 //                 )}
 //               </label>
 
-//               <label className="block text-lg font-medium text-gray-700">
+//               <label className="block text-sm font-medium text-gray-700">
 //                 Type Of Deployment
 //                 <select
 //                   defaultValue=""
@@ -117,7 +117,7 @@
 //                 )}
 //               </label>
 
-//               <label className="block text-lg font-medium text-gray-700">
+//               <label className="block text-sm font-medium text-gray-700">
 //                 Please provide any details from your deployment including names
 //                 and dates of high stress situations (things such as
 //                 mortar/rocket attacks, convoy attacks, etc).
@@ -204,9 +204,9 @@ const MentalHealthDetails = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4 w-full max-w-2xl px-4 md:px-0"
+          className="space-y-4 w-full max-w-2xl  md:px-0"
         >
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-sm font-medium text-gray-700">
             Were You Deployed?
             <select
               defaultValue=""
@@ -230,7 +230,7 @@ const MentalHealthDetails = () => {
 
           {everDeployed === "yes" && (
             <>
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Deployed Area Name
                 <input
                   {...register("deployedArea", {
@@ -249,7 +249,7 @@ const MentalHealthDetails = () => {
                 )}
               </label>
 
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Duration Of Deployment
                 <input
                   {...register("duration")}
@@ -266,7 +266,7 @@ const MentalHealthDetails = () => {
                 )}
               </label>
 
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Type Of Deployment
                 <select
                   defaultValue=""
@@ -292,7 +292,7 @@ const MentalHealthDetails = () => {
                 )}
               </label>
 
-              <label className="block text-lg font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700">
                 Please provide any details from your deployment including names
                 and dates of high stress situations (things such as
                 mortar/rocket attacks, convoy attacks, etc).

@@ -1,11 +1,13 @@
-
-import { Navigate } from 'react-router-dom';
-import { useGetLoggedUserQuery } from '../redux/features/baseApi';
+import { Navigate } from "react-router-dom";
+import { useGetLoggedUserQuery } from "../redux/features/baseApi";
+import Loading from "../Loading/Loading";
 
 const RouteSecure = ({ children }) => {
-  const { data: userInfo, isLoading } = useGetLoggedUserQuery();
+  const { data: userInfo, isLoading, isFetching } = useGetLoggedUserQuery();
 
-  if (isLoading) return <span className="loading loading-bars loading-lg"></span>;
+  if (isLoading || isFetching || !userInfo) {
+    return <Loading />;
+  }
 
   const hasPaid = userInfo?.is_active === true;
 
@@ -13,4 +15,3 @@ const RouteSecure = ({ children }) => {
 };
 
 export default RouteSecure;
-

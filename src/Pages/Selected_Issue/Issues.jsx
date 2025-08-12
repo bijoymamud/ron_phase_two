@@ -97,12 +97,12 @@ function Issues() {
   };
 
   return (
-    <div className="md:py-28 md:mt-10 mt-0  min-h-[85vh] py-10 dark:bg-white  flex justify-center items-center md:p-4">
+    <div className="md:py-28 md:mt-10 mt-0  min-h-[85vh] py-10 dark:bg-white  flex justify-center items-center md:p-4 pt-32  ">
       <div className="w-full max-w-3xl bg-white md:shadow-md rounded-lg md:p-6 p-3">
-        <h1 className="text-xl md:text-2xl font-bold text-blue-900 mb-2">
+        <h1 className="text-xl md:text-2xl font-bold text-blue-900 mb-2 text-center">
           What condition(s) do you want to start a claim for?
         </h1>
-        <p className="md:text-sm text-gray-600 mb-6 text-[14px]">
+        <p className="md:text-sm text-gray-600 mb-6 text-[14px] text-center ">
           You can choose multiple conditions. We recommend starting with mental
           health conditions first. We'll guide you step-by-step.
         </p>

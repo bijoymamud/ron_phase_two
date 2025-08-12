@@ -32,7 +32,7 @@ import FamilialIssuesDetails from "../Pages/MentalHealth/FamilialIssuesDetails";
 import ConfirmMentalHealth from "../Pages/MentalHealth/ConfirmMentalHealth";
 import MentalHealthSymptoms from "../Pages/MentalHealth/MentalHealthSymptoms";
 import MentalHealthIndicators from "../Pages/MentalHealth/MentalHealthIndicators";
-import Issues from "../Pages/Selected_Issue/Issues";
+// import Issues from "../Pages/Selected_Issue/Issues";
 import Migraine from "../Pages/BodyClaims/Migraine/Migraine";
 import ServiceDetails from "../Pages/BodyClaims/Migraine/ServiceDetails";
 import Shifts from "../Pages/BodyClaims/Migraine/Shifts";
@@ -53,19 +53,11 @@ import OthersIssues from "../Pages/BodyClaims/OthersIssue";
 import AdminLogin from "../Pages/AdminLogin/AdminLogin";
 import Recovery from "../Pages/AdminLogin/Recovery";
 import PasswordRecovery from "../Pages/AdminLogin/PasswordRecovery";
-// import Admin_home from "../Pages/AdminDashboard/Admin_home";
-// import UserManagment from "../Pages/AdminDashboard/UserManagment";
-// import FormView from "../Pages/AdminDashboard/FormView";
-// import Payment from "../Pages/AdminDashboard/Payment";
-// import Document from "../Pages/AdminDashboard/Document";
-// import Submission from "../Pages/AdminDashboard/Submission";
+
 import Notification from "../Pages/AdminDashboard/Notification";
-// import Profile from "../Pages/AdminDashboard/Profile";
 import PrivacyPolicy from "../Pages/AdminDashboard/PrivacyPolicy";
 import TermsConditions from "../Pages/AdminDashboard/TermsConditions";
 import Policy from "../Pages/PrivacyPolicy/Policy";
-// import Calculator from "../Pages/Calculator/Calculator";
-// import AboutUs from "../Pages/AboutUs/AboutUs";
 import Auto_Narative_Video from "../Pages/Auto_Narative/Auto_Narative_Video";
 import VaSubcription from "../Pages/Auto_Narative/VaSubcription";
 import Pricing_Plan from "../Pages/Home/Pricing_Plan";
@@ -75,19 +67,16 @@ import Payment_Success from "../Pages/PaymentStatus/Payment_Success";
 import Payment_Error from "../Pages/PaymentStatus/Payment_Error";
 import Final_Sub from "../Pages/FinalSubmissio/Final_Sub";
 import UnauthorizedError from "../Pages/Private/UnauthorizedError";
-// import AdminRouteSecure from "../Pages/Private/AdminRouteSecure";
 import PrivateRoute from "../hooks/PrivateRoute";
-// import Dashboard from "../Pages//AdminDashboard/Dashboard";
 import ProgressMessageForm from "../Pages/BodyClaims/Migraine/ProgressMessageForm";
 import RouteSecure from "../hooks/RouteSecure";
-import NoSubscription from "../Pages/NoSubcription/NoSubscription";
 import ProtectedRoute from "./ProtectedRoute";
-// import LiveChat from "../Pages/AdminDashboard/LiveChat";
-import React from "react";
+import React, { Suspense } from "react";
 import { tr } from "framer-motion/client";
 import SuperAdminHome from "../Pages/AdminLogin/SuperAdminHome";
 import AdminManagment from "../Pages/AdminDashboard/AdminManagment";
 import PackageManagment from "../Pages/AdminDashboard/PackageManagment";
+import Loading from "../Loading/Loading";
 
 const Home = React.lazy(() => import("../Pages/Home/Home"));
 const AboutUs = React.lazy(() => import("../Pages/AboutUs/AboutUs"));
@@ -104,6 +93,10 @@ const Payment = React.lazy(() => import("../Pages/AdminDashboard/Payment"));
 const Document = React.lazy(() => import("../Pages/AdminDashboard/Document"));
 const LiveChat = React.lazy(() => import("../Pages/AdminDashboard/LiveChat"));
 const Profile = React.lazy(() => import("../Pages/AdminDashboard/Profile"));
+const Issues = React.lazy(() => import("../Pages/Selected_Issue/Issues"));
+const NoSubscription = React.lazy(
+  () => import("../Pages/NoSubcription/NoSubscription")
+);
 
 export const router = createBrowserRouter([
   {
@@ -128,7 +121,9 @@ export const router = createBrowserRouter([
         path: "/issues",
         element: (
           <RouteSecure>
-            <Issues />
+            <Suspense fallback={<Loading />}>
+              <Issues />
+            </Suspense>
           </RouteSecure>
         ),
       },
@@ -491,7 +486,14 @@ export const router = createBrowserRouter([
   },
 
   { path: "/unauthorized", element: <UnauthorizedError /> },
-  { path: "/active", element: <NoSubscription /> },
+  {
+    path: "/active",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <NoSubscription />
+      </Suspense>
+    ),
+  },
 
   //authentication
   {

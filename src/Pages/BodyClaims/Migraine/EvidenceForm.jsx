@@ -216,7 +216,7 @@ const EvidenceForm = () => {
   };
 
   return (
-    <section className=" mx-auto bg-white dark:bg-white">
+    <section className=" mx-auto bg-white dark:bg-white mt-24 md:pt-0">
       <div className="flex flex-col items-center justify-center md:min-h-screen min-h-[85vh] p-4">
         <form
           onSubmit={handleSubmit(onSubmit)}
