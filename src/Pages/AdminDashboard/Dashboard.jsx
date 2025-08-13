@@ -485,7 +485,7 @@ export default function Dashboard() {
           isCollapsed ? "w-20" : "w-80"
         } bg-[#0A3161] border-r border-gray-200 transition-all duration-500 ease-in-out`}
       >
-        <div className="h-16 pt-20 flex items-center justify-center px-4">
+        <div className="h-16 md:pt-20 pt-10 flex items-center justify-center px-4">
           <div className="flex items-center justify-center gap-2">
             <Link
               to="/"
@@ -498,13 +498,13 @@ export default function Dashboard() {
               <img
                 src="https://i.ibb.co.com/RZzJHnG/Group-2147225243.png"
                 alt="Logo"
-                className="h-[130px] w-[120px]"
+                className="md:h-[130px] md:w-[120px] h-[90px] w-[80px]"
               />
             </Link>
           </div>
         </div>
 
-        <nav className="p-4 md:mt-20 pt-10">
+        <nav className="p-4 md:mt-20 md:pt-10 pt-20">
           {menuItems.map((section, idx) => (
             <div key={idx} className="mb-8">
               <ul className="space-y-2">

@@ -301,17 +301,17 @@ export default function Navbar() {
                   {dashboardLink.label}
                 </Link>
 
-                <button
+                {/* <button
                   onClick={openProfileModal}
                   className="flex items-center uppercase gap-3 rounded-md bg-[#104685] px-6 py-2.5 text-white font-semibold hover:bg-opacity-90"
                 >
                   <FaUser className="w-5 h-5" />
                   Profile
-                </button>
+                </button> */}
 
                 <button
                   onClick={openLogoutModal}
-                  className="flex items-center gap-3 rounded-md bg-[#B31942] px-6 py-2.5 text-white font-semibold hover:bg-opacity-90"
+                  className="flex items-center gap-3  rounded-md bg-[#B31942] px-12 py-2.5 text-white font-semibold hover:bg-opacity-90"
                 >
                   <FaSignOutAlt className="w-5 h-5" />
                   Logout

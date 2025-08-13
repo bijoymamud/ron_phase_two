@@ -1,6 +1,3 @@
-
-
-
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useGetLoggedUserQuery } from "../../redux/features/baseApi";
@@ -13,9 +10,10 @@ const FeaturesCard = () => {
   }
 
   return (
-    <div 
-    id="features"
-    className="bg-[#E0F7FF] dark:bg-[#E0F7FF] md:pt-10 md:pb-10 pb-16">
+    <div
+      id="features"
+      className="bg-[#E0F7FF] dark:bg-[#E0F7FF] md:pt-10 md:pb-10 "
+    >
       <div className="md:bg-[url('https://i.ibb.co/mV4kpQdX/Group-1.png')] bg-cover bg-center bg-no-repeat min-h-[50vh] md:min-h-[90vh]">
         <div className="flex flex-col md:flex-row md:justify-center md:items-center md:gap-8 min-h-[50vh] md:min-h-[90vh] px-4 md:px-0">
           {/* Image Section (Moved to bottom,on mobile, left on md) */}
@@ -34,7 +32,8 @@ const FeaturesCard = () => {
                 Unmatched Experience
               </h1>
               <p className="pt-3 text-gray-500 text-sm md:text-base text-center md:text-start">
-                With decades of experience, we’ve helped thousands of veterans secure their benefits. No case is too complex for our team.
+                With decades of experience, we’ve helped thousands of veterans
+                secure their benefits. No case is too complex for our team.
               </p>
             </div>
 
@@ -43,7 +42,8 @@ const FeaturesCard = () => {
                 Turn Your Disabilities Into Possibilities
               </h1>
               <p className="pt-3 text-gray-500 text-sm md:text-base text-center md:text-start">
-                We transform the challenges of navigating the VA system into a clear path toward the benefits you deserve.
+                We transform the challenges of navigating the VA system into a
+                clear path toward the benefits you deserve.
               </p>
             </div>
 
@@ -52,22 +52,22 @@ const FeaturesCard = () => {
                 100% Success Rate
               </h1>
               <p className="pt-3 text-gray-500 text-sm md:text-base text-center md:text-start">
-                We’ve never failed to achieve our clients’ goals. Every veteran we’ve worked with has seen results.
+                We’ve never failed to achieve our clients’ goals. Every veteran
+                we’ve worked with has seen results.
               </p>
             </div>
 
             <div className="group flex items-center bg-red-500 w-[240px] md:w-[280px] rounded-md cursor-pointer shadow-lg shadow-gray-500 overflow-hidden transform transition-transform duration-300 hover:-translate-y-1 mx-auto lg:mx-0">
-  <Link
-    to="/narrative"
-    className="px-4 md:px-5 py-3 md:py-4 text-white text-base md:text-lg font-semibold uppercase"
-  >
-    Start Your Claim
-  </Link>
-  <div className="transition-transform duration-300 ease-in-out group-hover:translate-x-2 pr-4">
-    <FaArrowRightLong size={24} className="text-white" />
-  </div>
-</div>
-
+              <Link
+                to="/narrative"
+                className="px-4 md:px-5 py-3 md:py-4 text-white text-base md:text-lg font-semibold uppercase"
+              >
+                Start Your Claim
+              </Link>
+              <div className="transition-transform duration-300 ease-in-out group-hover:translate-x-2 pr-4">
+                <FaArrowRightLong size={24} className="text-white" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

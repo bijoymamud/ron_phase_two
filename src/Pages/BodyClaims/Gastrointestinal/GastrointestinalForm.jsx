@@ -52,8 +52,8 @@ const GastrointestinalForm = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4  mx-auto dark:bg-white pt-16 pb-10 md:pt-32">
       {/* Header */}
-      <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:max-w-4xl mx-auto mb-10">
-        <div className="w-28 h-28 mb-4">
+      <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:max-w-4xl mx-auto mb-10 mt-20 md:pt-0">
+        <div className="w-28 h-28 ">
           <img
             src="https://i.ibb.co.com/jPjS13V8/OBJECTS.png"
             alt="Mental Health Logo"

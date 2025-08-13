@@ -49,7 +49,7 @@ const TinnitusHearingLossForm = () => {
   return (
     <div className="flex  flex-col items-center dark:bg-white justify-center md:min-h-screen min-h-[85vh] pt-14 md:pt-32  py-20  p-4  mx-auto ">
       {/* Header */}
-      <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md max-w-4xl mx-auto mb-10">
+      <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md max-w-4xl mx-auto mb-10 mt-20 md:pt-0">
         <div className="w-28 h-28 mb-4">
           <img
             src="https://i.ibb.co.com/wNVRsJvd/Group-1597882599.png"
