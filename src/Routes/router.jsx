@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
-// import Home from "../Pages/Home/Home";
 import Login from "../Pages/Authentication/Login";
 import SignUp from "../Pages/Authentication/SignUp";
 import Forgot_Password from "../Pages/Authentication/Forgot_Password";
@@ -67,12 +66,9 @@ import Payment_Success from "../Pages/PaymentStatus/Payment_Success";
 import Payment_Error from "../Pages/PaymentStatus/Payment_Error";
 import Final_Sub from "../Pages/FinalSubmissio/Final_Sub";
 import UnauthorizedError from "../Pages/Private/UnauthorizedError";
-import PrivateRoute from "../hooks/PrivateRoute";
 import ProgressMessageForm from "../Pages/BodyClaims/Migraine/ProgressMessageForm";
 import RouteSecure from "../hooks/RouteSecure";
-import ProtectedRoute from "./ProtectedRoute";
 import React, { Suspense } from "react";
-import { tr } from "framer-motion/client";
 import SuperAdminHome from "../Pages/AdminLogin/SuperAdminHome";
 import AdminManagment from "../Pages/AdminDashboard/AdminManagment";
 import PackageManagment from "../Pages/AdminDashboard/PackageManagment";
@@ -94,6 +90,7 @@ const Document = React.lazy(() => import("../Pages/AdminDashboard/Document"));
 const LiveChat = React.lazy(() => import("../Pages/AdminDashboard/LiveChat"));
 const Profile = React.lazy(() => import("../Pages/AdminDashboard/Profile"));
 const Issues = React.lazy(() => import("../Pages/Selected_Issue/Issues"));
+  
 const NoSubscription = React.lazy(
   () => import("../Pages/NoSubcription/NoSubscription")
 );

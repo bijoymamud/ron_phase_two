@@ -5,7 +5,6 @@ export const baseApi = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: "http://10.10.13.73:4000/",
 		prepareHeaders: (headers, { endpoint }) => {
-			// List of auth-related endpoints that should not include the token
 			const authEndpoints = [
 				"createUser",
 				"loggedInUser",
@@ -14,7 +13,6 @@ export const baseApi = createApi({
 				"resetPassword",
 			];
 
-			// Only add Authorization header if the endpoint is not in authEndpoints
 			if (!authEndpoints.includes(endpoint)) {
 				const token = localStorage.getItem("access_token");
 				if (token) {
