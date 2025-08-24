@@ -2,7 +2,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function FormNavigation({
   currentStep,
-  totalSteps,
   onPrevious,
   onNext,
   onSubmit,
