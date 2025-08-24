@@ -28,27 +28,6 @@ export default function Step2PhoneNumbers({
           </span>
         </label>
 
-        {/* <PhoneInput
-          country={"us"}
-          value={internationalPhoneNumber}
-          onChange={(phone) => {
-            const cleanedPhone = phone.replace(/\s+/g, "");
-            setValue("International_Phone_Number[0]", cleanedPhone, {
-              shouldValidate: true,
-              shouldDirty: true,
-            });
-            trigger("International_Phone_Number[0]");
-          }}
-          inputProps={{
-            name: "International_Phone_Number[0]",
-            required: true,
-            className:
-              "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
-          }}
-          containerClass="w-full"
-          specialLabel={false}
-        /> */}
-
         <PhoneInput
           country={"us"}
           value={internationalPhoneNumber}

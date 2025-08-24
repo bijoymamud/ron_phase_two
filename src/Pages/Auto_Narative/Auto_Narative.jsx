@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,6 @@ const Auto_Narative = () => {
     };
 
     localStorage.setItem("va_claim_data", JSON.stringify(mappedData));
-
     console.log("\u{1F4BE} Saved Form Data:", mappedData);
     navigate("/video");
   };
@@ -117,11 +116,11 @@ const Auto_Narative = () => {
                 required: "This field is required",
               })}
               className={`w-full p-2 uppercase border rounded dark:bg-white dark:border-black dark:text-black text-sm 
-    [&::-webkit-calendar-picker-indicator]:bg-transparent 
-    [&::-webkit-calendar-picker-indicator]:cursor-pointer 
-    [&::-webkit-calendar-picker-indicator]:opacity-100 
-    dark:[&::-webkit-calendar-picker-indicator]:invert 
-    ${errors.letterDate ? "border-red-500" : "border-gray-300"}`}
+              [&::-webkit-calendar-picker-indicator]:bg-transparent 
+              [&::-webkit-calendar-picker-indicator]:cursor-pointer 
+              [&::-webkit-calendar-picker-indicator]:opacity-100 
+              dark:[&::-webkit-calendar-picker-indicator]:invert 
+              ${errors.letterDate ? "border-red-500" : "border-gray-300"}`}
               id="letterDate"
             />
 
