@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
+import narrationVoice from "../../../src/cris_voice/Have_You_Ever_Applied_for_VA_Benefits_chris.mp3";
 
 const Auto_Narative = () => {
   const {
@@ -11,6 +13,28 @@ const Auto_Narative = () => {
   } = useForm();
   const [step, setStep] = useState("start");
   const navigate = useNavigate();
+
+  const audioRef = useRef(new Audio(narrationVoice));
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    audio
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch((error) => {
+        console.error("Auto-play failed:", error);
+        setIsPlaying(false);
+      });
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
 
   const onSubmit = (data) => {
     const mappedData = {
@@ -48,6 +72,8 @@ const Auto_Narative = () => {
       }}
     >
       <div className="bg-white text-black md:p-6 p-2 rounded shadow-md w-full max-w-xl space-y-4 mt-20 md:mt-0">
+        {/* Audio Controls */}
+
         {step === "start" && (
           <>
             <h2 className="text-xl font-semibold">
@@ -115,11 +141,11 @@ const Auto_Narative = () => {
               {...register("letterDate", {
                 required: "This field is required",
               })}
-              className={`w-full p-2 uppercase border rounded dark:bg-white dark:border-black dark:text-black text-sm 
-              [&::-webkit-calendar-picker-indicator]:bg-transparent 
-              [&::-webkit-calendar-picker-indicator]:cursor-pointer 
-              [&::-webkit-calendar-picker-indicator]:opacity-100 
-              dark:[&::-webkit-calendar-picker-indicator]:invert 
+              className={`w-full p-2 uppercase border rounded dark:bg-white dark:border-black dark:text-black text-sm
+              [&::-webkit-calendar-picker-indicator]:bg-transparent
+              [&::-webkit-calendar-picker-indicator]:cursor-pointer
+              [&::-webkit-calendar-picker-indicator]:opacity-100
+              dark:[&::-webkit-calendar-picker-indicator]:invert
               ${errors.letterDate ? "border-red-500" : "border-gray-300"}`}
               id="letterDate"
             />
@@ -165,7 +191,7 @@ const Auto_Narative = () => {
             />
 
             <h2 className="text-xl font-semibold mt-4">
-              What is the date of that letter?
+              What is the date of the letter?
             </h2>
             <input
               type="date"

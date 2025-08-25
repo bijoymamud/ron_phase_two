@@ -35,7 +35,8 @@
     "signature_pad": "^5.0.7",
     "sonner": "^2.0.5",
     "sort-by": "^1.2.0",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "wavesurfer.js": "^7.10.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
