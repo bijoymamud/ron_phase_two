@@ -72,8 +72,6 @@ const Auto_Narative = () => {
       }}
     >
       <div className="bg-white text-black md:p-6 p-2 rounded shadow-md w-full max-w-xl space-y-4 mt-20 md:mt-0">
-        {/* Audio Controls */}
-
         {step === "start" && (
           <>
             <h2 className="text-xl font-semibold">

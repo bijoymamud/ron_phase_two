@@ -4,7 +4,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-// Function to get initial chat ID from localStorage
 const getInitialChatId = () => {
 	try {
 		const savedChatId = localStorage.getItem("currentChatId");
@@ -15,7 +14,6 @@ const getInitialChatId = () => {
 	}
 };
 
-// Function to get initial user data from localStorage
 const getInitialUser = () => {
 	try {
 		const savedUser = localStorage.getItem("chatUser");
