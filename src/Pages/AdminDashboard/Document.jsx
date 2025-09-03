@@ -43,7 +43,7 @@ export default function Document() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
+    <div className="bg-gray-50 min-h-screen">
       <Toaster position="top-right" richColors className="z-[1000]" />
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center space-x-4">

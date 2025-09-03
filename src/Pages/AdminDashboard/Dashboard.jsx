@@ -462,7 +462,6 @@ export default function Dashboard() {
     let currentItem = allItems.find((item) => item.path === location.pathname);
 
     if (!currentItem && allItems.length > 0) {
-      // Default to the first item if no match is found
       currentItem = allItems[0];
     }
 

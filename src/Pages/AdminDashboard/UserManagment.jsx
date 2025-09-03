@@ -66,7 +66,7 @@ export default function UserManagement() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
+    <div className="bg-gray-50 min-h-screen">
       {/* Page Title */}
       <h1 className="text-2xl font-bold text-gray-800 mb-6">User Management</h1>
 

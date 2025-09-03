@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const baseApi = createApi({
 	reducerPath: "baseApi",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "http://10.10.13.73:4000/",
+		baseUrl: "http://10.10.13.73:40000/",
 		prepareHeaders: (headers, { endpoint }) => {
 			const authEndpoints = [
 				"createUser",
@@ -22,7 +22,7 @@ export const baseApi = createApi({
 			return headers;
 		},
 	}),
-	tagTypes: ["user", "forms", "documents"],
+	tagTypes: ["user", "forms", "documents", "userManagement"],
 	endpoints: (builder) => ({
 		// Your existing endpoints remain unchanged
 		createUser: builder.mutation({
@@ -182,6 +182,12 @@ export const baseApi = createApi({
 				url: `/api/support/close-chat/${chatId}/`,
 				method: "POST",
 			})
+		}),
+
+		//superadmin
+		getUserManagement: builder.query({
+			query: () => "api/dashboard/superadmin/management-users/",
+			providesTags: ["userManagement"]
 		})
 	}),
 });
@@ -214,5 +220,8 @@ export const {
 	useApprovedFormMutation,
 	useRejectFormMutation,
 	useGetDocumentsQuery,
-	useCloseChatMutation
+	useCloseChatMutation,
+
+	//superadmin
+	useGetUserManagementQuery,
 } = baseApi;
