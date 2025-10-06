@@ -32,7 +32,7 @@
 
 //   const role = loggedUser?.role;
 
-//   const baseURL = "http://10.10.13.73:4000";
+//   const baseURL = "https://backend.valrpro.com";
 //   const location = useLocation();
 //   const navigate = useNavigate();
 
@@ -378,7 +378,7 @@ export default function Dashboard() {
 
   // const role = loggedUser?.role;
   const role = localStorage.getItem("user_role");
-  const baseURL = "http://10.10.13.73:4000";
+  const baseURL = "https://backend.valrpro.com";
   const location = useLocation();
   const navigate = useNavigate();
 

@@ -25,7 +25,7 @@ export default function Navbar() {
 
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
   console.log("loggedInUser", loggedInUser);
-  const baseURL = "http://10.10.13.73:4000";
+  const baseURL = "https://backend.valrpro.com";
 
   const [updateProfile, { data, isLoading: isUpdating }] =
     useUpdateUserProfileMutation();

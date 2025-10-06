@@ -48,7 +48,7 @@ const SubscriptionModal = ({ isOpen, onClose }) => {
           <RxCross2 size={20} />
         </button>
 
-        <h2 className="text-xl font-semibold mb-6 text-[#0A112F]">
+        <h2 className="text-xl font-semibold mb-6 text-[#0A112F] ">
           Add Package
         </h2>
 
@@ -125,7 +125,7 @@ const SubscriptionModal = ({ isOpen, onClose }) => {
               <button
                 type="button"
                 onClick={addFeature}
-                className="px-4 py-2 flex items-center gap-2 bg-[#0A3161] hover:cursor-pointer text-white rounded-md  "
+                className="px-4 py-2 uppercase flex items-center gap-2 bg-[#0A3161] hover:cursor-pointer text-white pe-8 rounded-full"
               >
                 <LuPlus className="dark:text-white text-white" />
                 Add
@@ -136,9 +136,9 @@ const SubscriptionModal = ({ isOpen, onClose }) => {
           <div className="flex justify-end  pt-4">
             <button
               type="submit"
-              className="px-6 py-2 w-full rounded-md text-white bg-[#0A3161] hover:cursor-pointer"
+              className="px-6 uppercase py-2 w-full rounded-md text-white bg-[#0A3161] hover:cursor-pointer"
             >
-              Save
+              Save Package
             </button>
           </div>
         </form>
