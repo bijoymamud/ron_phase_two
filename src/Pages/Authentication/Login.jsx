@@ -37,10 +37,6 @@ const Login = () => {
       localStorage.setItem("access_token", response?.access_token);
       localStorage.setItem("refresh_token", response?.refresh_token);
       localStorage.setItem("user_role", response?.role);
-      localStorage.setItem(
-        "isAdmin",
-        response.email === "admin@gmail.com" ? "true" : "false"
-      );
 
       await refetch();
 

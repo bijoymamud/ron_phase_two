@@ -25,9 +25,9 @@ export default function Navbar() {
 
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
   console.log("loggedInUser", loggedInUser);
-  const baseURL = "https://backend.valrpro.com";
+  const baseURL = "http://10.10.13.73:2000";
 
-  const [updateProfile, { data, isLoading: isUpdating }] =
+  const [updateProfile, refetch, { data, isLoading: isUpdating }] =
     useUpdateUserProfileMutation();
 
   console.log({ loggedInUser, data });
@@ -98,12 +98,15 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsLoggingOut(true);
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("role");
     localStorage.removeItem("chatUser");
+    localStorage.removeItem("user_role");
+    await refetch();
 
     setTimeout(() => {
       setIsLoggingOut(false);

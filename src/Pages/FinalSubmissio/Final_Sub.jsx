@@ -39,7 +39,7 @@
 
 //     try {
 //       const response = await fetch(
-//         " https://backend.valrpro.com/api/va/vaform/submit/",
+//         " http://10.10.13.73:2000/api/va/vaform/submit/",
 //         {
 //           method: "POST",
 //           headers: {
@@ -146,7 +146,7 @@ function Final_Sub() {
 
     try {
       const response = await fetch(
-        "https://backend.valrpro.com/api/va/vaform/submit/",
+        "http://10.10.13.73:2000/api/va/vaform/submit/",
         {
           method: "POST",
           headers: {

@@ -6,7 +6,6 @@ export default function AdminManagment() {
   const [searchTerm, setSearchTerm] = useState("");
   const { data: adminManagement, isLoading } = useGetUserManagementQuery();
 
-  // keep local state for users so we can update role/block easily
   const [users, setUsers] = useState([]);
 
   useEffect(() => {

@@ -56,7 +56,7 @@ export default function SupportChat() {
     }
   }, [fetchedMessages]);
 
-  // --- CORRECTED EFFECT 2: The REAL-TIME listener ---
+  // 2: The REAL-TIME listener ---
   useEffect(() => {
     if (currentChatId) {
       const messagesRef = ref(db, `support_chats/${currentChatId}/messages`);

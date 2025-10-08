@@ -10,29 +10,26 @@
 //   ChevronDown,
 //   ChevronsLeft,
 //   ChevronsRight,
-//   Link2,
 //   MessageSquareMore,
 // } from "lucide-react";
-
 // import { FiUsers } from "react-icons/fi";
-
 // import { useGetLoggedUserQuery } from "../../redux/features/baseApi";
 // import { setUser } from "../../redux/slice/chatSlice";
 // import { useDispatch, useSelector } from "react-redux";
 // import Loading from "../../Loading/Loading";
+// import { CgNotes } from "react-icons/cg";
 
 // export default function Dashboard() {
 //   const [isCollapsed, setIsCollapsed] = useState(false);
 //   const [selectedItem, setSelectedItem] = useState("Dashboard");
 //   const dispatch = useDispatch();
 //   const user = useSelector((state) => state.chatSlice.user);
+//   const { data: loggedUser, refetch } = useGetLoggedUserQuery();
+//   console.log(loggedUser, "siam");
 
-//   const { data: loggedUser } = useGetLoggedUserQuery();
-//   console.log(loggedUser);
+//   const role = localStorage.getItem("role");
 
-//   const role = loggedUser?.role;
-
-//   const baseURL = "https://backend.valrpro.com";
+//   const baseURL = "http://10.10.13.73:2000";
 //   const location = useLocation();
 //   const navigate = useNavigate();
 
@@ -64,7 +61,6 @@
 //           icon: <LuStickyNote size={20} />,
 //           path: "/admin/document",
 //         },
-
 //         {
 //           name: "LiveChat",
 //           icon: <MessageSquareMore size={20} />,
@@ -78,13 +74,27 @@
 //     {
 //       items: [
 //         {
-//           name: "Home",
+//           name: "Dashboard",
 //           icon: <LuLayoutDashboard size={20} />,
 //           path: "/super_admin/super_admin_home",
+//         },
+//         {
+//           name: "Admin Management",
+//           icon: <FiUsers size={20} />,
+//           path: "/super_admin/admin_management",
+//         },
+//         {
+//           name: "Package Management",
+//           icon: <CgNotes size={20} />,
+//           path: "/super_admin/package_management",
 //         },
 //       ],
 //     },
 //   ];
+
+//   // Determine which items to display based on role
+//   const menuItems =
+//     role === "superuser" ? superAdminItems : role === "admin" ? adminItems : [];
 
 //   useEffect(() => {
 //     if (loggedUser) {
@@ -95,30 +105,28 @@
 //   const handleLogOut = () => {
 //     localStorage.removeItem("access_token");
 //     localStorage.removeItem("refresh_token");
-
-//     navigate("/login");
+//     localStorage.removeItem("isAdmin");
+//     localStorage.removeItem("role");
+//     localStorage.removeItem("chatUser");
+//     localStorage.removeItem("user_role");
+//     refetch();
+//     navigate("/admin_login");
 //   };
+
 //   useEffect(() => {
-//     const allItems = adminItems[0].items;
+//     const allItems = menuItems[0]?.items || [];
 //     let currentItem = allItems.find((item) => item.path === location.pathname);
 
-//     if (!currentItem) {
-//       allItems.forEach((item) => {
-//         if (item.submenu && item.children) {
-//           const submenuItem = item.children.find(
-//             (child) => child.path === location.pathname
-//           );
-//           if (submenuItem) {
-//             currentItem = submenuItem;
-//           }
-//         }
-//       });
+//     if (!currentItem && allItems.length > 0) {
+//       currentItem = allItems[0];
 //     }
 
 //     if (currentItem) {
 //       setSelectedItem(currentItem.name);
+//     } else {
+//       setSelectedItem(role === "superuser" ? "Dashboard" : "Dashboard");
 //     }
-//   }, [location.pathname]);
+//   }, [location.pathname, menuItems, role]);
 
 //   const handleItemClick = (itemName, path) => {
 //     setSelectedItem(itemName);
@@ -129,10 +137,10 @@
 //     <div className="flex h-screen bg-gray-50">
 //       <aside
 //         className={`${
-//           isCollapsed ? "w-20" : "w-76"
+//           isCollapsed ? "w-20" : "w-80"
 //         } bg-[#0A3161] border-r border-gray-200 transition-all duration-500 ease-in-out`}
 //       >
-//         <div className="h-16 pt-20 flex items-center justify-center px-4 ">
+//         <div className="h-16 md:pt-20 pt-10 flex items-center justify-center px-4">
 //           <div className="flex items-center justify-center gap-2">
 //             <Link
 //               to="/"
@@ -145,14 +153,14 @@
 //               <img
 //                 src="https://i.ibb.co.com/RZzJHnG/Group-2147225243.png"
 //                 alt="Logo"
-//                 className="h-[130px] w-[120px] "
+//                 className="md:h-[130px] md:w-[120px] h-[90px] w-[80px]"
 //               />
 //             </Link>
 //           </div>
 //         </div>
 
-//         <nav className="p-4 md:mt-20 pt-10">
-//           {adminItems.map((section, idx) => (
+//         <nav className="p-4 md:mt-20 md:pt-10 pt-20">
+//           {menuItems.map((section, idx) => (
 //             <div key={idx} className="mb-8">
 //               <ul className="space-y-2">
 //                 {section.items.map((item, itemIdx) => (
@@ -362,7 +370,7 @@ import {
   MessageSquareMore,
 } from "lucide-react";
 import { FiUsers } from "react-icons/fi";
-import { useGetLoggedUserQuery } from "../../redux/features/baseApi";
+import { useGetLoggedUserQuery, baseApi } from "../../redux/features/baseApi";
 import { setUser } from "../../redux/slice/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Loading/Loading";
@@ -373,12 +381,18 @@ export default function Dashboard() {
   const [selectedItem, setSelectedItem] = useState("Dashboard");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.chatSlice.user);
-  const { data: loggedUser } = useGetLoggedUserQuery();
-  console.log(loggedUser);
+  const {
+    data: loggedUser,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useGetLoggedUserQuery();
 
-  // const role = loggedUser?.role;
-  const role = localStorage.getItem("user_role");
-  const baseURL = "https://backend.valrpro.com";
+  const role = localStorage.getItem("role");
+  console.log("Current role:", role); // Debug role
+
+  const baseURL = "http://10.10.13.73:2000";
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -441,7 +455,6 @@ export default function Dashboard() {
     },
   ];
 
-  // Determine which items to display based on role
   const menuItems =
     role === "superuser" ? superAdminItems : role === "admin" ? adminItems : [];
 
@@ -449,12 +462,20 @@ export default function Dashboard() {
     if (loggedUser) {
       dispatch(setUser(loggedUser));
     }
-  }, [loggedUser]);
+  }, [loggedUser, dispatch]);
 
   const handleLogOut = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
-    navigate("/login");
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("role");
+    localStorage.removeItem("chatUser");
+    localStorage.removeItem("user_role");
+
+    dispatch(setUser(null));
+    dispatch(baseApi.util.resetApiState());
+
+    navigate("/admin_login");
   };
 
   useEffect(() => {
@@ -476,6 +497,15 @@ export default function Dashboard() {
     setSelectedItem(itemName);
     navigate(path);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    console.error("Error fetching logged user:", error);
+    return <div>Error loading user data. Please try again.</div>;
+  }
 
   return (
     <div className="flex h-screen bg-gray-50">
