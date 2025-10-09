@@ -24,13 +24,8 @@ export default function Navbar() {
   );
 
   const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
-  console.log("loggedInUser", loggedInUser);
+
   const baseURL = "http://10.10.13.73:2000";
-
-  const [updateProfile, refetch, { data, isLoading: isUpdating }] =
-    useUpdateUserProfileMutation();
-
-  console.log({ loggedInUser, data });
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({

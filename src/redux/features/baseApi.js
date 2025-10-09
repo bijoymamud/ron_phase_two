@@ -187,6 +187,25 @@ export const baseApi = createApi({
 		getUserManagement: builder.query({
 			query: () => "api/dashboard/superadmin/management-users/",
 			providesTags: ["userManagement"]
+		}),
+
+		//admin management
+		makeAdmin: builder.mutation({
+			query: (id) => ({
+				url: "api/dashboard/superadmin/role-change/",
+				method: "PUT",
+				body: id
+			}),
+			invalidatesTags: ["userManagement"]
+		}),
+
+		blockUser: builder.mutation({
+			query: (id) => ({
+				url: "api/dashboard/superadmin/block-unblock-user/",
+				method: "PUT",
+				body: id
+			}),
+			invalidatesTags: ["userManagement"]
 		})
 	}),
 });
@@ -223,4 +242,8 @@ export const {
 
 	//superadmin
 	useGetUserManagementQuery,
+
+	//makeAdmin
+	useMakeAdminMutation,
+	useBlockUserMutation
 } = baseApi;

@@ -48,7 +48,7 @@ const Recovery = () => {
           />
         </div>
 
-        <div className="basis-8/12 h-screen flex flex-col justify-center items-center">
+        <div className="basis-8/12 h-screen dark:bg-white flex flex-col justify-center items-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="text-[#0A3161] md:p-8 rounded-lg w-full md:max-w-lg"
@@ -64,7 +64,7 @@ const Recovery = () => {
               <input
                 type="email"
                 id="email"
-                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+                className="w-full p-3 border border-gray-300 bg-white dark:bg-white rounded-lg mt-2"
                 placeholder="Enter Email"
                 {...register("email", { required: "Email is required" })}
               />

@@ -222,7 +222,7 @@ const AdminLogin = () => {
               <input
                 type="email"
                 id="email"
-                className="w-full p-3 border bg-white border-gray-300 rounded-lg mt-2"
+                className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg mt-2"
                 placeholder="Enter Email"
                 {...register("email", {
                   required: "Email is required",
@@ -266,7 +266,7 @@ const AdminLogin = () => {
 
             <button
               type="submit"
-              className="w-full p-3 bg-[#B31942] uppercase text-white rounded-lg font-semibold hover:bg-[#af2a4d] transition flex items-center justify-center"
+              className="w-full p-3 bg-[#B31942] cursor-pointer uppercase text-white rounded-lg font-semibold hover:bg-[#af2a4d] transition flex items-center justify-center"
               disabled={isSubmitting || isLoading}
             >
               {isSubmitting || isLoading ? (

@@ -1,18 +1,22 @@
-
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useResetPasswordMutation } from '../../redux/features/baseApi';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../redux/features/baseApi";
 
 const PasswordRecovery = () => {
-  const { register, handleSubmit, formState: { errors }, watch } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
 
-  const password = watch('password'); 
+  const password = watch("password");
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -20,8 +24,8 @@ const PasswordRecovery = () => {
     setSuccessMessage(null);
     console.log(data);
 
-    const otp = localStorage.getItem('otp');
-    const email = localStorage.getItem('email');
+    const otp = localStorage.getItem("otp");
+    const email = localStorage.getItem("email");
     const payload = {
       new_password: data.password,
       otp,
@@ -30,15 +34,15 @@ const PasswordRecovery = () => {
 
     try {
       await resetPassword(payload).unwrap();
-      setSuccessMessage('Password reset successfully!');
+      setSuccessMessage("Password reset successfully!");
       setTimeout(() => {
         setIsSubmitting(false);
-        navigate('/admin_login');
+        navigate("/admin_login");
       }, 1000);
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
       setIsSubmitting(false);
-      setErrorMessage('Failed to reset password. Please try again.');
+      setErrorMessage("Failed to reset password. Please try again.");
     }
   };
 
@@ -46,17 +50,20 @@ const PasswordRecovery = () => {
     <section className="min-h-screen">
       <div className="flex items-center">
         <div className="basis-6/12 bg-[#0A3161] h-screen flex flex-col items-center justify-center">
-          <img src="https://i.ibb.co.com/RZzJHnG/Group-2147225243.png" alt="logo" />
+          <img
+            src="https://i.ibb.co.com/RZzJHnG/Group-2147225243.png"
+            alt="logo"
+          />
         </div>
 
-        <div className="basis-8/12 h-screen flex flex-col justify-center items-center">
+        <div className="basis-8/12 bg-white dark:bg-white h-screen flex flex-col justify-center items-center">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="text-[#0A3161] md:p-8 rounded-lg w-full md:max-w-lg"
           >
-            <h2 className="md:text-4xl text-3xl font-bold mb-10 text-start">Set New Password</h2>
-
-         
+            <h2 className="md:text-4xl text-3xl font-bold mb-10 text-start">
+              Set New Password
+            </h2>
 
             <div className="mb-6">
               <label htmlFor="password" className="block text-sm font-semibold">
@@ -65,35 +72,45 @@ const PasswordRecovery = () => {
               <input
                 type="password"
                 id="password"
-                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+                className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg mt-2"
                 placeholder="Enter Password"
-                {...register('password', {
-                  required: 'Password is required',
+                {...register("password", {
+                  required: "Password is required",
                   minLength: {
                     value: 6,
-                    message: 'Password must be at least 6 characters',
+                    message: "Password must be at least 6 characters",
                   },
                 })}
               />
-              {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-xs">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-6">
-              <label htmlFor="confirm_password" className="block text-sm font-semibold">
+              <label
+                htmlFor="confirm_password"
+                className="block text-sm font-semibold"
+              >
                 Confirm Password
               </label>
               <input
                 type="password"
                 id="confirm_password"
-                className="w-full p-3 border border-gray-300 rounded-lg mt-2"
+                className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg mt-2"
                 placeholder="Re-type Password"
-                {...register('confirm_password', {
-                  required: 'Confirm Password is required',
-                  validate: (value) => value === password || 'Passwords do not match',
+                {...register("confirm_password", {
+                  required: "Confirm Password is required",
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
                 })}
               />
               {errors.confirm_password && (
-                <p className="text-red-500 text-xs">{errors.confirm_password.message}</p>
+                <p className="text-red-500 text-xs">
+                  {errors.confirm_password.message}
+                </p>
               )}
             </div>
 
@@ -105,7 +122,7 @@ const PasswordRecovery = () => {
               {isSubmitting || isLoading ? (
                 <span className="loading loading-bars loading-md"></span>
               ) : (
-                'Reset'
+                "Reset"
               )}
             </button>
           </form>
