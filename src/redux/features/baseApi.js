@@ -206,7 +206,17 @@ export const baseApi = createApi({
 				body: id
 			}),
 			invalidatesTags: ["userManagement"]
-		})
+		}),
+
+		//subcription management
+		editSubscription: builder.mutation({
+			query: ({ id, data }) => ({
+				url: `payment/plan/update/${id}/`,
+				method: "PUT",
+				body: data,
+			}),
+			invalidatesTags: ["plans"]
+		}),
 	}),
 });
 

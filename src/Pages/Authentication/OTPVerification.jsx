@@ -158,12 +158,12 @@ const OTPVerification = () => {
 
         <p className="mt-4 text-gray-300 text-end">
           Didn’t receive code?{" "}
-          <span
-            onClick={handleResend}
+          <button
+            onClick={() => handleResend()}
             className="text-[#B31942] font-semibold hover:underline cursor-pointer"
           >
             Resend
-          </span>
+          </button>
         </p>
       </div>
 
