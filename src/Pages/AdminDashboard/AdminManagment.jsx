@@ -1,6 +1,4 @@
-
-
-// import { useState, useEffect } from "react";
+// import { useState, useEffect, useCallback } from "react";
 // import { LuUserRoundCog } from "react-icons/lu";
 // import {
 //   useBlockUserMutation,
@@ -8,18 +6,41 @@
 //   useMakeAdminMutation,
 // } from "../../redux/features/baseApi";
 // import { toast, Toaster } from "sonner";
+// import debounce from "lodash/debounce";
 
 // export default function AdminManagement() {
 //   const [searchTerm, setSearchTerm] = useState("");
 //   const [users, setUsers] = useState([]);
 //   const [loadingUserId, setLoadingUserId] = useState(null);
 //   const [blockingUserId, setBlockingUserId] = useState(null);
-//   const { data: adminManagement, isLoading } = useGetUserManagementQuery();
-//   const [blockUser] = useBlockUserMutation();
-//   const [makeAdmin] = useMakeAdminMutation();
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+//   const {
+//     data: adminManagement,
+//     isLoading,
+//     isFetching,
+//     refetch,
+//   } = useGetUserManagementQuery({
+//     page: currentPage,
+//     search: debouncedSearchTerm,
+//   });
+
+//   const debouncedSetSearch = useCallback(
+//     debounce((value) => {
+//       setDebouncedSearchTerm(value);
+//       setCurrentPage(1);
+//     }, 500),
+//     []
+//   );
 
 //   useEffect(() => {
-//     if (adminManagement?.total_users) setUsers(adminManagement.total_users);
+//     debouncedSetSearch(searchTerm);
+//   }, [searchTerm, debouncedSetSearch]);
+
+//   useEffect(() => {
+//     if (adminManagement?.results) setUsers(adminManagement.results);
 //   }, [adminManagement]);
 
 //   const handleRoleChange = async (id) => {
@@ -58,13 +79,33 @@
 //     }
 //   };
 
-//   const filteredUsers = users?.filter(
-//     (user) =>
-//       user.user_profile?.name
-//         ?.toLowerCase()
-//         .includes(searchTerm.toLowerCase()) ||
-//       user.id.toString().includes(searchTerm)
-//   );
+//   const handlePageChange = (page) => {
+//     if (page >= 1 && page <= (adminManagement?.total_pages || 1)) {
+//       setCurrentPage(page);
+//       refetch({ page, search: debouncedSearchTerm });
+//     }
+//   };
+
+//   const renderPageNumbers = () => {
+//     const totalPages = adminManagement?.total_pages || 1;
+//     const pages = [];
+//     for (let i = 1; i <= totalPages; i++) {
+//       pages.push(
+//         <button
+//           key={i}
+//           onClick={() => handlePageChange(i)}
+//           className={`btn btn-sm ${
+//             currentPage === i
+//               ? "bg-[#0A3161] text-white"
+//               : "bg-white text-[#0A3161] border-[#0A3161] hover:bg-[#0A3161] hover:text-white"
+//           }`}
+//         >
+//           {i}
+//         </button>
+//       );
+//     }
+//     return pages;
+//   };
 
 //   if (isLoading) {
 //     return (
@@ -78,7 +119,7 @@
 //     <div className="min-h-screen">
 //       <Toaster />
 //       <div className="mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-//         <div className="p-4 border-b  border-gray-200 flex justify-end">
+//         <div className="p-4 border-b border-gray-200 flex justify-end">
 //           <input
 //             type="text"
 //             placeholder="Search by ID or Name"
@@ -99,13 +140,16 @@
 //               </tr>
 //             </thead>
 //             <tbody className="[&>tr:nth-child(odd)]:bg-white [&>tr:nth-child(even)]:bg-gray-100">
-//               {filteredUsers?.map((user) => (
+//               {users?.map((user) => (
 //                 <tr key={user.id} className="cursor-pointer">
 //                   <td className="py-3 px-4 text-sm text-gray-700">{user.id}</td>
 //                   <td className="py-3 px-4">
-//                     <p className="font-medium text-gray-900">
-//                       {user.user_profile?.name}
-//                     </p>
+//                     <div className="flex flex-col">
+//                       <p className="font-medium text-gray-900">
+//                         {user?.user_profile?.name}
+//                       </p>
+//                       <span className="text-gray-400">{user?.email}</span>
+//                     </div>
 //                     <p className="text-xs text-gray-500">{user.joined_date}</p>
 //                   </td>
 //                   <td className="py-3 px-4">
@@ -121,7 +165,7 @@
 //                   </td>
 //                   <td className="py-3 px-4">
 //                     {loadingUserId === user.id ? (
-//                       <span className="loading loading-bars loading-[5px] flex items-center justify-start "></span>
+//                       <span className="loading loading-bars loading-[5px] flex items-center justify-start"></span>
 //                     ) : (
 //                       <button
 //                         onClick={() => handleRoleChange(user.id)}
@@ -158,7 +202,7 @@
 //                   </td>
 //                 </tr>
 //               ))}
-//               {!filteredUsers?.length && (
+//               {!users?.length && (
 //                 <tr>
 //                   <td colSpan={5} className="text-center text-gray-500 py-8">
 //                     No users found.
@@ -168,12 +212,38 @@
 //             </tbody>
 //           </table>
 //         </div>
+//         {/* Pagination Controls */}
+//       </div>
+//       <div className="p-4 flex justify-center items-center space-x-2 relative">
+//         {isFetching && (
+//           <span className="loading loading-bars loading-xl"></span>
+//         )}
+//         <button
+//           onClick={() => handlePageChange(currentPage - 1)}
+//           disabled={!adminManagement?.previous || isFetching}
+//           className="btn btn-sm bg-[#0A3161] text-white hover:bg-[#0A3161]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
+//         >
+//           Previous
+//         </button>
+//         {renderPageNumbers()}
+//         <button
+//           onClick={() => handlePageChange(currentPage + 1)}
+//           disabled={!adminManagement?.next || isFetching}
+//           className="btn btn-sm bg-[#0A3161] text-white hover:bg-[#0A3161]/90 disabled:bg-gray-300 disabled:cursor-not-allowed"
+//         >
+//           Next
+//         </button>
+//         <span className="text-sm ml-4">
+//           Page {adminManagement?.current_page || 1} of{" "}
+//           {adminManagement?.total_pages || 1} (Total:{" "}
+//           {adminManagement?.count || 0} users)
+//         </span>
 //       </div>
 //     </div>
 //   );
 // }
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { LuUserRoundCog } from "react-icons/lu";
 import {
   useBlockUserMutation,
@@ -181,6 +251,7 @@ import {
   useMakeAdminMutation,
 } from "../../redux/features/baseApi";
 import { toast, Toaster } from "sonner";
+import debounce from "lodash/debounce";
 
 export default function AdminManagement() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -188,13 +259,35 @@ export default function AdminManagement() {
   const [loadingUserId, setLoadingUserId] = useState(null);
   const [blockingUserId, setBlockingUserId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
-  const { data: adminManagement, isLoading } = useGetUserManagementQuery();
-  const [blockUser] = useBlockUserMutation();
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  const {
+    data: adminManagement,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useGetUserManagementQuery({
+    page: currentPage,
+    search: debouncedSearchTerm,
+  });
+
   const [makeAdmin] = useMakeAdminMutation();
+  const [blockUser] = useBlockUserMutation();
+
+  const debouncedSetSearch = useCallback(
+    debounce((value) => {
+      setDebouncedSearchTerm(value);
+      setCurrentPage(1);
+    }, 500),
+    []
+  );
 
   useEffect(() => {
-    if (adminManagement?.total_users) setUsers(adminManagement.total_users);
+    debouncedSetSearch(searchTerm);
+  }, [searchTerm, debouncedSetSearch]);
+
+  useEffect(() => {
+    if (adminManagement?.results) setUsers(adminManagement.results);
   }, [adminManagement]);
 
   const handleRoleChange = async (id) => {
@@ -233,147 +326,148 @@ export default function AdminManagement() {
     }
   };
 
-  const filteredUsers = users?.filter(
-    (user) =>
-      user.user_profile?.name
-        ?.toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      user.id.toString().includes(searchTerm)
-  );
-
-  // Pagination logic
-  const totalPages = Math.ceil(filteredUsers?.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentUsers = filteredUsers?.slice(startIndex, endIndex);
-
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    if (page >= 1 && page <= (adminManagement?.total_pages || 1)) {
+      setCurrentPage(page);
+      refetch({ page, search: debouncedSearchTerm });
+    }
   };
 
-  const getPageNumbers = () => {
+  const renderPageNumbers = () => {
+    const totalPages = adminManagement?.total_pages || 1;
     const pages = [];
-    const maxVisiblePages = 5;
-
-    if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) {
-          pages.push(i);
-        }
-        pages.push("...");
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1);
-        pages.push("...");
-        for (let i = totalPages - 3; i <= totalPages; i++) {
-          pages.push(i);
-        }
-      } else {
-        pages.push(1);
-        pages.push("...");
-        pages.push(currentPage - 1);
-        pages.push(currentPage);
-        pages.push(currentPage + 1);
-        pages.push("...");
-        pages.push(totalPages);
-      }
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`px-4 py-2 rounded-lg transition-all duration-200 ${
+            currentPage === i
+              ? "bg-[#0A3161] text-white"
+              : "bg-white text-[#0A3161] border border-[#0A3161] hover:bg-[#0A3161] hover:text-white"
+          }`}
+        >
+          {i}
+        </button>
+      );
     }
     return pages;
   };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm]);
-
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <span className="loading loading-bars loading-xl"></span>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="flex flex-col items-center gap-4">
+          <span className="loading loading-bars loading-xl"></span>
+
+          <p className="text-gray-600 font-medium">Loading user data...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      <Toaster />
-      <div className="mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="p-4 border-b  border-gray-200 flex justify-end">
+    <div className="min-h-screen bg-gray-50 py-8 px-4">
+      <Toaster position="top-right" richColors />
+      <div className=" mx-auto bg-white rounded-xl shadow-lg overflow-hidden relative">
+        {isFetching && (
+          <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10">
+            <span className="loading loading-bars loading-xl"></span>
+          </div>
+        )}
+        <div className="p-6 border-b border-gray-200 flex justify-end">
           <input
             type="text"
             placeholder="Search by ID or Name"
-            className="input input-bordered flex items-center justify-end w-[350px] dark:bg-white focus:outline-none border-gray-300"
+            className="w-full max-w-md px-4 py-2 bg-white dark:bg-white rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0A3161] focus:border-transparent transition-all duration-200"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
         <div className="overflow-x-auto">
-          <table className="table w-full">
+          <table className="w-full">
             <thead>
               <tr className="bg-[#0A3161] text-white">
-                <th className="py-3 px-4 text-sm font-semibold">ID</th>
-                <th className="py-3 px-4 text-sm font-semibold">Name</th>
-                <th className="py-3 px-4 text-sm font-semibold">Role</th>
-                <th className="py-3 px-4 text-sm font-semibold">Make Admin</th>
-                <th className="py-3 px-4 text-sm font-semibold">Block</th>
+                <th className="py-4 px-6 text-sm font-semibold text-left">
+                  ID
+                </th>
+                <th className="py-4 px-6 text-sm font-semibold text-left">
+                  Name
+                </th>
+                <th className="py-4 px-6 text-sm font-semibold text-left">
+                  Role
+                </th>
+                <th className="py-4 px-6 text-sm font-semibold text-left">
+                  Make Admin
+                </th>
+                <th className="py-4 px-6 text-sm font-semibold text-left">
+                  Block
+                </th>
               </tr>
             </thead>
-            <tbody className="[&>tr:nth-child(odd)]:bg-white [&>tr:nth-child(even)]:bg-gray-100">
-              {currentUsers?.map((user) => (
-                <tr key={user.id} className="cursor-pointer">
-                  <td className="py-3 px-4 text-sm text-gray-700">{user.id}</td>
-                  <td className="py-3 px-4">
-                    <p className="font-medium text-gray-900">
-                      {user.user_profile?.name}
-                    </p>
-                    <p className="text-xs text-gray-500">{user.joined_date}</p>
+            <tbody className="[&>tr:nth-child(odd)]:bg-white [&>tr:nth-child(even)]:bg-gray-50">
+              {users?.map((user) => (
+                <tr
+                  key={user.id}
+                  className="hover:bg-gray-100 transition-colors duration-150"
+                >
+                  <td className="py-4 px-6 text-sm text-gray-700">{user.id}</td>
+                  <td className="py-4 px-6">
+                    <div className="flex flex-col">
+                      <p className="font-medium text-gray-900">
+                        {user?.user_profile?.name}
+                      </p>
+                      <span className="text-gray-500 text-sm">
+                        {user?.email}
+                      </span>
+                      <p className="text-xs text-gray-400">
+                        {user.joined_date}
+                      </p>
+                    </div>
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-6">
                     <span
-                      className={`btn btn-sm border-none rounded-full ${
+                      className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                         user.role.toLowerCase() === "user"
-                          ? "bg-[#0A3161]"
-                          : "bg-green-600"
-                      } text-xs font-medium`}
+                          ? "bg-[#0A3161] text-white"
+                          : "bg-green-600 text-white"
+                      }`}
                     >
                       {user.role}
                     </span>
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-6">
                     {loadingUserId === user.id ? (
-                      <span className="loading loading-bars loading-[5px] flex items-center justify-start "></span>
+                      <span className="loading loading-spinner loading-sm text-[#0A3161]"></span>
                     ) : (
                       <button
                         onClick={() => handleRoleChange(user.id)}
                         disabled={loadingUserId === user.id}
-                        className={`btn btn-sm rounded-full ${
+                        className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                           user.role === "admin"
-                            ? "btn-error text-white hover:bg-red-600"
-                            : "btn-outline border-none bg-[#0A3161] text-white hover:bg-[#0A3161]/90"
-                        }`}
+                            ? "bg-red-600 text-white hover:bg-red-700"
+                            : "bg-[#0A3161] text-white hover:bg-[#0A3161]/90"
+                        } disabled:opacity-50 disabled:cursor-not-allowed`}
                       >
-                        <LuUserRoundCog size={16} className="mr-1" />
+                        <LuUserRoundCog size={16} className="mr-2" />
                         {user.role === "admin"
                           ? "Demote to User"
                           : "Make Admin"}
                       </button>
                     )}
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-6">
                     {blockingUserId === user.id ? (
-                      <span className="loading loading-spinner loading-sm"></span>
+                      <span className="loading loading-spinner loading-sm text-[#0A3161]"></span>
                     ) : (
                       <button
                         onClick={() => handleUserActive(user.id)}
                         disabled={blockingUserId === user.id}
-                        className={`btn btn-sm rounded-full ${
+                        className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                           user.is_active
-                            ? "btn-error text-white hover:bg-red-600"
+                            ? "bg-red-600 text-white hover:bg-red-700"
                             : "bg-green-600 text-white hover:bg-green-700"
-                        }`}
+                        } disabled:opacity-50 disabled:cursor-not-allowed`}
                       >
                         {user.is_active ? "Block" : "Unblock"}
                       </button>
@@ -381,9 +475,9 @@ export default function AdminManagement() {
                   </td>
                 </tr>
               ))}
-              {!currentUsers?.length && (
+              {!users?.length && (
                 <tr>
-                  <td colSpan={5} className="text-center text-gray-500 py-8">
+                  <td colSpan={5} className="text-center text-gray-500 py-12">
                     No users found.
                   </td>
                 </tr>
@@ -391,49 +485,28 @@ export default function AdminManagement() {
             </tbody>
           </table>
         </div>
-
-        {/* Pagination */}
-        {filteredUsers?.length > 0 && (
-          <div className="p-4 border-t border-gray-200 flex items-center justify-between">
-            <div className="text-sm text-gray-600">
-              Showing {startIndex + 1} to{" "}
-              {Math.min(endIndex, filteredUsers?.length)} of{" "}
-              {filteredUsers?.length} users
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="btn btn-sm bg-[#0A3161] text-white hover:bg-[#0A3161]/90 disabled:bg-gray-300 disabled:text-gray-500"
-              >
-                Previous
-              </button>
-
-              {getPageNumbers().map((page, index) => (
-                <button
-                  key={index}
-                  onClick={() =>
-                    typeof page === "number" && handlePageChange(page)
-                  }
-                  disabled={page === "..."}
-                  className={`btn btn-sm ${
-                    currentPage === page
-                      ? "bg-[#0A3161] text-white"
-                      : "bg-white text-gray-700 hover:bg-gray-100"
-                  } ${page === "..." ? "cursor-default hover:bg-white" : ""}`}
-                >
-                  {page}
-                </button>
-              ))}
-
-              <button
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="btn btn-sm bg-[#0A3161] text-white hover:bg-[#0A3161]/90 disabled:bg-gray-300 disabled:text-gray-500"
-              >
-                Next
-              </button>
-            </div>
+        {!isLoading && !isFetching && (
+          <div className="p-6 flex justify-center items-center space-x-3">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={!adminManagement?.previous}
+              className="px-4 py-2 bg-[#0A3161] text-white rounded-lg hover:bg-[#0A3161]/90 transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            {renderPageNumbers()}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={!adminManagement?.next}
+              className="px-4 py-2 bg-[#0A3161] text-white rounded-lg hover:bg-[#0A3161]/90 transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+            <span className="text-sm text-gray-600">
+              Page {adminManagement?.current_page || 1} of{" "}
+              {adminManagement?.total_pages || 1} (Total:{" "}
+              {adminManagement?.count || 0} users)
+            </span>
           </div>
         )}
       </div>

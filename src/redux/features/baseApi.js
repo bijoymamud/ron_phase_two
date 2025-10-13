@@ -183,9 +183,17 @@ export const baseApi = createApi({
 			})
 		}),
 
-		//superadmin
+		// //superadmin
+		// getUserManagement: builder.query({
+		// 	query: () => "api/dashboard/superadmin/management-users/",
+		// 	providesTags: ["userManagement"]
+		// }),
+
 		getUserManagement: builder.query({
-			query: () => "api/dashboard/superadmin/management-users/",
+			query: ({ page = 1, search = '', page_size = 15 }) => ({
+				url: "api/dashboard/superadmin/management-users/",
+				params: { page, search, page_size }
+			}),
 			providesTags: ["userManagement"]
 		}),
 
