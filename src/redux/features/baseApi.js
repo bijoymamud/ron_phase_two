@@ -22,7 +22,7 @@ export const baseApi = createApi({
 			return headers;
 		},
 	}),
-	tagTypes: ["user", "forms", "documents", "userManagement"],
+	tagTypes: ["user", "forms", "documents", "userManagement", "plans", "loggedIn"],
 	endpoints: (builder) => ({
 		createUser: builder.mutation({
 			query: (userData) => ({
@@ -70,8 +70,19 @@ export const baseApi = createApi({
 				body: payload
 			})
 		}),
+		// getPlans: builder.query({
+		// 	query: () => "api/payment/get_all/subscribtions-plan/",
+		// 	provideTags: ["plans"],
+		// }),
 		getPlans: builder.query({
 			query: () => "api/payment/get_all/subscribtions-plan/",
+			providesTags: (result) =>
+				result
+					? [
+						...result.map(({ id }) => ({ type: 'plans', id })),
+						{ type: 'plans', id: 'LIST' }
+					]
+					: [{ type: 'plans', id: 'LIST' }],
 		}),
 		contactForm: builder.mutation({
 			query: (formData) => ({
@@ -183,11 +194,6 @@ export const baseApi = createApi({
 			})
 		}),
 
-		// //superadmin
-		// getUserManagement: builder.query({
-		// 	query: () => "api/dashboard/superadmin/management-users/",
-		// 	providesTags: ["userManagement"]
-		// }),
 
 		getUserManagement: builder.query({
 			query: ({ page = 1, search = '', page_size = 15 }) => ({
@@ -217,13 +223,17 @@ export const baseApi = createApi({
 		}),
 
 		//subcription management
+
 		editSubscription: builder.mutation({
 			query: ({ id, data }) => ({
-				url: `payment/plan/update/${id}/`,
+				url: `api/payment/plan/update/${id}/`,
 				method: "PUT",
 				body: data,
 			}),
-			invalidatesTags: ["plans"]
+			invalidatesTags: (result, error, { id }) => [
+				{ type: 'plans', id },
+				{ type: 'plans', id: 'LIST' }
+			],
 		}),
 	}),
 });
@@ -263,5 +273,8 @@ export const {
 
 	//makeAdmin
 	useMakeAdminMutation,
-	useBlockUserMutation
+	useBlockUserMutation,
+
+	//supcription management
+	useEditSubscriptionMutation,
 } = baseApi;
