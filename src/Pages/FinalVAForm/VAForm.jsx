@@ -46,7 +46,7 @@ const VAForm = memo(() => {
 
   if (!pdfs?.length) {
     return (
-      <div className="min-h-screen py-20 flex flex-col items-center justify-center px-4">
+      <div className="min-h-screen py-20 flex flex-col items-center dark:bg-white justify-center px-4">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-700">
           No Data Found
         </h2>

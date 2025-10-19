@@ -62,8 +62,7 @@ const SignUp = () => {
           Create Account
         </h2>
         <p className="text-center text-gray-200 md:mb-16 mb-8 md:text-base">
-          Please enter information and click the button. We will send an email
-          with a verification code for you to enter.
+          Please enter information and click the button.
         </p>
 
         {/* Name */}
@@ -74,7 +73,7 @@ const SignUp = () => {
           <input
             type="text"
             id="name"
-            className="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 dark:text-gray-100"
+            className="w-full dark:bg-white bg-white p-3 border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 "
             placeholder="Name"
             {...register("name", { required: "Name is required" })}
           />
@@ -91,7 +90,7 @@ const SignUp = () => {
           <input
             type="email"
             id="email"
-            className="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 dark:text-gray-100"
+            className="w-full p-3 dark:bg-white bg-white border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 "
             placeholder="Enter Email"
             {...register("email", {
               required: "Email is required",
@@ -114,7 +113,7 @@ const SignUp = () => {
             <input
               type={showPassword ? "text" : "password"}
               id="password"
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 dark:text-gray-100"
+              className="w-full p-3 dark:bg-white flex items-center bg-white border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 "
               placeholder="Enter New Password"
               {...register("password", {
                 required: "Password is required",
@@ -149,7 +148,7 @@ const SignUp = () => {
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
-              className="w-full p-3 border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 dark:text-gray-100"
+              className="w-full p-3 dark:bg-white flex items-center bg-white  border border-gray-300 rounded-lg mt-2 text-sm text-gray-800 "
               placeholder="Confirm New Password"
               {...register("confirmPassword", {
                 required: "Please confirm your password",

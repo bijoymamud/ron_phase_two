@@ -192,14 +192,23 @@ const AdminLogin = () => {
       dispatch(baseApi.util.invalidateTags(["user"]));
       await refetch();
 
-      toast.success(response?.data?.message);
+      toast.success(response?.data?.message || "Login successful!");
 
       setIsSubmitting(false);
-      navigate("/admin");
+
+      // ✅ Role-based navigation
+      if (response?.role === "superuser") {
+        navigate("/super_admin");
+      } else if (response?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/"); // fallback (optional)
+      }
     } catch (error) {
       console.error("Admin login error", error);
       setIsSubmitting(false);
-      const message = data?.error || "Login failed. Please try again.";
+      const message =
+        error?.data?.non_field_errors || "Login failed. Please try again.";
       toast.error(message);
     }
   };

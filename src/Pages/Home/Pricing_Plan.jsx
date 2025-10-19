@@ -52,7 +52,7 @@ const Pricing_Plan = () => {
       const response = await paymentCheckout(payload).unwrap();
       window.location.href = response?.checkout_url;
     } catch (error) {
-      console.log("subscription error", error);
+      toast.error(response?.data?.error || "Something went wrong!");
     }
   };
 
@@ -123,7 +123,7 @@ const Pricing_Plan = () => {
                       {plan.name}
                     </h2>
                     <span className="text-4xl bg-gradient-to-r from-[#B31942] via-[#e54860] to-[#B31942] bg-clip-text text-transparent font-bold">
-                      ${plan.amount}
+                      ${plan.price}
                     </span>
 
                     {/* Duration with icon */}

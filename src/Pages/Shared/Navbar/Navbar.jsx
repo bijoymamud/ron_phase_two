@@ -23,7 +23,7 @@ export default function Navbar() {
     localStorage.getItem("isAdmin") === "true" ? true : false
   );
 
-  const { data: loggedInUser, isLoading } = useGetLoggedUserQuery();
+  const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
 
   const baseURL = "http://10.10.13.73:2000";
 
