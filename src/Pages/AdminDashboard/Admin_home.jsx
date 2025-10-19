@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -11,11 +11,13 @@ import {
 } from "recharts";
 import {
   useGetDashboardInfoQuery,
+  useGetFilteredSubmissionDataQuery,
   useMonthlyRevenueQuery,
 } from "../../redux/features/baseApi";
 import { IoChevronDownOutline } from "react-icons/io5";
+import { GoFile } from "react-icons/go";
+import { AiOutlineException } from "react-icons/ai";
 
-// Month names for X-axis
 const monthNames = [
   "Jan",
   "Feb",
@@ -32,37 +34,137 @@ const monthNames = [
 ];
 
 const processChartData = (backendData, year) => {
-  const yearData = backendData.find((item) => item.year === year);
-  if (!yearData) return [];
+  // If backendData is an array of year objects (existing implementation)
+  if (Array.isArray(backendData)) {
+    const yearData = backendData.find((item) => item.year === year);
+    if (!yearData || !Array.isArray(yearData.data)) return [];
+    return yearData.data.map((value, index) => {
+      const numeric = Number(value) || 0;
+      return {
+        month: monthNames[index],
+        value: numeric,
+        formattedValue: numeric.toLocaleString(),
+      };
+    });
+  }
 
-  return yearData.data.map((value, index) => ({
-    month: monthNames[index],
-    value: value,
-    formattedValue: value.toLocaleString(),
-  }));
+  // object with monthly_revenue
+  if (
+    backendData &&
+    typeof backendData === "object" &&
+    backendData.monthly_revenue
+  ) {
+    const fullMonthOrder = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return fullMonthOrder.map((fullName, index) => {
+      const raw = backendData.monthly_revenue[fullName] ?? 0;
+      const numeric = Number(raw) || 0;
+      return {
+        month: monthNames[index],
+        value: numeric,
+        formattedValue: numeric.toLocaleString(),
+      };
+    });
+  }
+
+  // object with monthly_submissions (new endpoint shape)
+  if (
+    backendData &&
+    typeof backendData === "object" &&
+    backendData.monthly_submissions
+  ) {
+    const fullMonthOrder = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return fullMonthOrder.map((fullName, index) => {
+      const raw = backendData.monthly_submissions[fullName] ?? 0;
+      const numeric = Number(raw) || 0;
+      return {
+        month: monthNames[index],
+        value: numeric,
+        formattedValue: numeric.toLocaleString(),
+      };
+    });
+  }
+
+  // Fallback empty
+  return [];
 };
 
 export default function Admin_home() {
   const [period, setPeriod] = useState("2025");
+  const [years, setYears] = useState([String(period)]);
   const { data: dashboardData } = useGetDashboardInfoQuery();
-  const { data: revenueInfo } = useMonthlyRevenueQuery();
+  console.log(dashboardData, "dashboardData");
+  // Pass selected year into queries to avoid year=undefined in request URL
+  const yearParam = parseInt(period, 10);
+  const { data: revenueInfo } = useMonthlyRevenueQuery(yearParam);
+  const { data: submissionInfo } = useGetFilteredSubmissionDataQuery(yearParam);
 
-  // Assuming revenueInfo contains the backend data you provided
-  const revenueData = revenueInfo?.all_revenue_data
-    ? processChartData(revenueInfo.all_revenue_data, parseInt(period))
-    : [];
-  const submissionsData = revenueInfo?.all_submission_data
-    ? processChartData(revenueInfo.all_submission_data, parseInt(period))
-    : [];
+  // Populate available years from backend responses (revenue or submissions)
+  useEffect(() => {
+    const revYears = Array.isArray(revenueInfo?.available_years)
+      ? revenueInfo.available_years
+      : [];
+    const subYears = Array.isArray(submissionInfo?.available_years)
+      ? submissionInfo.available_years
+      : [];
+    const merged = Array.from(new Set([...revYears, ...subYears]));
+    if (merged.length) {
+      const mergedStr = merged.map((y) => String(y));
+      setYears(mergedStr);
+      if (!mergedStr.includes(String(period))) {
+        setPeriod(String(merged[0]));
+      }
+    }
+  }, [revenueInfo, submissionInfo]); 
 
-  const revenuePeak = revenueData.reduce(
-    (max, item) => (item.value > max.value ? item : max),
-    revenueData[0] || {}
-  );
-  const submissionPeak = submissionsData.reduce(
-    (max, item) => (item.value > max.value ? item : max),
-    submissionsData[0] || {}
-  );
+  
+  const revenueSource = revenueInfo?.all_revenue_data ?? revenueInfo ?? null;
+
+  const submissionSource = submissionInfo ?? revenueInfo ?? null;
+
+  const revenueData = processChartData(revenueSource, parseInt(period));
+  const submissionsData = processChartData(submissionSource, parseInt(period));
+
+  const revenuePeak =
+    revenueData && revenueData.length
+      ? revenueData.reduce(
+          (max, item) => (item.value > (max.value ?? -Infinity) ? item : max),
+          revenueData[0]
+        )
+      : null;
+
+  const submissionPeak =
+    submissionsData && submissionsData.length
+      ? submissionsData.reduce(
+          (max, item) => (item.value > (max.value ?? -Infinity) ? item : max),
+          submissionsData[0]
+        )
+      : null;
 
   return (
     <div className="space-y-6 bg-gray-50 min-h-screen">
@@ -70,7 +172,7 @@ export default function Admin_home() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           title="Total Active Users"
-          value={dashboardData?.total_user}
+          value={dashboardData?.total_users}
           icon={<UsersIcon className="h-5 w-5 text-indigo-600" />}
           bgColor="bg-indigo-50"
         />
@@ -81,18 +183,18 @@ export default function Admin_home() {
           bgColor="bg-emerald-50"
         />
         <StatCard
-          title="Total Completion Rate"
-          value={dashboardData?.complete_rate}
-          icon={<CheckSquareIcon className="h-5 w-5 text-amber-600" />}
+          title="Total Documents"
+          value={dashboardData?.total_documents}
+          icon={<GoFile className="h-5 w-5 text-amber-600" />}
           change={4.3}
           trend="down"
           period="yesterday"
           bgColor="bg-amber-50"
         />
         <StatCard
-          title="Active Submissions"
-          value={dashboardData?.submission_count}
-          icon={<ClockIcon className="h-5 w-5 text-green-600" />}
+          title="Total Submissions"
+          value={dashboardData?.total_submissions}
+          icon={<AiOutlineException className="h-5 w-5 text-green-600" />}
           bgColor="bg-green-50"
         />
       </div>
@@ -108,8 +210,11 @@ export default function Admin_home() {
                 onChange={(e) => setPeriod(e.target.value)}
                 className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm leading-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="2025">2025</option>
-                {/* Add more years if backend supports multiple years */}
+                {years.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <IoChevronDownOutline />
@@ -152,7 +257,7 @@ export default function Admin_home() {
                   fillOpacity={1}
                   fill="url(#colorRevenue)"
                 />
-                {revenuePeak.month && (
+                {revenuePeak?.month && (
                   <ReferenceDot
                     x={revenuePeak.month}
                     y={revenuePeak.value}
@@ -182,8 +287,11 @@ export default function Admin_home() {
                 onChange={(e) => setPeriod(e.target.value)}
                 className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm leading-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="2025">2025</option>
-                {/* Add more years if backend supports multiple years */}
+                {years.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <IoChevronDownOutline />
@@ -232,7 +340,7 @@ export default function Admin_home() {
                   fillOpacity={1}
                   fill="url(#colorSubmissions)"
                 />
-                {submissionPeak.month && (
+                {submissionPeak?.month && (
                   <ReferenceDot
                     x={submissionPeak.month}
                     y={submissionPeak.value}

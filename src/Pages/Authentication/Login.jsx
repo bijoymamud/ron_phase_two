@@ -101,45 +101,7 @@ const Login = () => {
         </div>
 
         {/* Password Field */}
-        {/* <div className="mb-6">
-					<label
-						htmlFor="password"
-						className="block text-sm font-semibold"
-					>
-						Password
-					</label>
-					<div className="relative w-full mt-4">
-						<input
-							type={showPassword ? "text" : "password"}
-							id="password"
-							className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg text-black"
-							placeholder="Enter Password"
-							{...register("password", {
-								required: "Password is required",
-							})}
-						/>
-						<button
-							type="button"
-							onClick={togglePasswordVisibility}
-							className="absolute right-3  ps-2 top-1/2 -translate-y-[55%] text-gray-500 hover:text-gray-700"
-							aria-label={
-								showPassword ? "Hide password" : "Show password"
-							}
-						>
-							{showPassword ? (
-								<FaEyeSlash size={20} />
-							) : (
-								<FaEye size={20} />
-							)}
-						</button>
-					</div>
-					{errors.password && (
-						<p className="text-red-500 text-xs mt-1">
-							{errors.password.message}
-						</p>
-					)}
-				</div> */}
-
+   
         <div className="mb-6">
           <label htmlFor="password" className="block text-sm font-semibold">
             Password

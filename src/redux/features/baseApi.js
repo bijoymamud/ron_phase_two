@@ -130,14 +130,14 @@ export const baseApi = createApi({
 			query: (chatId) => `api/support/get-messages/${chatId}/`,
 		}),
 		getActiveChats: builder.query({
-			query: () => "/api/support/admin/active-chats/",
+			query: () => "api/support/admin/active-chats/",
 		}),
 		getUsers: builder.query({
 			query: () => "api/payment/get_all/subscribtions/",
 			providesTags: ["loggedIn"],
 		}),
 		getDashboardInfo: builder.query({
-			query: () => "api/payment/get_all/calculate_for_dashboard/",
+			query: () => "api/dashboard/superadmin/dashboard_view/",
 		}),
 		monthlyRevenue: builder.query({
 			query: () => "api/payment/get_all/calculate_yearly_revenue/",
@@ -201,6 +201,28 @@ export const baseApi = createApi({
 				params: { page, search, page_size }
 			}),
 			providesTags: ["userManagement"]
+		}),
+
+		//admin login 
+		adminLogin: builder.mutation({
+			query: (adminData) => ({
+				url: "api/auth/admin/login/",
+				method: "POST",
+				body: adminData,
+
+			}),
+			invalidatesTags: ["admin"],
+		}),
+
+
+		//filter admin home data
+
+		getFilteredReviewData: builder.query({
+			query: (year) => `api/payment/get_all/calculate_yearly_revenue/?year=${year}`,
+		}),
+
+		getFilteredSubmissionData: builder.query({
+			query: (year) => `api/payment/get_all/calculate_yearly_submissions/?year=${year}`,
 		}),
 
 		//admin management
@@ -268,6 +290,9 @@ export const {
 	useGetDocumentsQuery,
 	useCloseChatMutation,
 
+
+	//admin login
+	useAdminLoginMutation,
 	//superadmin
 	useGetUserManagementQuery,
 
@@ -277,4 +302,7 @@ export const {
 
 	//supcription management
 	useEditSubscriptionMutation,
+	useGetFilteredReviewDataQuery,
+	useGetFilteredSubmissionDataQuery,
+
 } = baseApi;

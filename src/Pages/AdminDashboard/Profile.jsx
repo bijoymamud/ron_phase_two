@@ -106,7 +106,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex items-center justify-center dark:text-gray-100 dark:bg-gray-300 p-4">
+    <div className="flex items-center justify-center  min-h-[70vh] dark:text-gray-100 p-4">
       <Toaster />
       <div className="bg-white p-8 rounded-lg w-full max-w-2xl shadow-lg">
         {/* Profile Section */}

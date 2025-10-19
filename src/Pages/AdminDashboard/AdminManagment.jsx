@@ -367,7 +367,7 @@ export default function AdminManagement() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 ">
       <Toaster position="top-right" richColors />
       <div className=" mx-auto bg-white rounded-xl shadow-lg overflow-hidden relative">
         {isFetching && (

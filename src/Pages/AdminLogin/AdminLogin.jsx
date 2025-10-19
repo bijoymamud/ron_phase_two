@@ -1,16 +1,24 @@
 // import { useState } from "react";
 // import { useForm } from "react-hook-form";
 // import { Link, useNavigate } from "react-router-dom";
-// import { useLoggedInUserMutation } from "../../redux/features/baseApi";
+// import {
+//   useAdminLoginMutation,
+//   useGetLoggedUserQuery,
+// } from "../../redux/features/baseApi";
+// import { useDispatch } from "react-redux";
+// import { baseApi } from "../../redux/features/baseApi";
 // import { toast, Toaster } from "sonner";
 
 // const AdminLogin = () => {
+//   const dispatch = useDispatch();
+//   const { refetch } = useGetLoggedUserQuery();
 //   const {
 //     register,
 //     handleSubmit,
 //     formState: { errors },
 //   } = useForm();
-//   const [loggedInUser, { isLoading }] = useLoggedInUserMutation();
+//   // const [loggedInUser, { isLoading }] = useLoggedInUserMutation();
+//   const [adminLogin, { isLoading }] = useAdminLoginMutation();
 //   const navigate = useNavigate();
 //   const [isSubmitting, setIsSubmitting] = useState(false);
 //   const [loginError, setLoginError] = useState(null);
@@ -19,25 +27,26 @@
 //     setIsSubmitting(true);
 //     setLoginError(null);
 //     const { email, password } = data;
-//     const userData = { email, password };
+//     const adminData = { email, password };
 
 //     try {
-//       const response = await loggedInUser(userData).unwrap();
-//       console.log(response, "admin");
+//       const response = await adminLogin(adminData).unwrap();
+//       console.log("Login response:", response);
 //       localStorage.setItem("access_token", response?.access_token);
 //       localStorage.setItem("refresh_token", response?.refresh_token);
 //       localStorage.setItem("role", response?.role);
 
+//       // Invalidate cache and refetch user data
+//       dispatch(baseApi.util.invalidateTags(["user"]));
+//       await refetch();
+
 //       toast.success("Login successful!");
 
-//       setTimeout(() => {
-//         setIsSubmitting(false);
-//         navigate("/admin");
-//       }, 1000);
+//       setIsSubmitting(false);
+//       navigate("/admin");
 //     } catch (error) {
 //       console.error("Admin login error", error);
 //       setIsSubmitting(false);
-
 //       const message =
 //         error?.data?.non_field_errors?.[0] || "Login failed. Please try again.";
 //       toast.error(message);
@@ -75,7 +84,7 @@
 //               <input
 //                 type="email"
 //                 id="email"
-//                 className="w-full p-3 border bg-white border-gray-300 rounded-lg mt-2"
+//                 className="w-full p-3 border bg-white dark:bg-white border-gray-300 rounded-lg mt-2"
 //                 placeholder="Enter Email"
 //                 {...register("email", {
 //                   required: "Email is required",
@@ -119,7 +128,7 @@
 
 //             <button
 //               type="submit"
-//               className="w-full p-3 bg-[#B31942] uppercase text-white rounded-lg font-semibold hover:bg-[#af2a4d] transition flex items-center justify-center"
+//               className="w-full p-3 bg-[#B31942] cursor-pointer uppercase text-white rounded-lg font-semibold hover:bg-[#af2a4d] transition flex items-center justify-center"
 //               disabled={isSubmitting || isLoading}
 //             >
 //               {isSubmitting || isLoading ? (
@@ -141,12 +150,13 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  useLoggedInUserMutation,
+  useAdminLoginMutation,
   useGetLoggedUserQuery,
 } from "../../redux/features/baseApi";
 import { useDispatch } from "react-redux";
 import { baseApi } from "../../redux/features/baseApi";
 import { toast, Toaster } from "sonner";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const AdminLogin = () => {
   const dispatch = useDispatch();
@@ -156,37 +166,40 @@ const AdminLogin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [loggedInUser, { isLoading }] = useLoggedInUserMutation();
+  const [adminLogin, { isLoading }] = useAdminLoginMutation();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     setLoginError(null);
     const { email, password } = data;
-    const userData = { email, password };
+    const adminData = { email, password };
 
     try {
-      const response = await loggedInUser(userData).unwrap();
-      console.log("Login response:", response); // Debug response
+      const response = await adminLogin(adminData).unwrap();
+      console.log("Login response:", response);
       localStorage.setItem("access_token", response?.access_token);
       localStorage.setItem("refresh_token", response?.refresh_token);
       localStorage.setItem("role", response?.role);
 
-      // Invalidate cache and refetch user data
       dispatch(baseApi.util.invalidateTags(["user"]));
       await refetch();
 
-      toast.success("Login successful!");
+      toast.success(response?.data?.message);
 
       setIsSubmitting(false);
       navigate("/admin");
     } catch (error) {
       console.error("Admin login error", error);
       setIsSubmitting(false);
-      const message =
-        error?.data?.non_field_errors?.[0] || "Login failed. Please try again.";
+      const message = data?.error || "Login failed. Please try again.";
       toast.error(message);
     }
   };
@@ -237,15 +250,28 @@ const AdminLogin = () => {
               <label htmlFor="password" className="block text-sm font-semibold">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                className="w-full p-3 border bg-white border-gray-300 rounded-lg mt-2"
-                placeholder="Enter Password"
-                {...register("password", {
-                  required: "Password is required",
-                })}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  className="w-full p-3 border flex items-center bg-white border-gray-300 rounded-lg mt-2"
+                  placeholder="Enter Password"
+                  {...register("password", {
+                    required: "Password is required",
+                  })}
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 flex items-center justify-center pr-3"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={20} />
+                  ) : (
+                    <FaEye size={20} />
+                  )}
+                </button>
+              </div>
               {errors.password && (
                 <p className="text-red-500 text-xs">
                   {errors.password.message}

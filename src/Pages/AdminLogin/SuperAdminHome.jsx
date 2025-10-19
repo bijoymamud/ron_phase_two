@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -8,21 +8,19 @@ import {
   Tooltip,
   ResponsiveContainer,
   ReferenceDot,
+  Label,
 } from "recharts";
 import {
   useGetDashboardInfoQuery,
+  useGetFilteredSubmissionDataQuery,
   useMonthlyRevenueQuery,
 } from "../../redux/features/baseApi";
 import { IoChevronDownOutline } from "react-icons/io5";
-import {
-  CheckSquareIcon,
-  ClockIcon,
-  DollarSignIcon,
-  UsersIcon,
-} from "lucide-react";
+import { GoFile } from "react-icons/go";
+import { AiOutlineException } from "react-icons/ai";
 import ActivityTest from "../AdminDashboard/ActivityTest";
+import { DollarSign, Users } from "lucide-react";
 
-// Month names for X-axis
 const monthNames = [
   "Jan",
   "Feb",
@@ -39,70 +37,174 @@ const monthNames = [
 ];
 
 const processChartData = (backendData, year) => {
-  const yearData = backendData.find((item) => item.year === year);
-  if (!yearData) return [];
+  // Handle array of year objects
+  if (Array.isArray(backendData)) {
+    const yearData = backendData.find((item) => item?.year === year);
+    if (!yearData || !Array.isArray(yearData.data)) return [];
+    return yearData.data.map((value, index) => {
+      const numeric = Number(value) || 0;
+      return {
+        month: monthNames[index],
+        value: numeric,
+        formattedValue: numeric.toLocaleString(),
+      };
+    });
+  }
 
-  return yearData.data.map((value, index) => ({
-    month: monthNames[index],
-    value: value,
-    formattedValue: value.toLocaleString(),
-  }));
+  // Handle object with monthly_revenue
+  if (
+    backendData &&
+    typeof backendData === "object" &&
+    backendData.monthly_revenue
+  ) {
+    const fullMonthOrder = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return fullMonthOrder.map((fullName, index) => {
+      const raw = backendData.monthly_revenue[fullName] ?? 0;
+      const numeric = Number(raw) || 0;
+      return {
+        month: monthNames[index],
+        value: numeric,
+        formattedValue: numeric.toLocaleString(),
+      };
+    });
+  }
+
+  // Handle object with monthly_submissions
+  if (
+    backendData &&
+    typeof backendData === "object" &&
+    backendData.monthly_submissions
+  ) {
+    const fullMonthOrder = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return fullMonthOrder.map((fullName, index) => {
+      const raw = backendData.monthly_submissions[fullName] ?? 0;
+      const numeric = Number(raw) || 0;
+      return {
+        month: monthNames[index],
+        value: numeric,
+        formattedValue: numeric.toLocaleString(),
+      };
+    });
+  }
+
+  // Fallback empty array
+  return [];
 };
 
 export default function SuperAdminHome() {
   const [period, setPeriod] = useState("2025");
-  const { data: dashboardData } = useGetDashboardInfoQuery();
-  const { data: revenueInfo } = useMonthlyRevenueQuery();
+  const [years, setYears] = useState([String(period)]);
+  const { data: dashboardData, isLoading: isDashboardLoading } =
+    useGetDashboardInfoQuery();
+  const yearParam = parseInt(period, 10);
+  const { data: revenueInfo, isLoading: isRevenueLoading } =
+    useMonthlyRevenueQuery(yearParam);
+  const { data: submissionInfo, isLoading: isSubmissionLoading } =
+    useGetFilteredSubmissionDataQuery(yearParam);
 
-  // Assuming revenueInfo contains the backend data you provided
-  const revenueData = revenueInfo?.all_revenue_data
-    ? processChartData(revenueInfo.all_revenue_data, parseInt(period))
-    : [];
-  const submissionsData = revenueInfo?.all_submission_data
-    ? processChartData(revenueInfo.all_submission_data, parseInt(period))
-    : [];
+  // Populate available years from backend responses
+  useEffect(() => {
+    const revYears = Array.isArray(revenueInfo?.available_years)
+      ? revenueInfo.available_years.map(String)
+      : [];
+    const subYears = Array.isArray(submissionInfo?.available_years)
+      ? submissionInfo.available_years.map(String)
+      : [];
+    const merged = Array.from(new Set([...revYears, ...subYears]));
+    if (merged.length) {
+      setYears(merged);
+      if (!merged.includes(String(period))) {
+        setPeriod(merged[0] || "2025");
+      }
+    }
+  }, [revenueInfo, submissionInfo, period]);
 
-  const revenuePeak = revenueData.reduce(
-    (max, item) => (item.value > max.value ? item : max),
-    revenueData[0] || {}
-  );
-  const submissionPeak = submissionsData.reduce(
-    (max, item) => (item.value > max.value ? item : max),
-    submissionsData[0] || {}
-  );
+  const revenueSource = revenueInfo?.all_revenue_data ?? revenueInfo ?? null;
+  const submissionSource = submissionInfo ?? revenueInfo ?? null;
+
+  const revenueData = processChartData(revenueSource, parseInt(period));
+  const submissionsData = processChartData(submissionSource, parseInt(period));
+
+  const revenuePeak =
+    revenueData?.length > 0
+      ? revenueData.reduce(
+          (max, item) => (item.value > (max.value ?? -Infinity) ? item : max),
+          revenueData[0]
+        )
+      : null;
+
+  const submissionPeak =
+    submissionsData?.length > 0
+      ? submissionsData.reduce(
+          (max, item) => (item.value > (max.value ?? -Infinity) ? item : max),
+          submissionsData[0]
+        )
+      : null;
+
+  // Loading state
+  if (isDashboardLoading || isRevenueLoading || isSubmissionLoading) {
+    return <div className="text-center p-6">Loading...</div>;
+  }
 
   return (
-    <div className="space-y-6 bg-gray-50 min-h-screen">
+    <div className="space-y-6 bg-gray-50 min-h-screen p-6">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
-          title="Total Users"
-          value={dashboardData?.total_user}
+          title="Total Active Users"
+          value={dashboardData?.total_users ?? "N/A"}
           icon={<UsersIcon className="h-5 w-5 text-indigo-600" />}
           bgColor="bg-indigo-50"
         />
         <StatCard
           title="Total Revenue"
-          value={dashboardData?.total_revenue}
-          icon={<DollarSignIcon className="h-5 w-5 text-emerald-600" />}
+          value={dashboardData?.total_revenue ?? "N/A"}
+          icon={<DollarIcon className="h-5 w-5 text-emerald-600" />}
           bgColor="bg-emerald-50"
         />
         <StatCard
-          title="Total Payment"
-          value={dashboardData?.complete_rate}
-          icon={<CheckSquareIcon className="h-5 w-5 text-amber-600" />}
+          title="Total Documents"
+          value={dashboardData?.total_documents ?? "N/A"}
+          icon={<GoFile className="h-5 w-5 text-amber-600" />}
           change={4.3}
           trend="down"
           period="yesterday"
           bgColor="bg-amber-50"
         />
         <StatCard
-          title="Documents Submition"
-          value={dashboardData?.submission_count}
-          icon={<ClockIcon className="h-5 w-5 text-green-600" />}
+          title="Total Submissions"
+          value={dashboardData?.total_submissions ?? "N/A"}
+          icon={<AiOutlineException className="h-5 w-5 text-green-600" />}
           bgColor="bg-green-50"
         />
       </div>
+
       {/* Revenue Chart */}
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div className="p-6">
@@ -114,8 +216,11 @@ export default function SuperAdminHome() {
                 onChange={(e) => setPeriod(e.target.value)}
                 className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm leading-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="2025">2025</option>
-                {/* Add more years if backend supports multiple years */}
+                {years.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <IoChevronDownOutline />
@@ -158,7 +263,7 @@ export default function SuperAdminHome() {
                   fillOpacity={1}
                   fill="url(#colorRevenue)"
                 />
-                {revenuePeak.month && (
+                {revenuePeak?.month && (
                   <ReferenceDot
                     x={revenuePeak.month}
                     y={revenuePeak.value}
@@ -166,18 +271,20 @@ export default function SuperAdminHome() {
                     fill="#3b82f6"
                     stroke="none"
                   >
-                    <label position="top" fill="#3b82f6" fontSize={12}>
-                      {revenuePeak.formattedValue}
-                    </label>
+                    <Label
+                      value={revenuePeak.formattedValue}
+                      position="top"
+                      fill="#3b82f6"
+                      fontSize={12}
+                    />
                   </ReferenceDot>
                 )}
               </AreaChart>
             </ResponsiveContainer>
           </div>
-
-          <h1></h1>
         </div>
       </div>
+
       {/* Submissions Chart */}
       <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
         <div className="p-6">
@@ -189,8 +296,11 @@ export default function SuperAdminHome() {
                 onChange={(e) => setPeriod(e.target.value)}
                 className="appearance-none bg-white border border-gray-300 rounded-md py-2 pl-3 pr-10 text-sm leading-5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="2025">2025</option>
-                {/* Add more years if backend supports multiple years */}
+                {years.map((y) => (
+                  <option key={y} value={y}>
+                    {y}
+                  </option>
+                ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <IoChevronDownOutline />
@@ -239,7 +349,7 @@ export default function SuperAdminHome() {
                   fillOpacity={1}
                   fill="url(#colorSubmissions)"
                 />
-                {submissionPeak.month && (
+                {submissionPeak?.month && (
                   <ReferenceDot
                     x={submissionPeak.month}
                     y={submissionPeak.value}
@@ -247,9 +357,12 @@ export default function SuperAdminHome() {
                     fill="#22c55e"
                     stroke="none"
                   >
-                    <label position="top" fill="#22c55e" fontSize={12}>
-                      {submissionPeak.formattedValue}
-                    </label>
+                    <Label
+                      value={submissionPeak.formattedValue}
+                      position="top"
+                      fill="#22c55e"
+                      fontSize={12}
+                    />
                   </ReferenceDot>
                 )}
               </AreaChart>
@@ -258,13 +371,17 @@ export default function SuperAdminHome() {
         </div>
       </div>
 
-      {/* tabs */}
-      <ActivityTest />
+      {/* Tabs Section with ActivityTest */}
+      <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+        <div className="p-6">
+          <h2 className="text-lg font-semibold mb-4">Activity</h2>
+          <ActivityTest />
+        </div>
+      </div>
     </div>
   );
 }
 
-// Modified CustomTooltip to show month
 function CustomTooltip({ active, payload }) {
   if (active && payload && payload.length) {
     return (
@@ -277,7 +394,6 @@ function CustomTooltip({ active, payload }) {
   return null;
 }
 
-// StatCard and Icons remain unchanged
 function StatCard({ title, value, icon, change, trend, period, bgColor }) {
   return (
     <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
@@ -290,4 +406,12 @@ function StatCard({ title, value, icon, change, trend, period, bgColor }) {
       </div>
     </div>
   );
+}
+
+function UsersIcon({ className }) {
+  return <Users size={20} className="text-indigo-500" />;
+}
+
+function DollarIcon({ className }) {
+  return <DollarSign size={20} className="text-emerald-600" />;
 }
