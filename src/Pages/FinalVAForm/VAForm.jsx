@@ -118,10 +118,10 @@ const VAForm = memo(() => {
                 <td className="py-3 px-2 md:px-4 capitalize text-black">
                   {pdf.status}
                 </td>
-                <td className="py-3 px-2 md:px-4 flex items-center gap-2 text-indigo-600">
+                <td className="py-3 px-2 md:px-4 flex items-center gap-2 text-[#0B2A52]">
                   <FaRegEye className="text-base md:text-lg" />
                   <span
-                    className="text-sm md:text-base cursor-pointer"
+                    className="text-sm md:text-sm cursor-pointer"
                     onClick={() => openModal(pdf)}
                   >
                     View
@@ -134,7 +134,7 @@ const VAForm = memo(() => {
 
         <div className="flex flex-wrap justify-center items-center gap-2 md:gap-4 mt-6">
           <button
-            className="btn btn-sm bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg py-1 px-3 md:px-4 disabled:opacity-50"
+            className="btn btn-sm bg-[#0B2A52] text-white  rounded-lg py-1 px-3 md:px-4 disabled:opacity-50"
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}
           >
@@ -144,7 +144,7 @@ const VAForm = memo(() => {
             Page {currentPage} of {totalPages}
           </span>
           <button
-            className="btn btn-sm bg-indigo-600 text-white hover:bg-indigo-700 rounded-lg py-1 px-3 md:px-4 disabled:opacity-50"
+            className="btn btn-sm bg-[#0B2A52] text-white hover:bg-[#0B2A52] rounded-lg py-1 px-3 md:px-4 disabled:opacity-50"
             disabled={currentPage === totalPages}
             onClick={() => handlePageChange(currentPage + 1)}
           >
@@ -186,7 +186,7 @@ const VAForm = memo(() => {
                         href={`${BASE_URL}${doc.file}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-sm bg-blue-600 dark:border-none text-white hover:bg-blue-700"
+                        className="btn btn-sm bg-[#0B2A52] dark:border-none text-white "
                       >
                         View PDF
                       </a>
