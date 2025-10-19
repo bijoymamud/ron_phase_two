@@ -82,7 +82,6 @@ const processChartData = (backendData, year) => {
     });
   }
 
-  // Handle object with monthly_submissions
   if (
     backendData &&
     typeof backendData === "object" &&
@@ -113,7 +112,6 @@ const processChartData = (backendData, year) => {
     });
   }
 
-  // Fallback empty array
   return [];
 };
 
@@ -128,7 +126,6 @@ export default function SuperAdminHome() {
   const { data: submissionInfo, isLoading: isSubmissionLoading } =
     useGetFilteredSubmissionDataQuery(yearParam);
 
-  // Populate available years from backend responses
   useEffect(() => {
     const revYears = Array.isArray(revenueInfo?.available_years)
       ? revenueInfo.available_years.map(String)
@@ -167,9 +164,15 @@ export default function SuperAdminHome() {
         )
       : null;
 
-  // Loading state
   if (isDashboardLoading || isRevenueLoading || isSubmissionLoading) {
-    return <div className="text-center p-6">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="flex flex-col items-center gap-4">
+          <span className="loading loading-bars loading-xl"></span>
+          <p className="text-gray-600 font-medium">Loading data...</p>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -52,7 +52,9 @@ const Login = () => {
     } catch (error) {
       console.log("error", error);
       const errorMessage =
-        error?.data?.non_field_errors || "Something went wrong!";
+        error?.data?.non_field_errors ||
+        error?.data?.error ||
+        "Something went wrong!";
 
       toast.error(errorMessage, {
         id: toastId,
@@ -101,7 +103,7 @@ const Login = () => {
         </div>
 
         {/* Password Field */}
-   
+
         <div className="mb-6">
           <label htmlFor="password" className="block text-sm font-semibold">
             Password
