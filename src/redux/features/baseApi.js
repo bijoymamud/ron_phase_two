@@ -138,7 +138,7 @@ export const baseApi = createApi({
 			query: (body) => ({
 				url: "api/support/start/",
 				method: "POST",
-				body, // { subject: "" }
+				body,
 			}),
 			invalidatesTags: ["Support"],
 		}),
@@ -153,11 +153,7 @@ export const baseApi = createApi({
 			invalidatesTags: ["Support"],
 		}),
 
-		// fetch messages for a support chat (list endpoint used by UI)
-		getMessages: builder.query({
-			// API returns { success: boolean, messages: [...], total_messages }
-			query: (chatId) => `api/support/message/list/${chatId}/`,
-		}),
+	
 
 		// optional: fetch active chats for admin/chat list (used by some chat UI)
 		getActiveChats: builder.query({
@@ -165,10 +161,10 @@ export const baseApi = createApi({
 		}),
 
 		closeChat: builder.mutation({
-			query: (body) => ({
+			query: (chat_id) => ({
 				url: "api/support/admin/chat/close/",
 				method: "POST",
-				body,
+				body: { chat_id },
 			}),
 			invalidatesTags: ["Support"],
 		}),
