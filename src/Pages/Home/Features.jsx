@@ -28,7 +28,7 @@ const FeaturesCard = () => {
           {/* Text Content Section */}
           <div className="basis-full md:basis-6/12 px-0 md:px-10 space-y-6  md:mt-20  md:space-y-14 pt-10 md:pt-0 order-1 md:order-2">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#0B2A52] text-center md:text-start">
+              <h1 className="text-2xl md:text-4xl font-bold text-[#0B2A52] text-center md:text-start">
                 Unmatched Experience
               </h1>
               <p className="pt-3 text-gray-500 text-sm md:text-base text-center md:text-start">
@@ -38,7 +38,7 @@ const FeaturesCard = () => {
             </div>
 
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#0B2A52] text-center md:text-start">
+              <h1 className="text-2xl md:text-4xl font-bold text-[#0B2A52] text-center md:text-start">
                 Turn Your Disabilities Into Possibilities
               </h1>
               <p className="pt-3 text-gray-500 text-sm md:text-base text-center md:text-start">
@@ -48,7 +48,7 @@ const FeaturesCard = () => {
             </div>
 
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#0B2A52] text-center md:text-start">
+              <h1 className="text-2xl md:text-4xl font-bold text-[#0B2A52] text-center md:text-start">
                 100% Success Rate
               </h1>
               <p className="pt-3 text-gray-500 text-sm md:text-base text-center md:text-start">
