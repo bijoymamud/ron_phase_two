@@ -3,7 +3,6 @@ import { PiPaperPlaneRightDuotone } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import {
   useGetLoggedUserQuery,
-  useGetMessagesQuery,
   useSendMessageMutation,
   useStartChatMutation,
   useCloseChatMutation,
@@ -25,27 +24,23 @@ export default function SupportChat() {
   const [sendMessage] = useSendMessageMutation();
   const [closeChat, { isLoading: isClosingChat }] = useCloseChatMutation();
 
-  // We still need the user query, but it's no longer part of the message display logic
   useGetLoggedUserQuery();
   const currentChatId = useSelector((state) => state.chatSlice.currentChatId);
 
   const {
     data: fetchedMessages,
-    isLoading, // Using the original 'isLoading' is now sufficient
+    isLoading, 
     error,
   } = useGetMessagesQuery(currentChatId, {
     skip: !currentChatId,
   });
 
-  // --- CORRECTED EFFECT 1: Loads historical messages ---
-  // Now only depends on fetchedMessages
   useEffect(() => {
     if (fetchedMessages?.messages) {
       const formattedMessages = fetchedMessages.messages.map((message) => ({
         id: message.firebase_message_id,
         content: message.content,
         timestamp: new Date(message.timestamp),
-        // THE FIX: Use sender.senderType directly
         isSent: message.sender.senderType === "user",
       }));
       setMessages(formattedMessages);
@@ -56,7 +51,6 @@ export default function SupportChat() {
     }
   }, [fetchedMessages]);
 
-  // 2: The REAL-TIME listener ---
   useEffect(() => {
     if (currentChatId) {
       const messagesRef = ref(db, `support_chats/${currentChatId}/messages`);
@@ -71,7 +65,6 @@ export default function SupportChat() {
             id: messageId,
             content: messageData.content,
             timestamp: new Date(messageData.timestamp),
-            // THE FIX: Use senderType from Firebase data directly
             isSent: messageData.senderType === "user",
           };
 
@@ -86,14 +79,12 @@ export default function SupportChat() {
         off(messagesRef, "child_added", unsubscribe);
       };
     }
-  }, [currentChatId]); // Dependency on currentUserId is removed
+  }, [currentChatId]); 
 
-  // EFFECT 3: Handles scrolling to the bottom (No change needed)
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // --- NO CHANGES NEEDED IN HANDLERS ---
   const handleStartChat = async () => {
     if (!subject.trim()) return;
     try {
@@ -157,7 +148,6 @@ export default function SupportChat() {
     });
   };
 
-  // --- NO CHANGES NEEDED IN JSX ---
   return (
     <div className="flex flex-col h-[60vh]  md:w-[400px] w-[350px] mx-auto bg-base-100 shadow-2xl rounded-xl overflow-hidden">
       <div className="navbar bg-gradient-to-r from-[#0B2A52]/90 to-[#0B2A52] text-base-100 shadow-md px-4">

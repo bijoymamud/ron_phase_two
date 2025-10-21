@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { get } from "firebase/database";
 
 export const baseApi = createApi({
 	reducerPath: "baseApi",
@@ -22,7 +23,7 @@ export const baseApi = createApi({
 			return headers;
 		},
 	}),
-	tagTypes: ["user", "forms", "documents", "userManagement", "plans", "loggedIn"],
+	tagTypes: ["user", "forms", "documents", "userManagement", "plans", "loggedIn", "Support"],
 	endpoints: (builder) => ({
 		createUser: builder.mutation({
 			query: (userData) => ({
@@ -70,10 +71,7 @@ export const baseApi = createApi({
 				body: payload
 			})
 		}),
-		// getPlans: builder.query({
-		// 	query: () => "api/payment/get_all/subscribtions-plan/",
-		// 	provideTags: ["plans"],
-		// }),
+
 		getPlans: builder.query({
 			query: () => "api/payment/get_all/subscribtions-plan/",
 			providesTags: (result) =>
@@ -112,26 +110,71 @@ export const baseApi = createApi({
 				body: payload,
 			}),
 		}),
+
+		// startChat: builder.mutation({
+		// 	query: (subject) => ({
+		// 		url: "api/support/start-chat/",
+		// 		method: "POST",
+		// 		body: { subject },
+		// 	}),
+		// }),
+		// sendMessage: builder.mutation({
+		// 	query: ({ chatId, message, type = "text" }) => ({
+		// 		url: `api/support/send-message/${chatId}/`,
+		// 		method: "POST",
+		// 		body: { message, type },
+		// 	}),
+		// }),
+		// getMessages: builder.query({
+		// 	query: (chatId) => `api/support/get-messages/${chatId}/`,
+		// }),
+		// getActiveChats: builder.query({
+		// 	query: () => "api/support/admin/active-chats/",
+		// }),
+
+
+		//startchat
 		startChat: builder.mutation({
-			query: (subject) => ({
-				url: "api/support/start-chat/",
+			query: (body) => ({
+				url: "api/support/start/",
 				method: "POST",
-				body: { subject },
+				body, // { subject: "" }
 			}),
+			invalidatesTags: ["Support"],
 		}),
+
+		// send a message to a support chat
 		sendMessage: builder.mutation({
 			query: ({ chatId, message, type = "text" }) => ({
 				url: `api/support/send-message/${chatId}/`,
 				method: "POST",
 				body: { message, type },
 			}),
+			invalidatesTags: ["Support"],
 		}),
+
+		// fetch messages for a support chat (list endpoint used by UI)
 		getMessages: builder.query({
-			query: (chatId) => `api/support/get-messages/${chatId}/`,
+			// API returns { success: boolean, messages: [...], total_messages }
+			query: (chatId) => `api/support/message/list/${chatId}/`,
 		}),
+
+		// optional: fetch active chats for admin/chat list (used by some chat UI)
 		getActiveChats: builder.query({
 			query: () => "api/support/admin/active-chats/",
 		}),
+
+		closeChat: builder.mutation({
+			query: (body) => ({
+				url: "api/support/admin/chat/close/",
+				method: "POST",
+				body,
+			}),
+			invalidatesTags: ["Support"],
+		}),
+
+		//end chat
+
 		getUsers: builder.query({
 			query: () => "api/payment/get_all/subscribtions/",
 			providesTags: ["loggedIn"],
@@ -186,12 +229,6 @@ export const baseApi = createApi({
 		getDocuments: builder.query({
 			query: () => "api/dashboard/documents/list/",
 			providesTags: ["documents"],
-		}),
-		closeChat: builder.mutation({
-			query: ({ chatId }) => ({
-				url: `/api/support/close-chat/${chatId}/`,
-				method: "POST",
-			})
 		}),
 
 
@@ -257,6 +294,11 @@ export const baseApi = createApi({
 				{ type: 'plans', id: 'LIST' }
 			],
 		}),
+
+		//activity test
+		getFilteredActivityTestData: builder.query({
+			query: () => "api/dashboard/superadmin/activity-log/",
+		}),
 	}),
 });
 
@@ -273,10 +315,10 @@ export const {
 	useContactFormMutation,
 	usePaymentCheckoutMutation,
 	useGenerateNarrationMutation,
-	useSendMessageMutation,
-	useStartChatMutation,
-	useGetMessagesQuery,
-	useGetActiveChatsQuery,
+
+
+
+
 	useGetUsersQuery,
 	useGetDashboardInfoQuery,
 	useMonthlyRevenueQuery,
@@ -288,7 +330,7 @@ export const {
 	useApprovedFormMutation,
 	useRejectFormMutation,
 	useGetDocumentsQuery,
-	useCloseChatMutation,
+
 
 
 	//admin login
@@ -304,5 +346,15 @@ export const {
 	useEditSubscriptionMutation,
 	useGetFilteredReviewDataQuery,
 	useGetFilteredSubmissionDataQuery,
+
+	//activity test
+	useGetFilteredActivityTestDataQuery,
+
+	//chat
+	useStartChatMutation,
+	useSendMessageMutation,
+	useGetMessagesQuery,
+	useGetActiveChatsQuery,
+	useCloseChatMutation,
 
 } = baseApi;

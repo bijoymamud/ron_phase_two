@@ -8,29 +8,7 @@ export default function Step4ServiceDates({ register, errors }) {
           </span>
         </label>
         <div className="flex space-x-2">
-          {/* <input
-            type="text"
-            inputMode="numeric"
-            pattern="\d*"
-            maxLength={2}
-            {...register("Beginning_Date_Month[0]", {
-              required: "Month is required",
-              pattern: {
-                value: /^(0[1-9]|1[0-2])$/,
-                message: "Invalid month (01-12)",
-              },
-            })}
-            onInput={(e) => {
-              const val = e.target.value.replace(/\D/g, "");
-              if (val.length === 1 && parseInt(val) > 1) {
-                e.target.value = "0" + val;
-              } else if (parseInt(val) > 12) {
-                e.target.value = "12";
-              }
-            }}
-            className="input input-bordered w-1/3 py-5 dark:bg-white dark:border-black dark:text-black"
-            placeholder="MM"
-          /> */}
+        
 
           <input
             type="text"

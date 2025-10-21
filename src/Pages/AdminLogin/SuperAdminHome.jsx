@@ -37,7 +37,6 @@ const monthNames = [
 ];
 
 const processChartData = (backendData, year) => {
-  // Handle array of year objects
   if (Array.isArray(backendData)) {
     const yearData = backendData.find((item) => item?.year === year);
     if (!yearData || !Array.isArray(yearData.data)) return [];

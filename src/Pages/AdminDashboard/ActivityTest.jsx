@@ -55,6 +55,7 @@ const activitiesData = [
 
 const ActivityTest = () => {
   const [activeTab, setActiveTab] = useState("All");
+  // const
 
   const filteredActivities = activitiesData.filter((activity) => {
     if (activeTab === "All") {
