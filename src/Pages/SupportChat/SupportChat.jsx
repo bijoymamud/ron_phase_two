@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Send, X, MessageCircle, User } from "lucide-react";
 import {
@@ -279,17 +278,17 @@ const SupportChat = () => {
     return (
       <div className="flex flex-col ">
         <div className="flex-1 flex items-center justify-center p-6 ">
-          <div className="w-full max-w-md">
-            <div className="bg-white rounded-3xl shadow-2xl p-8">
+          <div className="w-full md:max-w-md">
+            <div className="bg-white rounded-3xl shadow-2xl md:p-8 p-3">
               <div className="flex justify-center mb-6">
-                <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-full">
-                  <MessageCircle className="w-12 h-12 text-white" />
+                <div className="bg-gradient-to-br from-blue-500 to-[#0B2A52] p-4 rounded-full">
+                  <MessageCircle className="w-8 h-8 text-white" />
                 </div>
               </div>
-              <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+              <h1 className="md:text-3xl font-bold text-center text-gray-800 mb-2">
                 Start Support Chat
               </h1>
-              <p className="text-center text-gray-500 mb-8">
+              <p className="text-center md:text-base text-sm text-gray-500 mb-8">
                 How can we help you today?
               </p>
 
@@ -300,13 +299,13 @@ const SupportChat = () => {
                   onChange={(e) => setSubject(e.target.value)}
                   onKeyPress={handleSubjectKeyPress}
                   placeholder="What do you need help with?"
-                  className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 transition-colors"
+                  className="w-full px-4 py-3 bg-gray-50 border-2 text-sm border-gray-200 rounded-xl transition-colors"
                   autoFocus
                 />
                 <button
                   onClick={handleStartChat}
                   disabled={!subject.trim()}
-                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+                  className="w-full bg-gradient-to-r uppercase from-blue-500 to-[#0B2A52] text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-[#0B2A52] transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
                 >
                   Start Chat
                 </button>

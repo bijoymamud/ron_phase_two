@@ -315,6 +315,10 @@ const LiveChat = () => {
         }
       };
 
+
+
+      
+
       chatWsRef.current.onerror = (error) => {
         console.error("Chat WebSocket error:", error);
         setConnectionStatus((prev) => ({ ...prev, chat: "error" }));
