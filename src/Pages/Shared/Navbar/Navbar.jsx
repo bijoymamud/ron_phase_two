@@ -25,7 +25,7 @@ export default function Navbar() {
 
   const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
 
-  const baseURL = "http://10.10.13.73:2000";
+  const baseURL = "https://backend.valrpro.com";
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({

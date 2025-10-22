@@ -73,6 +73,7 @@ import SuperAdminHome from "../Pages/AdminLogin/SuperAdminHome";
 import AdminManagment from "../Pages/AdminDashboard/AdminManagment";
 import PackageManagment from "../Pages/AdminDashboard/PackageManagment";
 import Loading from "../Loading/Loading";
+import ChatInterface from "../Pages/AdminDashboard/ChatInterface";
 
 const Home = React.lazy(() => import("../Pages/Home/Home"));
 const AboutUs = React.lazy(() => import("../Pages/AboutUs/AboutUs"));
@@ -90,7 +91,7 @@ const Document = React.lazy(() => import("../Pages/AdminDashboard/Document"));
 const LiveChat = React.lazy(() => import("../Pages/AdminDashboard/LiveChat"));
 const Profile = React.lazy(() => import("../Pages/AdminDashboard/Profile"));
 const Issues = React.lazy(() => import("../Pages/Selected_Issue/Issues"));
-  
+
 const NoSubscription = React.lazy(
   () => import("../Pages/NoSubcription/NoSubscription")
 );
@@ -538,7 +539,16 @@ export const router = createBrowserRouter([
       { path: "forms", element: <FormView /> },
       { path: "payment", element: <Payment /> },
       { path: "document", element: <Document /> },
-      { path: "livechat", element: <LiveChat /> },
+      {
+        path: "livechat",
+        element: <ChatInterface />,
+        children: [
+          {
+            path: ":id",
+            element: <LiveChat />,
+          },
+        ],
+      },
       { path: "settings/privacy_policy", element: <PrivacyPolicy /> },
       { path: "settings/terms_conditions", element: <TermsConditions /> },
       { path: "notification", element: <Notification /> },

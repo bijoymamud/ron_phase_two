@@ -4,7 +4,10 @@ import { get } from "firebase/database";
 export const baseApi = createApi({
 	reducerPath: "baseApi",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "http://10.10.13.73:2000/",
+		baseUrl: "https://backend.valrpro.com/",
+
+
+
 		prepareHeaders: (headers, { endpoint }) => {
 			const authEndpoints = [
 				"createUser",
@@ -111,28 +114,6 @@ export const baseApi = createApi({
 			}),
 		}),
 
-		// startChat: builder.mutation({
-		// 	query: (subject) => ({
-		// 		url: "api/support/start-chat/",
-		// 		method: "POST",
-		// 		body: { subject },
-		// 	}),
-		// }),
-		// sendMessage: builder.mutation({
-		// 	query: ({ chatId, message, type = "text" }) => ({
-		// 		url: `api/support/send-message/${chatId}/`,
-		// 		method: "POST",
-		// 		body: { message, type },
-		// 	}),
-		// }),
-		// getMessages: builder.query({
-		// 	query: (chatId) => `api/support/get-messages/${chatId}/`,
-		// }),
-		// getActiveChats: builder.query({
-		// 	query: () => "api/support/admin/active-chats/",
-		// }),
-
-
 		//startchat
 		startChat: builder.mutation({
 			query: (body) => ({
@@ -153,11 +134,20 @@ export const baseApi = createApi({
 			invalidatesTags: ["Support"],
 		}),
 
-	
+
 
 		// optional: fetch active chats for admin/chat list (used by some chat UI)
 		getActiveChats: builder.query({
-			query: () => "api/support/admin/active-chats/",
+			query: () => "api/support/admin/chat/list/",
+		}),
+
+		//get requested chat
+		approveChat: builder.mutation({
+			query: (chatId) => ({
+				url: `api/support/admin/chat/approve/`,
+				method: "POST",
+				body: { chat_id: chatId },
+			}),
 		}),
 
 		closeChat: builder.mutation({
@@ -170,6 +160,13 @@ export const baseApi = createApi({
 		}),
 
 		//end chat
+
+
+		//getchat history
+		getHistory: builder.query({
+			query: (chatId) => `api/support/message/list/${chatId}/`,
+			providesTags: ["Support"],
+		}),
 
 		getUsers: builder.query({
 			query: () => "api/payment/get_all/subscribtions/",
@@ -352,5 +349,9 @@ export const {
 	useGetMessagesQuery,
 	useGetActiveChatsQuery,
 	useCloseChatMutation,
+
+	//get requested chat
+	useApproveChatMutation,
+	useGetHistoryQuery,
 
 } = baseApi;

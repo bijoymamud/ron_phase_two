@@ -18,7 +18,7 @@ export default function FormView() {
   const [approve, { isLoading: approving }] = useApprovedFormMutation();
   const [reject, { isLoading: rejecting }] = useRejectFormMutation();
 
-  const baseURL = "http://10.10.13.73:2000";
+  const baseURL = "https://backend.valrpro.com";
   const perPage = 15;
 
   const filtered =

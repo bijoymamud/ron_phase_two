@@ -145,7 +145,7 @@ const SupportChat = () => {
     if (!websocketChatId) return;
     const token = localStorage.getItem("access_token");
     const ws = new WebSocket(
-      `ws://10.10.13.73:2000/ws/support-chat/${websocketChatId}/?Authorization=Bearer ${token}`
+      `ws://backend.valrpro.com/ws/support-chat/${websocketChatId}/?Authorization=Bearer ${token}`
     );
 
     ws.onopen = () => {

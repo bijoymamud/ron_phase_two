@@ -4,10 +4,17 @@
   font-family: "Montserrat", serif;
 }
 
-*{
+* {
   scroll-behavior: smooth
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.bijoyvhai>.modal-box {
+  max-width: 100vw;
+  width: 800px;
+  max-height: 70%;
+}

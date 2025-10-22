@@ -12,7 +12,7 @@ export default function Document() {
   const [isActionTaken, setIsActionTaken] = useState(false);
   const { data: allDocuments, isLoading } = useGetDocumentsQuery();
 
-  const baseURL = "http://10.10.13.73:2000";
+  const baseURL = "https://backend.valrpro.com";
 
   console.log("documents", allDocuments);
 
