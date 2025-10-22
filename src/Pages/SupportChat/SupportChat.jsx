@@ -130,6 +130,17 @@ const SupportChat = () => {
     }
   };
 
+  const role = localStorage.getItem("user_role");
+  const chatUserRaw = localStorage.getItem("chatUser");
+  let name = "";
+  try {
+    const chatUser = chatUserRaw ? JSON.parse(chatUserRaw) : null;
+    name = chatUser?.name ?? "";
+  } catch (e) {
+    console.warn("Failed to parse chatUser from localStorage", e);
+    name = chatUserRaw ?? "";
+  }
+
   useEffect(() => {
     if (!websocketChatId) return;
     const token = localStorage.getItem("access_token");
@@ -209,7 +220,7 @@ const SupportChat = () => {
     const optimistic = {
       id: tempId,
       content: text,
-      sender_type: "admin",
+      sender_type: role,
       sender_name: "You",
       websocket_message_id: tempId,
       timestamp: new Date().toISOString(),
@@ -299,7 +310,7 @@ const SupportChat = () => {
                   onChange={(e) => setSubject(e.target.value)}
                   onKeyPress={handleSubjectKeyPress}
                   placeholder="What do you need help with?"
-                  className="w-full px-4 py-3 bg-gray-50 border-2 text-sm border-gray-200 rounded-xl transition-colors"
+                  className="w-full px-4 py-3 bg-gray-50 border-2 text-sm dark:text-gray-900 border-gray-200 rounded-xl transition-colors"
                   autoFocus
                 />
                 <button
