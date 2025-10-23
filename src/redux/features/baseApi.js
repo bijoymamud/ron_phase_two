@@ -26,7 +26,7 @@ export const baseApi = createApi({
 			return headers;
 		},
 	}),
-	tagTypes: ["user", "forms", "documents", "userManagement", "plans", "loggedIn", "Support"],
+	tagTypes: ["user", "forms", "documents", "userManagement", "plans", "loggedIn", "Support", "requestedChats", "admin"],
 	endpoints: (builder) => ({
 		createUser: builder.mutation({
 			query: (userData) => ({
@@ -139,6 +139,7 @@ export const baseApi = createApi({
 		// optional: fetch active chats for admin/chat list (used by some chat UI)
 		getActiveChats: builder.query({
 			query: () => "api/support/admin/chat/list/",
+			providesTags: ["requestedChats"]
 		}),
 
 		//get requested chat
@@ -148,6 +149,7 @@ export const baseApi = createApi({
 				method: "POST",
 				body: { chat_id: chatId },
 			}),
+			invalidatesTags: ["requestedChats"],
 		}),
 
 		closeChat: builder.mutation({
