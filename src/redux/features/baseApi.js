@@ -166,7 +166,7 @@ export const baseApi = createApi({
 
 		//getchat history
 		getHistory: builder.query({
-			query: (chatId) => `api/support/message/list/${chatId}/`,
+			query: (id) => `api/support/message/list/${id}/`,
 			providesTags: ["Support"],
 		}),
 
