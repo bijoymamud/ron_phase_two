@@ -182,19 +182,27 @@ export default function Dashboard() {
               <ul className="space-y-2">
                 {section.items.map((item, itemIdx) => (
                   <li key={itemIdx} className="w-full">
+                    {console.log(
+                      location.pathname.includes(item.path),
+                      location.pathname,
+                      item,
+                      "ldksjglasjlffdjl;;aj"
+                    )}
                     {item.submenu ? (
                       <div className="dropdown">
                         <div tabIndex={0} role="button">
                           <div
                             className={`flex items-center w-[260px] gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 group relative transition-all duration-300 ${
-                              selectedItem === item.name
+                              // selectedItem === item.name
+                              location.pathname.includes(item.path)
                                 ? "bg-gray-200 font-semibold"
                                 : ""
                             }`}
                           >
                             <span
                               className={`group-hover:text-gray-700 transition-colors duration-300 ${
-                                selectedItem === item.name
+                                // selectedItem === item.name
+                                location.pathname.includes(item.path)
                                   ? "text-[#0A3161]"
                                   : "text-white"
                               }`}
@@ -207,7 +215,8 @@ export default function Dashboard() {
                                   ? "opacity-0 -translate-x-full"
                                   : "opacity-100 translate-x-0"
                               } whitespace-nowrap group-hover:text-gray-700 ${
-                                selectedItem === item.name
+                                // selectedItem === item.name
+                                location.pathname.includes(item.path)
                                   ? "text-[#0A3161]"
                                   : "text-white"
                               }`}
@@ -229,7 +238,8 @@ export default function Dashboard() {
                                     handleItemClick(child.name, child.path)
                                   }
                                   className={`flex items-center gap-2 px-3 py-2 my-1 transition-all duration-300 ${
-                                    location.pathname === child.path
+                                    // location.pathname === child.path
+                                    location.pathname.includes(child.path)
                                       ? "bg-gray-200 text-[#0A3161] font-semibold"
                                       : "text-gray-700 hover:bg-gray-100"
                                   }`}
@@ -247,14 +257,14 @@ export default function Dashboard() {
                         to={item.path}
                         onClick={() => handleItemClick(item.name, item.path)}
                         className={`flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 group relative transition-all duration-300 ${
-                          selectedItem === item.name
+                          location.pathname.includes(item.path)
                             ? "bg-gray-200 font-semibold"
                             : ""
                         }`}
                       >
                         <span
                           className={`group-hover:text-gray-700 transition-colors duration-300 ${
-                            selectedItem === item.name
+                            location.pathname.includes(item.path)
                               ? "text-[#0A3161]"
                               : "text-white"
                           }`}
@@ -267,7 +277,7 @@ export default function Dashboard() {
                               ? "opacity-0 -translate-x-full"
                               : "opacity-100 translate-x-0"
                           } whitespace-nowrap group-hover:text-gray-700 ${
-                            selectedItem === item.name
+                            location.pathname.includes(item.path)
                               ? "text-[#0A3161]"
                               : "text-white"
                           }`}
