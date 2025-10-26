@@ -1,69 +1,18 @@
 import { useState } from "react";
-
-const activitiesData = [
-  {
-    id: 1,
-    type: "registration",
-    title: "John Doe",
-    badgeText: "Registered",
-    badgeBg: "bg-green-100",
-    badgeTextClass: "text-green-800",
-    timestamp: "2h ago",
-    details: "janecooper@gmail.com",
-  },
-  {
-    id: 2,
-    type: "package_purchase",
-    title: "Package purchased",
-    badgeText: "Purchase",
-    badgeBg: "bg-blue-100",
-    badgeTextClass: "text-blue-800",
-    timestamp: "2h ago",
-    details: "Payment: **** 4242 · $49.00",
-  },
-  {
-    id: 3,
-    type: "role_update",
-    title: "Role updated",
-    badgeText: "Admin",
-    badgeBg: "bg-purple-100",
-    badgeTextClass: "text-purple-800",
-    timestamp: "2h ago",
-    details: "Admin set Manager role for Dario",
-  },
-  {
-    id: 4,
-    type: "registration",
-    title: "Jane Smith",
-    badgeText: "Registered",
-    badgeBg: "bg-green-100",
-    badgeTextClass: "text-green-800",
-    timestamp: "5h ago",
-    details: "janesmith@example.com",
-  },
-  {
-    id: 5,
-    type: "package_purchase",
-    title: "Package purchased",
-    badgeText: "Purchase",
-    badgeBg: "bg-blue-100",
-    badgeTextClass: "text-blue-800",
-    timestamp: "1d ago",
-    details: "Payment: **** 1234 · $99.00",
-  },
-];
+import { useGetFilteredActivityTestDataQuery } from "../../redux/features/baseApi";
 
 const ActivityTest = () => {
   const [activeTab, setActiveTab] = useState("All");
-  // const
+  const { data: activitiesData } = useGetFilteredActivityTestDataQuery();
+  console.log(activitiesData);
 
-  const filteredActivities = activitiesData.filter((activity) => {
+  const filteredActivities = activitiesData?.filter((activity) => {
     if (activeTab === "All") {
       return true;
     } else if (activeTab === "Recent Registrations") {
-      return activity.type === "registration";
+      return activity.user_registration === "registration";
     } else if (activeTab === "Recent Package purchases") {
-      return activity.type === "package_purchase";
+      return activity.purchase === "package_purchase";
     }
     return false;
   });
@@ -105,7 +54,7 @@ const ActivityTest = () => {
           </button>
         </div>
         <div className="pt-5 space-y-4">
-          {filteredActivities.map((activity) => (
+          {filteredActivities?.map((activity) => (
             <div
               key={activity.id}
               className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:cursor-pointer hover:shadow-md"
@@ -113,8 +62,9 @@ const ActivityTest = () => {
               <div className="flex items-center justify-between mb-1 ">
                 <div className="flex items-center">
                   <p className="font-semibold text-gray-900 text-lg">
-                    {activity.title}
+                    {activity?.action}
                   </p>
+                  <span className="">{activity?.action_type}</span>
                   <span
                     className={`ml-2 px-2 py-0.5 text-xs font-medium rounded-full ${activity.badgeBg} ${activity.badgeTextClass}`}
                   >
@@ -128,7 +78,7 @@ const ActivityTest = () => {
               <p className="text-gray-600 text-sm">{activity.details}</p>
             </div>
           ))}
-          {filteredActivities.length === 0 && (
+          {filteredActivities?.length === 0 && (
             <div className="text-center text-gray-500 py-8">
               No activities to display for this category.
             </div>

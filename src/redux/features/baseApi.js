@@ -294,6 +294,8 @@ export const baseApi = createApi({
 		getFilteredActivityTestData: builder.query({
 			query: () => "api/dashboard/superadmin/activity-log/",
 		}),
+
+
 	}),
 });
 
@@ -348,12 +350,14 @@ export const {
 	//chat
 	useStartChatMutation,
 	useSendMessageMutation,
-	useGetMessagesQuery,
+	// useGetMessagesQuery,
 	useGetActiveChatsQuery,
 	useCloseChatMutation,
 
 	//get requested chat
 	useApproveChatMutation,
 	useGetHistoryQuery,
+
+	
 
 } = baseApi;

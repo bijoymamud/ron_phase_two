@@ -1,10 +1,15 @@
+
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import Lottie from "lottie-react";
+import { Play, Pause } from "lucide-react";
 import useCategoryNavigation from "../../../hooks/useCategoryNavigation";
-import { removeCategoryByName } from "../../../redux/slice/issueSlice";
-import { store } from "../../../redux/store";
+import backgroundMusic from "../../../henas_voice/Sinusitis_Rhinitis_Asthma_Claim_Information_henna.mp3";
+import audioWave from "../../../../public/Voice.json";
 
 const SinusitisForm = () => {
   // Initialize React Hook Form
@@ -26,15 +31,64 @@ const SinusitisForm = () => {
     },
   });
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const selectedCategories = useSelector(
     (state) => state.issueSlice.selectedCategories
   );
   const { navigateToNextCategory } = useCategoryNavigation();
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioError, setAudioError] = useState(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Error playing audio:", error);
+          setIsPlaying(false);
+          setAudioError(
+            "Audio playback was blocked. Click the play button to start."
+          );
+        });
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        setAudioError(null);
+      } else {
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+            setAudioError(null);
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            setAudioError("Failed to play audio. Please try again.");
+          });
+      }
+    }
+  };
 
   const onSubmit = (data) => {
     console.log(data);
     localStorage.setItem("sinusitis_form", JSON.stringify(data));
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
 
     const currentCategoryIndex = selectedCategories.indexOf(
       "Sinusitis, Rhinitis & Asthma Claim Information"
@@ -51,9 +105,10 @@ const SinusitisForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center md:min-h-screen min-h-[85vh] bg-white dark:bg-white pt-14 pb-10 p-4  mx-auto md:pt-32">
-      {/* Header */}
-      <div className="flex flex-col items-center bg-[#0A3161]  p-8 rounded-md md:max-w-4xl w-full mx-auto mb-10 mt-20 md:pt-10">
+    <div className="flex flex-col items-center justify-center md:min-h-screen min-h-[85vh] bg-white dark:bg-white pt-14 pb-10 p-4 mx-auto md:pt-32">
+      <audio ref={audioRef} src={backgroundMusic} loop />
+
+      <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:max-w-4xl w-full mx-auto mb-10 mt-20 md:pt-10">
         <div className="md:w-28 md:h-28 mb-4">
           <img
             src="https://i.ibb.co.com/bgjW5zrC/graphic-elements.png"
@@ -67,14 +122,43 @@ const SinusitisForm = () => {
         </h1>
       </div>
 
+      <div className="flex justify-end mb-6">
+        <button
+          type="button"
+          onClick={toggleAudio}
+          aria-label={isPlaying ? "Pause audio" : "Play audio"}
+          className="flex items-center gap-2 py-2  text-white rounded-lg  transition-colors"
+        >
+          {isPlaying ? (
+            <>
+              <Lottie
+                animationData={audioWave}
+                loop
+                autoplay
+                className="w-20 h-14"
+              />
+              <div className="bg-gray-200 p-2 shadow-md border border-gray-400 rounded-full">
+                <Pause size={16} className="text-gray-900" />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="bg-gray-200 p-2 shadow-md border border-gray-400 rounded-full">
+                <Play size={14} className="text-gray-900" />
+              </div>
+            </>
+          )}
+        </button>
+      </div>
+
       {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full bg-white dark:bg-white max-w-4xl "
+        className="w-full bg-white dark:bg-white max-w-4xl"
       >
         {/* Runny Nose */}
         <div className="mb-6">
-          <label className="block text-gray-900 dark:text-gray-900 font-semibold mb-2  ">
+          <label className="block text-gray-900 dark:text-gray-900 font-semibold mb-2">
             DO YOU HAVE ANY OF THE FOLLOWING SYMPTOMS?
           </label>
           <select
@@ -103,7 +187,7 @@ const SinusitisForm = () => {
 
         {/* Complained While in Service */}
         <div className="mb-6">
-          <label className="block text-gray-900 dark:text-gray-900 font-semibold mb-2 ">
+          <label className="block text-gray-900 dark:text-gray-900 font-semibold mb-2">
             DID YOU EVER COMPLAIN OF THIS TO SICK CALL WHILE IN SERVICE?
           </label>
           <select
@@ -173,12 +257,6 @@ const SinusitisForm = () => {
               {errors.symptomsStartDate.message}
             </p>
           )}
-
-          {errors.symptomsStartDate && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.symptomsStartDate.message}
-            </p>
-          )}
         </div>
 
         {/* Symptoms Frequency */}
@@ -190,7 +268,7 @@ const SinusitisForm = () => {
             {...register("symptomsFrequency", {
               required: "This field is required",
             })}
-            className={`mt-1 block w-full p-2  dark:bg-white  dark:border-gray-600 dark:text-gray-900 border   uppercase border-gray-300 rounded-md text-sm text-gray-700 ${
+            className={`mt-1 block w-full p-2 dark:bg-white dark:border-gray-600 dark:text-gray-900 border uppercase border-gray-300 rounded-md text-sm text-gray-700 ${
               errors.symptomsFrequency ? "border-red-500" : ""
             }`}
           >
@@ -217,7 +295,7 @@ const SinusitisForm = () => {
             {...register("dailyMedication", {
               required: "This field is required",
             })}
-            className={`mt-1 block w-full p-2 dark:bg-white  dark:border-gray-600 dark:text-gray-900 border uppercase border-gray-300 rounded-md text-sm text-gray-700 ${
+            className={`mt-1 block w-full p-2 dark:bg-white dark:border-gray-600 dark:text-gray-900 border uppercase border-gray-300 rounded-md text-sm text-gray-700 ${
               errors.dailyMedication ? "border-red-500" : ""
             }`}
           >
@@ -271,10 +349,10 @@ const SinusitisForm = () => {
               required: "This field is required",
             })}
             className={`mt-1 block w-full p-2 border rounded-md text-sm uppercase
-      bg-white text-gray-900 border-gray-300
-      dark:bg-white dark:text-gray-900 dark:border-gray-600
-      focus:outline-none focus:ring-2 focus:ring-blue-500
-      ${errors.treatmentProvided ? "border-red-500 dark:border-red-400" : ""}`}
+              bg-white text-gray-900 border-gray-300
+              dark:bg-white dark:text-gray-900 dark:border-gray-600
+              focus:outline-none focus:ring-2 focus:ring-blue-500
+              ${errors.treatmentProvided ? "border-red-500 dark:border-red-400" : ""}`}
           >
             <option value="" disabled>
               Select an option
@@ -300,7 +378,7 @@ const SinusitisForm = () => {
             {...register("details", {
               required: "This field is required",
             })}
-            className={`mt-1 block w-full p-2 border dark:bg-white  dark:text-gray-900 uppercase border-gray-300 rounded-md text-sm text-gray-700 h-32 resize-none ${
+            className={`mt-1 block w-full p-2 border dark:bg-white dark:text-gray-900 uppercase border-gray-300 rounded-md text-sm text-gray-700 h-32 resize-none ${
               errors.details ? "border-red-500" : ""
             }`}
             placeholder="Enter details here..."
@@ -315,7 +393,7 @@ const SinusitisForm = () => {
         <div className="flex justify-center gap-4 mt-6">
           <Link
             to="#"
-            className="bg-white text-blue-800 px-6 py-2 border border-blue-800 rounded-md hover:bg-gray-100  w-full text-center font-semibold"
+            className="bg-white text-blue-800 px-6 py-2 border border-blue-800 rounded-md hover:bg-gray-100 w-full text-center font-semibold"
             onClick={() => window.history.back()}
           >
             Back

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronDown, LogOut, Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, User, Users, X } from "lucide-react";
 import logo from "../../../assets/VALR_logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -24,6 +24,7 @@ export default function Navbar() {
   );
 
   const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
+  const tolname = loggedInUser?.name;
 
   const baseURL = "https://backend.valrpro.com";
 
@@ -93,20 +94,41 @@ export default function Navbar() {
     };
   }, [menuOpen]);
 
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("isAdmin");
-    localStorage.removeItem("role");
-    localStorage.removeItem("chatUser");
-    localStorage.removeItem("user_role");
-    await refetch();
+  // const handleLogout = async () => {
+  //   setIsLoggingOut(true);
+  //   localStorage.removeItem("access_token");
+  //   localStorage.removeItem("refresh_token");
+  //   localStorage.removeItem("isAdmin");
+  //   localStorage.removeItem("role");
+  //   localStorage.removeItem("chatUser");
+  //   localStorage.removeItem("user_role");
+  //   await refetch();
 
-    setTimeout(() => {
+  //   setTimeout(() => {
+  //     setIsLoggingOut(false);
+  //     navigate("/login");
+  //   }, 2000);
+  // };
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+
+      // সব localStorage data মুছে ফেলবে
+      localStorage.clear();
+
+      // চাইলে refetch call রাখতেই পারো, দরকার হলে
+      await refetch();
+
+      // ২ সেকেন্ড পর লগইন পেজে রিডাইরেক্ট করবে
+      setTimeout(() => {
+        setIsLoggingOut(false);
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      console.error("Logout failed:", error);
       setIsLoggingOut(false);
-      navigate("/login");
-    }, 2000);
+    }
   };
 
   const openLogoutModal = () => {
@@ -161,7 +183,7 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-3 relative">
           {isLoading ? null : loggedInUser ? (
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end ">
               <div
                 tabIndex={0}
                 role="button"
@@ -180,7 +202,14 @@ export default function Navbar() {
                 </div>
                 <ChevronDown size={20} className="text-white ml-2" />
               </div>
-              <ul className="menu dropdown-content z-[999] p-3 mt-1 shadow bg-[#002b5c] opacity-90 rounded-box w-48 space-y-2 border border-white/20">
+              <ul className="menu dropdown-content z-[999] p-3 mt-1 shadow bg-[#002b5c] opacity-90 rounded-box  space-y-2 border border-white/20">
+                <div className="flex items-center gap-3 px-3 text-white">
+                  <Users className="w-5 h-5 text-white" />
+                  <div className="flex flex-col items-start justify-start">
+                    <p> {tolname}</p>
+                    <p className="text-xs">{loggedInUser?.email}</p>
+                  </div>
+                </div>
                 <li>
                   <Link
                     to={dashboardLink.path}
@@ -276,16 +305,20 @@ export default function Navbar() {
           <div className="border-t border-white/10 p-6">
             {isLoading ? null : loggedInUser ? (
               <div className="flex flex-col items-center gap-4">
-                <img
-                  src={
-                    loggedInUser?.image
-                      ? `${baseURL}${loggedInUser?.image}`
-                      : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
-                  }
-                  alt="User Avatar"
-                  className="h-12 w-12 rounded-full object-cover"
-                />
-
+                <div
+                  className="tooltip tooltip-open tooltip-left"
+                  data-tip={loggedInUser?.name}
+                >
+                  <img
+                    src={
+                      loggedInUser?.image
+                        ? `${baseURL}${loggedInUser?.image}`
+                        : "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+                    }
+                    alt="User Avatar"
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                </div>
                 <Link
                   to={dashboardLink.path}
                   className="flex items-center uppercase gap-3 rounded-md bg-[#104685] px-6 py-2.5 text-white font-semibold hover:bg-opacity-90"
@@ -298,14 +331,6 @@ export default function Navbar() {
                   )}
                   {dashboardLink.label}
                 </Link>
-
-                {/* <button
-                  onClick={openProfileModal}
-                  className="flex items-center uppercase gap-3 rounded-md bg-[#104685] px-6 py-2.5 text-white font-semibold hover:bg-opacity-90"
-                >
-                  <FaUser className="w-5 h-5" />
-                  Profile
-                </button> */}
 
                 <button
                   onClick={openLogoutModal}

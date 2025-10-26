@@ -1,9 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import Lottie from "lottie-react";
+import { Play, Pause } from "lucide-react";
 import useCategoryNavigation from "../../../hooks/useCategoryNavigation";
 import { useSelector } from "react-redux";
-import { Watch } from "lucide-react";
+import backgroundMusic from "../../../henas_voice/Migraine_Headache_Claim_Information_henna.mp3";
+import audioWave from "../../../../public/Voice.json";
 
 const Migraine = () => {
   const {
@@ -16,12 +20,62 @@ const Migraine = () => {
   const selectedCategories = useSelector(
     (state) => state.issueSlice.selectedCategories
   );
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioError, setAudioError] = useState(null);
 
   const hasReceivedMedicalTreatment = watch("migraineImpactTreatment");
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Error playing audio:", error);
+          setIsPlaying(false);
+          setAudioError(
+            "Audio playback was blocked. Click the play button to start."
+          );
+        });
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        setAudioError(null);
+      } else {
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+            setAudioError(null);
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            setAudioError("Failed to play audio. Please try again.");
+          });
+      }
+    }
+  };
 
   const onSubmit = (data) => {
     console.log(data);
     localStorage.setItem("migraine", JSON.stringify(data));
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
 
     const currentCategoryIndex = selectedCategories.indexOf(
       "Migraine & Headache Claim Information"
@@ -38,8 +92,11 @@ const Migraine = () => {
   };
 
   return (
-    <div className="flex justify-center items-center  dark:bg-white  md:min-h-screen md:bg-gray-100 md:pt-32 md:py-10">
+    <div className="flex justify-center items-center dark:bg-white md:min-h-screen md:bg-gray-100 md:pt-32 md:py-10">
       <div className="bg-white md:shadow-md rounded-2xl md:p-8 p-2 w-full max-w-4xl space-y-8 my-14">
+        {/* Audio Element */}
+        <audio ref={audioRef} src={backgroundMusic} loop />
+
         {/* Centered Image and Title */}
         <div className="flex flex-col items-center bg-[#0A3161] p-8 rounded-md md:w-3/6 mx-auto mt-16 md:pt-0">
           <div className="md:w-28 md:h-28 mb-4">
@@ -54,6 +111,36 @@ const Migraine = () => {
           </h1>
         </div>
 
+        {/* Play/Pause Button */}
+        <div className="flex justify-end mb-6">
+          <button
+            type="button"
+            onClick={toggleAudio}
+            aria-label={isPlaying ? "Pause audio" : "Play audio"}
+            className="flex items-center gap-2 py-2  text-white rounded-lg  transition-colors"
+          >
+            {isPlaying ? (
+              <>
+                <Lottie
+                  animationData={audioWave}
+                  loop
+                  autoplay
+                  className="w-20 h-14"
+                />
+                <div className="bg-gray-200 p-2 shadow-md border border-gray-400 rounded-full">
+                  <Pause size={16} className="text-gray-900" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="bg-gray-200 p-2 shadow-md border border-gray-400 rounded-full">
+                  <Play size={14} className="text-gray-900" />
+                </div>
+              </>
+            )}
+          </button>
+        </div>
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-6 px-1 md:px-0"
@@ -65,13 +152,15 @@ const Migraine = () => {
               {...register("migraineFrequency", {
                 required: "This field is required",
               })}
-              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md  uppercase text-sm ${errors.migraineFrequency ? "border-red-500" : ""}`}
+              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md uppercase text-sm ${
+                errors.migraineFrequency ? "border-red-500" : ""
+              }`}
               defaultValue=""
             >
               <option value="" disabled>
                 Select frequency
               </option>
-              <option value="1-2 times per month ">1-2 times per month</option>
+              <option value="1-2 times per month">1-2 times per month</option>
               <option value="3-4 times per month">3-4 times per month</option>
               <option value="5-6 times per month">5-6 times per month</option>
               <option value="6+ times per month">6+ times per month</option>
@@ -90,7 +179,9 @@ const Migraine = () => {
               {...register("migraineDuration", {
                 required: "This field is required",
               })}
-              className={`mt-1 block w-full p-2 border dark:bg-white dark:border-black dark:text-black border-gray-300 rounded-md  uppercase text-sm ${errors.migraineDuration ? "border-red-500" : ""}`}
+              className={`mt-1 block w-full p-2 border dark:bg-white dark:border-black dark:text-black border-gray-300 rounded-md uppercase text-sm ${
+                errors.migraineDuration ? "border-red-500" : ""
+              }`}
               defaultValue=""
             >
               <option value="" disabled>
@@ -115,7 +206,9 @@ const Migraine = () => {
               {...register("migraineSymptoms", {
                 required: "This field is required",
               })}
-              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md  uppercase text-sm ${errors.migraineSymptoms ? "border-red-500" : ""}`}
+              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md uppercase text-sm ${
+                errors.migraineSymptoms ? "border-red-500" : ""
+              }`}
               defaultValue=""
             >
               <option value="" disabled>
@@ -142,7 +235,9 @@ const Migraine = () => {
               {...register("migraineImpact", {
                 required: "This field is required",
               })}
-              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md  uppercase text-sm ${errors.migraineImpact ? "border-red-500" : ""}`}
+              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md uppercase text-sm ${
+                errors.migraineImpact ? "border-red-500" : ""
+              }`}
               defaultValue=""
             >
               <option value="">Select impact</option>
@@ -166,16 +261,18 @@ const Migraine = () => {
               {...register("migraineImpactTreatment", {
                 required: "This field is required",
               })}
-              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md  uppercase text-sm ${errors.migraineImpact ? "border-red-500" : ""}`}
+              className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black border border-gray-300 rounded-md uppercase text-sm ${
+                errors.migraineImpactTreatment ? "border-red-500" : ""
+              }`}
               defaultValue=""
             >
               <option value="">Select impact</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
-            {errors.medicalTreatment && (
+            {errors.migraineImpactTreatment && (
               <span className="text-red-500 text-sm">
-                {errors.medicalTreatment.message}
+                {errors.migraineImpactTreatment.message}
               </span>
             )}
           </label>
@@ -191,20 +288,15 @@ const Migraine = () => {
                   {...register("medicalVisitDates", {
                     required: "This field is required",
                   })}
-                  className={`mt-1 block w-full p-2 border dark:bg-white dark:border-black dark:text-black uppercase border-gray-300 rounded-md text-sm  
-    [appearance:auto] 
-    [&::-webkit-calendar-picker-indicator]:bg-transparent 
-    [&::-webkit-calendar-picker-indicator]:cursor-pointer 
-    [&::-webkit-calendar-picker-indicator]:opacity-100 
-    dark:[&::-webkit-calendar-picker-indicator]:invert ${
-      errors.medicalVisitDates ? "border-red-500" : ""
-    }`}
+                  className={`mt-1 block w-full p-2 border dark:bg-white dark:border-black dark:text-black uppercase border-gray-300 rounded-md text-sm 
+                    [appearance:auto] 
+                    [&::-webkit-calendar-picker-indicator]:bg-transparent 
+                    [&::-webkit-calendar-picker-indicator]:cursor-pointer 
+                    [&::-webkit-calendar-picker-indicator]:opacity-100 
+                    dark:[&::-webkit-calendar-picker-indicator]:invert ${
+                      errors.medicalVisitDates ? "border-red-500" : ""
+                    }`}
                 />
-                {errors.medicalVisitDates && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.medicalVisitDates.message}
-                  </p>
-                )}
                 {errors.medicalVisitDates && (
                   <span className="text-red-500 text-sm">
                     {errors.medicalVisitDates.message}
@@ -219,7 +311,9 @@ const Migraine = () => {
                   {...register("details", {
                     required: "This field is required",
                   })}
-                  className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black uppercase border border-gray-300 rounded-md  text-sm h-32 resize-none ${errors.details ? "border-red-500" : ""}`}
+                  className={`mt-1 block w-full p-2 dark:bg-white dark:border-black dark:text-black uppercase border border-gray-300 rounded-md text-sm h-32 resize-none ${
+                    errors.details ? "border-red-500" : ""
+                  }`}
                   placeholder="Include any relevant information or context."
                 />
                 {errors.details && (
@@ -234,7 +328,7 @@ const Migraine = () => {
           <div className="flex justify-center gap-4 mt-6">
             <Link
               to="#"
-              className="bg-white text-blue-800 px-6 py-2 border border-blue-800 rounded-md hover:bg-gray-100  w-[150px] md:w-[200px] text-center font-semibold"
+              className="bg-white text-blue-800 px-6 py-2 border border-blue-800 rounded-md hover:bg-gray-100 w-[150px] md:w-[200px] text-center font-semibold"
               onClick={() => window.history.back()}
             >
               Back
