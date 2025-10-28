@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { get } from "firebase/database";
 export const baseUrlToBackend = "https://backend.valrpro.com/"
 export const baseApi = createApi({
 	reducerPath: "baseApi",
