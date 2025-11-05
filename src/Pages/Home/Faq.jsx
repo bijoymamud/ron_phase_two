@@ -3,28 +3,41 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "What benefits can I qualify for?",
+    question: "What is VALRPRO and how does it help veterans? ",
     answer:
-      "Veterans can qualify for healthcare, disability compensation, education assistance, housing loans, pension benefits, vocational training, and survivor support programs.",
+      "VALRPRO is a comprehensive platform designed to assist veterans in navigating the VA disability claims process. Our platform helps you start your claim, gather the necessary documents, and track your claim’s progress. We simplify the entire process to ensure you receive the benefits you deserve, quickly and securely. ",
   },
   {
-    question: "What happens if I've been denied before?",
+    question:
+      "What documents do I need to get started with my VA disability claim?",
     answer:
-      "If you have been denied before, we can guide you through the appeal process to ensure you get the benefits you deserve.",
+      "To begin your claim, There is no required document mandatory but we suggest having your DD214 (Certificate of Release or Discharge)",
   },
   {
-    question: "How long does the process take?",
-    answer: "The process varies depending on the case, but generally it takes a few weeks to a few months.",
+    question: "How much does it cost to use VALRPRO services? ",
+    answer:
+      "At VALRPRO, we offer flexible subscription options to best meet your needs. You can choose a month-to-month plan at $50 per month, which allows you to cancel anytime with no long-term commitment. Alternatively, we highly recommend our 6-month prepaid plan at $195, which provides a 35% savings – effectively giving you two months for free. Our goal is to make accessing your benefits as affordable and seamless as possible. ",
   },
   {
-    question: "What is your guest screening process?",
+    question: "How secure is my personal information with VALRPRO?",
     answer:
-      "Our guest screening process includes background checks and verification to ensure a safe and secure environment.",
+      "VALRPRO takes the protection of your personal data seriously. All information is encrypted and safeguarded, We never share your information without your consent. ",
   },
   {
-    question: "How much are your Co-Hosting fees?",
+    question: "Can I track the progress of my claim through VALRPRO? ",
     answer:
-      "Our Co-Hosting fees vary depending on the services you require. Contact us for more detailed pricing information.",
+      "Yes! Every veteran who uses VALRPRO is assigned a dedicated Case Advocate who will provide status updates. Ensuring that you’re always informed about the progress of your claim.",
+  },
+  {
+    question: "How Long Does the VA Disability Claim Process Take? ",
+    answer:
+      "The duration of the VA disability claim process varies depending on the VA's current workload. On average, it takes about 60 to 120 days after claim submission to receive a decision. We guide you through the entire process and provide regular updates to keep you informed every step of the way. ",
+  },
+  {
+    question:
+      "Can I File for VA Benefits if I Was Injured Before I Deployed or Completed Training?",
+    answer:
+      "Yes. If the injury occurred during your time in the military or during active training, you may still qualify for benefits, even if it happened prior to deployment or training completion. The key factor is that the injury was sustained during active military service or training. ",
   },
 ];
 
@@ -37,7 +50,7 @@ export default function FAQ() {
 
   return (
     <section
-	id="faqs"
+      id="faqs"
       className="md:py-16 py-10 bg-no-repeat bg-cover bg-center relative px-5"
       style={{ backgroundImage: "url('https://i.ibb.co/v6qYf4X4/faq-bg.png')" }}
     >
@@ -49,11 +62,20 @@ export default function FAQ() {
             <h2 className="text-3xl md:text-5xl font-bold text-white text-center md:text-start">
               Frequently Asked Questions
               {/* <br /> */}
-              
             </h2>
             <div className="hidden md:block ps-32">
-              <svg width="600" height="20" viewBox="0 0 600 20" className="text-white">
-                <path d="M0 10 L580 10 M575 5 L580 10 L575 15" stroke="currentColor" strokeWidth="2" fill="none" />
+              <svg
+                width="600"
+                height="20"
+                viewBox="0 0 600 20"
+                className="text-white"
+              >
+                <path
+                  d="M0 10 L580 10 M575 5 L580 10 L575 15"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  fill="none"
+                />
               </svg>
             </div>
           </div>
@@ -71,7 +93,9 @@ export default function FAQ() {
                   <span className="text-white/60 text-lg font-medium min-w-[3rem]">
                     {String(index + 1).padStart(2, "0")}.
                   </span>
-                  <h3 className="text-white text-base md:text-xl font-medium">{faq.question}</h3>
+                  <h3 className="text-white text-base md:text-xl font-medium">
+                    {faq.question}
+                  </h3>
                 </div>
                 <div
                   className={`
@@ -96,7 +120,9 @@ export default function FAQ() {
                 `}
               >
                 <div className="pb-6 pt-2 pl-12 pr-4">
-                  <p className="text-gray-400 text-sm md:text-lg leading-relaxed">{faq.answer}</p>
+                  <p className="text-gray-400 text-sm md:text-lg leading-relaxed">
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             </div>

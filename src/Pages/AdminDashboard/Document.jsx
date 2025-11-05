@@ -119,7 +119,7 @@ export default function Document() {
       {/* Modal */}
       {isModalOpen && selectedDocument && (
         <div className="modal modal-open backdrop-blur-[2px]">
-          <div className="modal-box bg-[#002b5c] text-white max-w-2xl p-8 rounded-xl shadow-2xl">
+          <div className="modal-box bg-[#002b5c] text-white max-w-3xl p-8 rounded-xl shadow-2xl">
             <h3 className="text-2xl font-bold mb-6 text-center">
               Document Details
             </h3>
@@ -152,7 +152,7 @@ export default function Document() {
                 </span>
                 <span>{selectedDocument.document_type || "N/A"}</span>
               </div>
-              <div className="flex flex-col col-span-2">
+              {/* <div className="flex flex-col col-span-2">
                 <span className="font-semibold text-white/80">Document:</span>
                 {selectedDocument?.file_url ? (
                   <a
@@ -166,7 +166,7 @@ export default function Document() {
                 ) : (
                   <span className="text-white/80">No document available.</span>
                 )}
-              </div>
+              </div> */} 
             </div>
             <div className="modal-action mt-6 w-full flex justify-end gap-4">
               <button

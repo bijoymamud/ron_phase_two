@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useRef, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useGetHistoryQuery } from "../../redux/features/baseApi";
@@ -320,12 +318,6 @@ const LiveChat = () => {
                   connectionStatus.slice(1)}
               </span>
             </div>
-            <button className="p-2.5 bg-white hover:bg-gray-50 rounded-lg shadow-sm border border-gray-200 transition-all duration-200">
-              <Phone size={18} className="text-gray-600" />
-            </button>
-            <button className="p-2.5 bg-white hover:bg-gray-50 rounded-lg shadow-sm border border-gray-200 transition-all duration-200">
-              <Video size={18} className="text-gray-600" />
-            </button>
           </div>
         </div>
       </div>

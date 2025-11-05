@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 
 const vaRatingTable = [
@@ -9,10 +7,10 @@ const vaRatingTable = [
   { rating: 40, amount: 774.16 },
   { rating: 50, amount: 1102.04 },
   { rating: 60, amount: 1395.93 },
-  { rating: 70, amount: 1716.20 },
+  { rating: 70, amount: 1716.2 },
   { rating: 80, amount: 2044.89 },
   { rating: 90, amount: 2241.91 },
-  { rating: 100, amount: 3831.30 },
+  { rating: 100, amount: 3831.3 },
 ];
 
 const smcLevels = [
@@ -30,17 +28,21 @@ const smcLevels = [
 ];
 
 const dependentAdjustments = {
-  under18: 46, 
-  between18And23: 149, 
-  parentSingle: 0, 
-  parentTwo: 90, 
-  spouse: 73, 
-  spouseAidAndAttendance: 64, 
+  under18: 46,
+  between18And23: 149,
+  parentSingle: 0,
+  parentTwo: 90,
+  spouse: 73,
+  spouseAidAndAttendance: 64,
 };
 
 const calculateCombinedRating = (ratings) => {
   if (!ratings || Object.keys(ratings).length === 0) {
-    return { raw: 0, rounded: 0, bilateralFactors: { armFactor: 0, legFactor: 0, footFactor: 0 } };
+    return {
+      raw: 0,
+      rounded: 0,
+      bilateralFactors: { armFactor: 0, legFactor: 0, footFactor: 0 },
+    };
   }
 
   // Validate ratings (0-100, multiples of 10)
@@ -51,9 +53,9 @@ const calculateCombinedRating = (ratings) => {
 
   // Define bilateral pairs
   const bilateralPairs = [
-    ['leftLeg', 'rightLeg'],
-    ['leftArm', 'rightArm'],
-    ['leftFoot', 'rightFoot'],
+    ["leftLeg", "rightLeg"],
+    ["leftArm", "rightArm"],
+    ["leftFoot", "rightFoot"],
   ];
 
   // Calculate bilateral ratings and factors
@@ -62,10 +64,11 @@ const calculateCombinedRating = (ratings) => {
   const bilateralFactors = { armFactor: 0, legFactor: 0, footFactor: 0 };
 
   bilateralPairs.forEach(([id1, id2], index) => {
-    const r1 = validRatings.find(r => r.id === id1);
-    const r2 = validRatings.find(r => r.id === id2);
+    const r1 = validRatings.find((r) => r.id === id1);
+    const r2 = validRatings.find((r) => r.id === id2);
     if (r1 && r2 && !usedIds.has(r1.id) && !usedIds.has(r2.id)) {
-      const combined = r1.percentage + (r2.percentage * (1 - r1.percentage / 100));
+      const combined =
+        r1.percentage + r2.percentage * (1 - r1.percentage / 100);
       const factor = combined * 0.1; // Bilateral factor (10%)
       const adjusted = combined + factor; // Apply factor
       bilateralRatings.push(Math.round(adjusted));
@@ -81,11 +84,13 @@ const calculateCombinedRating = (ratings) => {
 
   // Non-bilateral ratings
   const nonBilateral = validRatings
-    .filter(r => !usedIds.has(r.id))
-    .map(r => r.percentage);
+    .filter((r) => !usedIds.has(r.id))
+    .map((r) => r.percentage);
 
   // Combine all ratings
-  const allRatings = [...bilateralRatings, ...nonBilateral].sort((a, b) => b - a);
+  const allRatings = [...bilateralRatings, ...nonBilateral].sort(
+    (a, b) => b - a
+  );
 
   // VA combination formula
   let combined = allRatings[0] || 0;
@@ -108,7 +113,8 @@ const calculateMonthlyPayment = (
   maritalStatus,
   spouseAidAndAttendance
 ) => {
-  const basePayment = vaRatingTable.find(item => item.rating === roundedRating)?.amount || 0;
+  const basePayment =
+    vaRatingTable.find((item) => item.rating === roundedRating)?.amount || 0;
 
   let additional = 0;
   if (roundedRating >= 30) {
@@ -146,7 +152,11 @@ export default function VeteransDisabilityCalculator() {
   const [currentDisability, setCurrentDisability] = useState(0);
   const [selectedDisabilities, setSelectedDisabilities] = useState([]);
   const [selectedPercentages, setSelectedPercentages] = useState({});
-  const [bilateralFactors, setBilateralFactors] = useState({ armFactor: 0, legFactor: 0, footFactor: 0 });
+  const [bilateralFactors, setBilateralFactors] = useState({
+    armFactor: 0,
+    legFactor: 0,
+    footFactor: 0,
+  });
   const [dependentsUnder18, setDependentsUnder18] = useState("");
   const [dependentsBetween18And23, setDependentsBetween18And23] = useState("");
   const [dependentParents, setDependentParents] = useState("");
@@ -173,7 +183,9 @@ export default function VeteransDisabilityCalculator() {
 
   const handleDisabilitySelect = (disability) => {
     if (selectedDisabilities.includes(disability)) {
-      setSelectedDisabilities(selectedDisabilities.filter((d) => d !== disability));
+      setSelectedDisabilities(
+        selectedDisabilities.filter((d) => d !== disability)
+      );
       const newPercentages = { ...selectedPercentages };
       delete newPercentages[disability];
       setSelectedPercentages(newPercentages);
@@ -185,15 +197,20 @@ export default function VeteransDisabilityCalculator() {
 
   const handlePercentageSelect = (percentage) => {
     if (selectedDisabilities.length > 0) {
-      const lastSelected = selectedDisabilities[selectedDisabilities.length - 1];
-      const newPercentages = { ...selectedPercentages, [lastSelected]: percentage };
+      const lastSelected =
+        selectedDisabilities[selectedDisabilities.length - 1];
+      const newPercentages = {
+        ...selectedPercentages,
+        [lastSelected]: percentage,
+      };
       setSelectedPercentages(newPercentages);
       updateCalculations(newPercentages);
     }
   };
 
   const updateCalculations = (percentages) => {
-    const { raw, rounded, bilateralFactors } = calculateCombinedRating(percentages);
+    const { raw, rounded, bilateralFactors } =
+      calculateCombinedRating(percentages);
     setCurrentDisability(Math.round(raw * 10) / 10); // Display raw, rounded to 1 decimal
     setBilateralFactors(bilateralFactors);
 
@@ -226,7 +243,9 @@ export default function VeteransDisabilityCalculator() {
   return (
     <div className="min-h-screen mt-20 bg-[#002b5c] text-white flex flex-col items-center p-4 md:p-8">
       {/* Header */}
-      <h1 className="text-2xl text-center md:text-start md:text-3xl font-bold mb-4 mt-10">Veterans Disability Calculator</h1>
+      <h1 className="text-2xl text-center md:text-start md:text-3xl font-bold mb-4 mt-10">
+        Veterans Disability Calculator
+      </h1>
 
       {/* Calculator Section */}
       <div className="w-full max-w-4xl flex flex-col items-center">
@@ -283,21 +302,32 @@ export default function VeteransDisabilityCalculator() {
         {/* Current Disabilities Applied */}
         <h2 className="text-xl font-bold mb-4">Current Disabilities Applied</h2>
         <div className="flex flex-wrap gap-2 mb-8 w-full justify-center">
-          {Object.entries(selectedPercentages).map(([disability, percentage]) => {
-            const label = physicalDisabilities.find((d) => d.id === disability)?.label || disability;
-            return (
-              <div key={disability} className="badge bg-[#c41e3a] text-white p-3 rounded-md">
-                {percentage}% {label}
-              </div>
-            );
-          })}
+          {Object.entries(selectedPercentages).map(
+            ([disability, percentage]) => {
+              const label =
+                physicalDisabilities.find((d) => d.id === disability)?.label ||
+                disability;
+              return (
+                <div
+                  key={disability}
+                  className="badge bg-[#c41e3a] text-white p-3 rounded-md"
+                >
+                  {percentage}% {label}
+                </div>
+              );
+            }
+          )}
         </div>
 
         {/* Additional Payment Factors */}
-        <h2 className="text-xl font-bold mb-4 md:mt-10">Additional Payment Amount Factors</h2>
+        <h2 className="text-xl font-bold mb-4 md:mt-10">
+          Additional Payment Amount Factors
+        </h2>
         <div className="w-full space-y-4 mb-8">
           <div>
-            <label className="text-sm mb-1 block">Number of Dependent Children Under 18 Years Old</label>
+            <label className="text-sm mb-1 block">
+              Number of Dependent Children Under 18 Years Old
+            </label>
             <select
               className="select select-bordered w-full bg-white text-black rounded-md"
               value={dependentsUnder18}
@@ -316,7 +346,9 @@ export default function VeteransDisabilityCalculator() {
           </div>
 
           <div>
-            <label className="text-sm mb-1 block">Number of Dependent Children Between 18 and 24 Years Old</label>
+            <label className="text-sm mb-1 block">
+              Number of Dependent Children Between 18 and 24 Years Old
+            </label>
             <select
               className="select select-bordered w-full bg-white text-black rounded-md"
               value={dependentsBetween18And23}
@@ -335,7 +367,9 @@ export default function VeteransDisabilityCalculator() {
           </div>
 
           <div>
-            <label className="text-sm mb-1 block">Number of Dependent Parents</label>
+            <label className="text-sm mb-1 block">
+              Number of Dependent Parents
+            </label>
             <select
               className="select select-bordered w-full bg-white text-black rounded-md"
               value={dependentParents}
@@ -360,7 +394,9 @@ export default function VeteransDisabilityCalculator() {
           <div className="flex justify-center gap-4">
             <button
               className={`btn rounded-md transition-colors duration-300 ${
-                maritalStatus === "Single" ? "bg-[#c41e3a] text-white" : "bg-white text-black hover:bg-gray-200"
+                maritalStatus === "Single"
+                  ? "bg-[#c41e3a] text-white"
+                  : "bg-white text-black hover:bg-gray-200"
               }`}
               onClick={() => {
                 setMaritalStatus("Single");
@@ -372,7 +408,9 @@ export default function VeteransDisabilityCalculator() {
             </button>
             <button
               className={`btn rounded-md transition-colors duration-300 ${
-                maritalStatus === "Married" ? "bg-[#c41e3a] text-white" : "bg-white text-black hover:bg-gray-200"
+                maritalStatus === "Married"
+                  ? "bg-[#c41e3a] text-white"
+                  : "bg-white text-black hover:bg-gray-200"
               }`}
               onClick={() => {
                 setMaritalStatus("Married");
@@ -387,7 +425,9 @@ export default function VeteransDisabilityCalculator() {
         {/* Spouse Aid and Attendance */}
         {maritalStatus === "Married" && (
           <div className=" mb-8">
-            <label className="text-sm mb-2 block text-center">Does your spouse need Aid and Attendance (A/A)?</label>
+            <label className="text-sm mb-2 block text-center">
+              Does your spouse need Aid and Attendance (A/A)?
+            </label>
             <select
               className="select flex items-center justify-center select-bordered w-full max-w-xs mx-auto bg-white text-black rounded-md"
               value={spouseAidAndAttendance}
@@ -412,7 +452,9 @@ export default function VeteransDisabilityCalculator() {
 
         {/* Monthly Payment Amount */}
         <h2 className="text-xl font-bold mb-4">Your Monthly Payment Amount</h2>
-        <div className="text-4xl font-bold text-[#c41e3a] mb-8">${monthlyPayment}</div>
+        <div className="text-4xl font-bold text-[#c41e3a] mb-8">
+          ${monthlyPayment}
+        </div>
 
         {/* Reset Button */}
         <button
@@ -425,42 +467,54 @@ export default function VeteransDisabilityCalculator() {
 
       {/* VA Rating and SMC Tables */}
       <div className="w-full max-w-4xl mt-12">
-      
         <div className="bg-[#c41e3a] text-white p-4 flex justify-between items-center gap-6 md:gap-0 rounded-t-md">
           <h2 className="md:text-xl font-bold">Combined VA Rating</h2>
-          <h2 className="md:text-xl font-bold text-end">2025 VA Disability Pay Rate</h2>
+          <h2 className="md:text-xl font-bold text-end">
+            2025 VA Disability Pay Rate
+          </h2>
         </div>
         <div className="bg-white text-[#002b5c] w-full rounded-b-md">
           {vaRatingTable.map((item) => (
-            <div key={item.rating} className="flex justify-between p-3 border-b last:border-b-0">
+            <div
+              key={item.rating}
+              className="flex justify-between p-3 border-b last:border-b-0"
+            >
               <div className="font-bold">{item.rating}%</div>
-              <div className="text-[#c41e3a] font-bold">${item.amount.toFixed(2)}</div>
+              <div className="text-[#c41e3a] font-bold">
+                ${item.amount.toFixed(2)}
+              </div>
             </div>
           ))}
         </div>
-
-      
 
         {/* Special Monthly Compensation Section */}
         <h2 className="text-2xl font-bold text-[#c41e3a] mt-8 text-center">
           What is Special Monthly Compensation (SMC)?
         </h2>
-        <h3 className="text-xl font-bold mt-6 mb-4 text-center">How Long Have You Been Awarded?</h3>
+        <h3 className="text-xl font-bold mt-6 mb-4 text-center">
+          How Long Have You Been Awarded?
+        </h3>
         <p className="text-white mb-6 text-center max-w-3xl mx-auto">
-          The U.S. Department of Veterans Affairs (VA) awards special monthly compensation (SMC) to veterans with
-          service-connected conditions so severe that they warrant a rating higher than 100 percent; the idea is that
-          certain disabilities or combinations of disabilities are more debilitating than accounted for by the regular
-          rating schedule.
+          The U.S. Department of Veterans Affairs (VA) awards special monthly
+          compensation (SMC) to veterans with service-connected conditions so
+          severe that they warrant a rating higher than 100 percent; the idea is
+          that certain disabilities or combinations of disabilities are more
+          debilitating than accounted for by the regular rating schedule.
         </p>
 
         {/* SMC Levels Table */}
         <div className="bg-white text-[#002b5c] w-full mt-6 rounded-md">
           <div className="bg-[#c41e3a] text-white p-4 flex justify-between items-center rounded-t-md">
             <h2 className="md:text-xl font-bold">SMC Level</h2>
-            <h2 className="md:text-xl font-bold md:text-end">2025 VA SMC Amount</h2>
+            <h2 className="md:text-xl font-bold md:text-end">
+              2025 VA SMC Amount
+            </h2>
           </div>
           {smcLevels.map((item) => (
-            <div key={item.level} className="flex justify-between p-3 border-b last:border-b-0">
+            <div
+              key={item.level}
+              className="flex justify-between p-3 border-b last:border-b-0"
+            >
               <div className="font-bold">{item.level}</div>
               <div className="text-[#c41e3a] font-bold">{item.amount}</div>
             </div>
@@ -470,16 +524,20 @@ export default function VeteransDisabilityCalculator() {
         {/* Disclaimer */}
         <div className="mt-12 mb-6">
           <h2 className="text-xl font-bold mb-4 text-center">Disclaimer</h2>
-          <p className="text-white text-xs text-center max-w-3xl mx-auto">
-            This tool is for educational purposes only and does not constitute legal advice. The VA disability rates
-            shown are based on publicly available information and are subject to change. This is a simulation only and
-            is offered and provided by us with the understanding that we are not rendering legal, accounting, tax,
-            career, or other professional advice and services. Such information should not be used as a substitute for
-            consultation with professional accounting, tax, legal, or other competent advisers. We are not responsible
-            for the application that you have determined or selected for your use. We are not responsible for the
-            preparation of any output or deliverable that you have determined or selected for your use.
+          <p className="text-white text-xs text-justify max-w-4xl mx-auto">
+            This tool is for educational purposes only and does not constitute
+            legal advice. The VA disability rates shown are based on publicly
+            available information and are subject to change. This is a
+            simulation only and is offered and provided by us with the
+            understanding that we are not rendering legal, accounting, tax,
+            career, or other professional advice and services. Such information
+            should not be used as a substitute for consultation with
+            professional accounting, tax, legal, or other competent advisers. We
+            are not responsible for the application that you have determined or
+            selected for your use. We are not responsible for the preparation of
+            any output or deliverable that you have determined or selected for
+            your use.
           </p>
-         
         </div>
       </div>
     </div>

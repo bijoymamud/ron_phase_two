@@ -192,9 +192,9 @@ const Pricing_Plan = () => {
               <h1 className="text-[#16437E]">
                 You can complete the Veterans <br /> Benefits form with a
               </h1>
-              <h1 className="bg-[#B31942] text-white w-[600px] flex items-center justify-center rounded-full p-4 px-10 text-3xl py-4 shadow-md shadow-gray-700 font-bold mt-7">
-                <span className="text-white font-bold text-4xl">
-                  Payment of $195 or $50
+              <h1 className="bg-[#B31942] text-white w-[550px] flex items-center justify-center rounded-full p-4 px-5 text-3xl py-4 shadow-md shadow-gray-700 font-bold mt-7">
+                <span className="text-white font-bold text-3xl">
+                  Payment of $195 or $49.99
                 </span>
               </h1>
             </div>
@@ -235,7 +235,7 @@ const Pricing_Plan = () => {
           </h1>
           <h1 className="bg-[#B31942] text-white w-full max-w-[350px] mx-auto flex items-center justify-center rounded-full p-2 text-2xl shadow-md shadow-gray-700 font-bold mt-5">
             <span className="text-white font-bold text-2xl">
-              Payment of $195 or $50
+              Payment of $195 or $49.99
             </span>
           </h1>
         </motion.div>
