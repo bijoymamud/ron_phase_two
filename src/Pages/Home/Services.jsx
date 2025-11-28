@@ -1,4 +1,3 @@
-
 import { HiOutlineUsers } from "react-icons/hi";
 import { IoSettings } from "react-icons/io5";
 import { RiBarChart2Fill } from "react-icons/ri";
@@ -15,9 +14,12 @@ export default function Services() {
       {/* Large Device View (Unchanged) */}
       <div className="hidden md:block">
         <div className="text-center container mx-auto px-2 md:pt-10  p-10 md:px-20 md:pb-8">
-          <h1 className="md:text-4xl text-start font-bold text-[#16437E] pb-6 md:pb-3 md:text-center">Services</h1>
-          <p className="text-gray-500 font-medium text-start w-1/2 md:pb-3 md:w-2/6 mx-auto md:text-center">
-            We provide a comprehensive approach to help you navigate the VA benefits process with confidence.
+          <h1 className="md:text-4xl text-start font-bold text-[#16437E] pb-6 md:pb-3 md:text-center">
+            Services
+          </h1>
+          <p className="text-gray-900 font-medium text-start w-1/2 md:pb-3 md:w-2/6 mx-auto md:text-center">
+            We provide a comprehensive approach to help you navigate the VA
+            benefits process with confidence.
           </p>
         </div>
         <div className="min-h-[80vh] md:min-h-[70vh] bg-[#E0F7FF] dark:bg-[#E0F7FF]  flex items-center justify-center">
@@ -49,9 +51,14 @@ export default function Services() {
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-8 py-6 rounded-xl shadow-xl max-w-xl">
-                  <h3 className="font-bold text-xl mb-3 ms-10">Benefits Eligibility Assessment</h3>
+                  <h3 className="font-bold text-xl mb-3 ms-10">
+                    Benefits Eligibility Assessment
+                  </h3>
                   <p className="text-sm leading-relaxed opacity-90 ms-10">
-                    Discover your eligibility for VA benefits with our detailed assessments. We analyze your service history and unique circumstances to determine the benefits you’ve earned and guide you through the next steps.
+                    Discover your eligibility for VA benefits with our detailed
+                    assessments. We analyze your service history and unique
+                    circumstances to determine the benefits you’ve earned and
+                    guide you through the next steps.
                   </p>
                 </div>
               </div>
@@ -63,9 +70,14 @@ export default function Services() {
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-8 py-6 rounded-xl shadow-xl max-w-xl">
-                  <h3 className="font-bold text-xl mb-3 ms-10">Application Assistance</h3>
+                  <h3 className="font-bold text-xl mb-3 ms-10">
+                    Application Assistance
+                  </h3>
                   <p className="text-sm leading-relaxed opacity-90 ms-10">
-                    Discover your eligibility for VA benefits with our detailed assessments. We analyze your service history and unique circumstances to determine the benefits you’ve earned and guide you through the next steps.
+                    Discover your eligibility for VA benefits with our detailed
+                    assessments. We analyze your service history and unique
+                    circumstances to determine the benefits you’ve earned and
+                    guide you through the next steps.
                   </p>
                 </div>
               </div>
@@ -77,9 +89,14 @@ export default function Services() {
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-8 py-6 rounded-xl shadow-xl max-w-xl">
-                  <h3 className="font-bold text-xl mb-3 ms-10">Appeal Support</h3>
+                  <h3 className="font-bold text-xl mb-3 ms-10">
+                    Appeal Support
+                  </h3>
                   <p className="text-sm leading-relaxed opacity-90 ms-10">
-                    Discover your eligibility for VA benefits with our detailed assessments. We analyze your service history and unique circumstances to determine the benefits you’ve earned and guide you through the next steps.
+                    Discover your eligibility for VA benefits with our detailed
+                    assessments. We analyze your service history and unique
+                    circumstances to determine the benefits you’ve earned and
+                    guide you through the next steps.
                   </p>
                 </div>
               </div>
@@ -93,7 +110,8 @@ export default function Services() {
         <div className="text-center container mx-auto px-4 pt-8">
           <h1 className="text-3xl font-bold text-[#0B2A52] pb-4">Services</h1>
           <p className="text-gray-500 font-medium text-sm">
-            We provide a comprehensive approach to help you navigate the VA benefits process with confidence.
+            We provide a comprehensive approach to help you navigate the VA
+            benefits process with confidence.
           </p>
         </div>
         <div className="py-8 px-4 flex flex-col items-center">
@@ -126,9 +144,14 @@ export default function Services() {
                 <HiOutlineUsers size={32} className="text-white" />
               </div>
               <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-6 py-4 rounded-xl shadow-xl w-full">
-                <h3 className="font-bold text-lg mb-2 ms-14">Benefits Eligibility Assessment</h3>
+                <h3 className="font-bold text-lg mb-2 ms-14">
+                  Benefits Eligibility Assessment
+                </h3>
                 <p className="text-xs leading-relaxed opacity-90 ms-14">
-                  Discover your eligibility for VA benefits with our detailed assessments. We analyze your service history and unique circumstances to determine the benefits you’ve earned and guide you through the next steps.
+                  Discover your eligibility for VA benefits with our detailed
+                  assessments. We analyze your service history and unique
+                  circumstances to determine the benefits you’ve earned and
+                  guide you through the next steps.
                 </p>
               </div>
             </motion.div>
@@ -144,9 +167,14 @@ export default function Services() {
                 <RiBarChart2Fill size={32} className="text-white" />
               </div>
               <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-6 py-4 rounded-xl shadow-xl w-full">
-                <h3 className="font-bold text-lg mb-2 ms-14">Application Assistance</h3>
+                <h3 className="font-bold text-lg mb-2 ms-14">
+                  Application Assistance
+                </h3>
                 <p className="text-xs leading-relaxed opacity-90 ms-14">
-                  Discover your eligibility for VA benefits with our detailed assessments. We analyze your service history and unique circumstances to determine the benefits you’ve earned and guide you through the next steps.
+                  Discover your eligibility for VA benefits with our detailed
+                  assessments. We analyze your service history and unique
+                  circumstances to determine the benefits you’ve earned and
+                  guide you through the next steps.
                 </p>
               </div>
             </motion.div>
@@ -164,7 +192,10 @@ export default function Services() {
               <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-6 py-4 rounded-xl shadow-xl w-full">
                 <h3 className="font-bold text-lg mb-2 ms-14">Appeal Support</h3>
                 <p className="text-xs leading-relaxed opacity-90 ms-14">
-                  Discover your eligibility for VA benefits with our detailed assessments. We analyze your service history and unique circumstances to determine the benefits you’ve earned and guide you through the next steps.
+                  Discover your eligibility for VA benefits with our detailed
+                  assessments. We analyze your service history and unique
+                  circumstances to determine the benefits you’ve earned and
+                  guide you through the next steps.
                 </p>
               </div>
             </motion.div>

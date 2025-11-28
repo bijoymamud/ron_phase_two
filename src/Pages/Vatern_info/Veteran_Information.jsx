@@ -286,7 +286,7 @@ import { Pause, Play } from "lucide-react";
 import audioWave from "../../../public/Voice.json";
 import Lottie from "lottie-react";
 
-const STORAGE_KEY = "veteranFormData"; // <-- change if you need multiple forms
+const STORAGE_KEY = "veteranFormData";
 
 export default function VeteranInformationForm() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -295,14 +295,11 @@ export default function VeteranInformationForm() {
   const navigate = useNavigate();
   const totalSteps = 7;
 
-  /* --------------------------------------------------------------
-     1. Load persisted data (if any) as defaultValues
-     -------------------------------------------------------------- */
+
   const persisted = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
 
   const methods = useForm({
     defaultValues: {
-      // your original defaults
       Beginning_Date_Month: [""],
       Beginning_Date_Day: [""],
       Beginning_Date_Year: [""],
@@ -313,7 +310,7 @@ export default function VeteranInformationForm() {
       phone: "",
       vaHealthCare: "",
       livingSituation: "",
-      // …spread the persisted values so they win over the defaults
+     
       ...persisted,
     },
   });
@@ -327,22 +324,17 @@ export default function VeteranInformationForm() {
     watch,
   } = methods;
 
-  /* --------------------------------------------------------------
-     2. Keep localStorage in sync on every change
-     -------------------------------------------------------------- */
-  const formValues = watch(); // <-- all values, live
+ 
+  const formValues = watch(); 
 
   useEffect(() => {
-    // Debounce a tiny bit to avoid hammering storage on rapid typing
+   
     const timeout = setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(formValues));
     }, 300);
     return () => clearTimeout(timeout);
   }, [formValues]);
 
-  /* --------------------------------------------------------------
-     3. Audio handling (unchanged)
-     -------------------------------------------------------------- */
   const audioFiles = [
     Veterans_info_voice,
     Veterans_contact_voice,
@@ -385,9 +377,7 @@ export default function VeteranInformationForm() {
       : audioRef.current.play().catch(() => {});
   };
 
-  /* --------------------------------------------------------------
-     4. Validation per step (unchanged)
-     -------------------------------------------------------------- */
+ 
   const getFieldsForStep = (step) => {
     switch (step) {
       case 0:
@@ -434,8 +424,7 @@ export default function VeteranInformationForm() {
 
   const onSubmit = (data) => {
     console.log("Submitted data →", data);
-    // optional: clear storage after successful submit
-    // localStorage.removeItem(STORAGE_KEY);
+   
     navigate("/issues");
   };
 
@@ -472,7 +461,7 @@ export default function VeteranInformationForm() {
   ];
 
   return (
-    <div className="md:min-h-screen my-16 md:py-0 bg-white flex justify-center items-center md:p-4">
+    <div className="md:min-h-screen my-16 md:py-10 bg-white flex justify-center items-center md:p-4">
       <div className="md:card w-full md:max-w-4xl bg-white md:shadow-md">
         <div className="md:card-body p-3 md:p-5">
           <h1 className="card-title text-2xl font-bold text-blue-800 justify-center md:mb-4 mb-10">

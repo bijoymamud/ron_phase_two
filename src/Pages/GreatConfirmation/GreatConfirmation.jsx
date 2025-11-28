@@ -1,5 +1,4 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function GreatConfirmation() {
@@ -10,7 +9,7 @@ function GreatConfirmation() {
   console.log(categorizedConditions);
 
   const handleNavigate = () => {
-    if (categorizedConditions.length == 0) {
+    if (categorizedConditions.length === 0) {
       console.log("no parent category");
       return;
     }

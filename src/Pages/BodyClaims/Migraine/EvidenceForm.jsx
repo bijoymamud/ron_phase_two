@@ -401,15 +401,15 @@ const EvidenceForm = () => {
   };
 
   return (
-    <section className="mx-auto bg-white dark:bg-gray-900 mt-24 md:pt-0">
+    <section className="mx-auto bg-white dark:bg-white mt-24 md:pt-0">
       <div className="flex flex-col items-center justify-center md:min-h-screen min-h-[85vh] p-4">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full max-w-4xl bg-white dark:bg-gray-800 p-6 rounded-md shadow-md"
+          className="w-full max-w-4xl bg-white dark:bg-white p-6 rounded-md shadow-md"
         >
           {/* Has Evidence */}
           <div className="mb-6">
-            <label className="block text-black dark:text-white font-semibold mb-2">
+            <label className="block text-black  font-semibold mb-2">
               DO YOU HAVE ANY SUPPORTING EVIDENCE TO UPLOAD?
             </label>
 
@@ -417,7 +417,7 @@ const EvidenceForm = () => {
               {...register("hasEvidence", {
                 required: "Please select an option",
               })}
-              className={`mt-1 block w-full p-2 border uppercase border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 ${
+              className={`mt-1 block w-full p-2 border uppercase border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700  bg-white dark:text-gray-900 ${
                 errors.hasEvidence ? "border-red-500" : ""
               }`}
             >
@@ -440,12 +440,12 @@ const EvidenceForm = () => {
             <>
               {/* File Upload */}
               <div className="mb-6">
-                <label className="block text-black dark:text-white font-semibold mb-2">
+                <label className="block text-black  font-semibold mb-2">
                   UPLOAD FILE
                 </label>
 
-                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-md p-4 text-center bg-white dark:bg-gray-700">
-                  <p className="text-gray-600 dark:text-gray-300 mb-2">
+                <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-md p-4 text-center bg-white ">
+                  <p className="text-gray-600 ">
                     {watch("file")?.[0]?.name ||
                       "CLICK TO UPLOAD OR DRAG & DROP"}
                   </p>
@@ -456,7 +456,7 @@ const EvidenceForm = () => {
                       required:
                         hasEvidence === "yes" ? "Please upload a file" : false,
                     })}
-                    className="block w-full text-sm text-gray-700 dark:text-gray-300 file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 dark:file:bg-gray-600 file:text-gray-800 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-500"
+                    className="block w-full text-sm text-gray-700  file:mr-4 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 dark:file:bg-gray-600 file:text-gray-800 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-500"
                   />
                   {errors.file && (
                     <p className="text-red-500 text-sm mt-1">
@@ -476,7 +476,7 @@ const EvidenceForm = () => {
                   {...register("evidenceType", {
                     required: "This field is required",
                   })}
-                  className={`mt-1 block w-full p-2 border uppercase border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 ${
+                  className={`mt-1 block w-full p-2 border uppercase border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-700  bg-white  ${
                     errors.evidenceType ? "border-red-500" : ""
                   }`}
                 >

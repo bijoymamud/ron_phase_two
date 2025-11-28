@@ -38,6 +38,38 @@ export default function Step1PersonalInfo({ register, errors }) {
         )}
       </div>
 
+      {/* middle name */}
+      <div className="form-control">
+        <label htmlFor="firstName" className="label">
+          <span className="label-text  font-semibold md:text-base text-[12px] pb-1 dark:text-black">
+            Middle Name
+          </span>
+        </label>
+        <div className="relative">
+          <input
+            id="middleName"
+            type="text"
+            {...register("member_middle_name", {
+              required: "Middle Name is required",
+            })}
+            className={`input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-0${
+              errors.member_middle_name ? "input-error" : ""
+            }`}
+            placeholder="Enter your middle name"
+            aria-invalid={errors.member_middle_name ? "true" : "false"}
+          />
+          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <User size={18} />
+          </span>
+        </div>
+        {errors.member_middle_name && (
+          <label className="label">
+            <span className="label-text-alt text-error">
+              {errors.member_middle_name.message}
+            </span>
+          </label>
+        )}
+      </div>
       {/* Last Name Field */}
       <div className="form-control">
         <label htmlFor="lastName" className="label">

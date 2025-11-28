@@ -123,7 +123,7 @@ export default function Navbar() {
       // ২ সেকেন্ড পর লগইন পেজে রিডাইরেক্ট করবে
       setTimeout(() => {
         setIsLoggingOut(false);
-        navigate("/login");
+        navigate("/");
       }, 2000);
     } catch (error) {
       console.error("Logout failed:", error);

@@ -7,13 +7,11 @@ const initialState = {
 };
 
 const categoryMap = {
-  // Mental Health
   'PTSD': 'Mental Health',
   'Depression': 'Mental Health',
   'Anxiety': 'Mental Health',
   'Insomnia': 'Mental Health',
 
-  // Body Health
   'Neck Condition': 'Body Health',
   'Hip Condition': 'Body Health',
   'Shoulder Condition': 'Body Health',
@@ -36,27 +34,21 @@ const categoryMap = {
   'Radiculopathy of Upper Extremities': 'Body Health',
   'Sciatica': 'Body Health',
 
-  // Migraine & Headache
   'Prostrating Migraines': 'Migraine & Headache Claim Information',
 
-  // Sinusitis, Rhinitis, Asthma
   'Rhinitis': 'Sinusitis, Rhinitis & Asthma Claim Information',
   'Sinusitis': 'Sinusitis, Rhinitis & Asthma Claim Information',
 
-  // Gastrointestinal
+
   'GERD (Acid Reflux)': 'Gastrointestinal Issues (GERD/IBS) Claim Information',
   'IBS (Irritable Bowel Syndrome)': 'Gastrointestinal Issues (GERD/IBS) Claim Information',
 
-  // Tinnitus and Hearing Loss
   'Tinnitus': 'Tinnitus and Hearing Loss Claim Information',
 
-  // Cancer Related
   'Cancer': 'Other',
 
-  // Diabetes Related
   'Diabetes': 'Other',
 
-  // TBI Related
   'Traumatic Brain Injury': 'Other',
 };
 
