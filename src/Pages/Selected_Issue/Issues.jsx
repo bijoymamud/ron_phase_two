@@ -81,7 +81,15 @@ function Issues() {
       return;
     }
 
-    localStorage.setItem("issues", JSON.stringify(data));
+    const dissabilites = Object.assign(
+      {},
+      ...(data.CURRENTDISABILITY.map((e, i) => ({
+        [`current_disabilityiesrow${i + 1}`]: e,
+      })) ?? [])
+    );
+
+    // TODO: data, was in array, now in obj
+    localStorage.setItem("issues", JSON.stringify(dissabilites));
 
     const categorizedConditions = {};
     data.CURRENTDISABILITY.forEach((condition) => {

@@ -274,7 +274,6 @@ import Step7CurrentStatus from "./Steps/Step7CurrentStatus";
 import ProgressBar from "./Steps/ProgressBar";
 import FormNavigation from "./Steps/FormNavigation";
 
-// voice
 import Veterans_info_voice from "../../../src/cris_voice/Personal_Information_chris.mp3";
 import Veterans_contact_voice from "../../../src/cris_voice/Contact_Numbers_chris.mp3";
 import Veterans_dob_voice from "../../../src/cris_voice/Date_of_Birth_chris.mp3";
@@ -376,13 +375,17 @@ export default function VeteranInformationForm() {
   const getFieldsForStep = (step) => {
     switch (step) {
       case 0:
-        return ["Veterans_Beneficiary_First_Name[0]", "Last_Name[0]"];
+        return [
+          "veteran_service_member_first_fname",
+          "veteran_service_member_middle_mname",
+          "veteran_service_member_last_l`name",
+        ];
       case 1:
         return [
-          "International_Phone_Number[0]",
-          "TelephoneNumber_FirstThreeNumbers[0]",
-          "TelephoneNumber_SecondThreeNumbers[0]",
-          "TelephoneNumber_LastFourNumbers[0]",
+          "veterans_international_phone",
+          "veterans_telephone_area_code",
+          "veterans_telephone_operator_code",
+          "veterans_telephone_line_number",
         ];
       case 2:
         return ["DOB_Month[0]", "DOB_Day[0]", "DOB_Year[0]"];
@@ -394,8 +397,8 @@ export default function VeteranInformationForm() {
         ];
       case 4:
         return [
-          "MailingAddress_NumberAndStreet[0]",
-          "MailingAddress_City[0]",
+          "veterans_mailing_address",
+          "veterans_city",
           "MailingAddress_StateOrProvince[0]",
           "MailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]",
         ];

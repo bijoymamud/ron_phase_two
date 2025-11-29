@@ -20,6 +20,7 @@ function Final_Sub() {
     const excludedKeys = ["access_token", "refresh_token"];
 
     const payload = {};
+
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (excludedKeys.includes(key)) continue;
@@ -31,6 +32,22 @@ function Final_Sub() {
         payload[key] = localStorage.getItem(key);
       }
     }
+
+    const finalPayload = {};
+
+    finalPayload.pdf_data = { ...payload.issues };
+    console.log("Final payload: ", finalPayload);
+    return;
+
+    // payload.issues = Object.assign(
+    //   {},
+    //   ...(payload?.issues?.CURRENTDISABILITY?.map((e, i) => ({
+    //     [`current_disabilityiesrow${i + 1}`]: e,
+    //   })) ?? [])
+    // );
+
+    // console.log("Final payload: ", payload);
+    // return;
 
     payload.document = {
       discharge_condition: payload["discharge_condition"] || {},
