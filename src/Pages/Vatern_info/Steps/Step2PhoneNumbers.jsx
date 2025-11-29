@@ -9,11 +9,11 @@
 //   watch,
 //   trigger,
 // }) {
-//   const internationalPhoneNumber = watch("International_Phone_Number[0]");
+//   const internationalPhoneNumber = watch("veterans_international_phone");
 
 //   useEffect(() => {
 //     if (internationalPhoneNumber) {
-//       setValue("International_Phone_Number[0]", internationalPhoneNumber, {
+//       setValue("veterans_international_phone", internationalPhoneNumber, {
 //         shouldValidate: true,
 //       });
 //     }
@@ -33,14 +33,14 @@
 //           value={internationalPhoneNumber}
 //           onChange={(phone) => {
 //             const cleanedPhone = phone.replace(/\s+/g, "");
-//             setValue("International_Phone_Number[0]", cleanedPhone, {
+//             setValue("veterans_international_phone", cleanedPhone, {
 //               shouldValidate: true,
 //               shouldDirty: true,
 //             });
-//             trigger("International_Phone_Number[0]");
+//             trigger("veterans_international_phone");
 //           }}
 //           inputProps={{
-//             name: "International_Phone_Number[0]",
+//             name: "veterans_international_phone",
 //             required: true,
 //             className:
 //               "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
@@ -53,15 +53,15 @@
 
 //         <input
 //           type="hidden"
-//           {...register("International_Phone_Number[0]", {
+//           {...register("veterans_international_phone", {
 //             required: "Input valid number",
 //           })}
 //         />
 
-//         {errors["International_Phone_Number[0]"] && (
+//         {errors["veterans_international_phone"] && (
 //           <label className="label">
 //             <span className="label-text-alt text-error text-sm pt-1">
-//               {errors["International_Phone_Number[0]"].message}
+//               {errors["veterans_international_phone"].message}
 //             </span>
 //           </label>
 //         )}
@@ -82,15 +82,15 @@
 //   trigger,
 //   control,
 // }) {
-//   const internationalPhoneNumber = watch("International_Phone_Number[0]");
+//   const internationalPhoneNumber = watch("veterans_international_phone");
 
 //   const ssn1Ref = useRef(null);
 //   const ssn2Ref = useRef(null);
 //   const ssn3Ref = useRef(null);
 
-//   const ssn1 = watch("veterans_social_security_no_1") || "";
-//   const ssn2 = watch("veterans_social_security_no_2") || "";
-//   const ssn3 = watch("veterans_social_security_no_3") || "";
+//   const ssn1 = watch("veterans_ssn_part1") || "";
+//   const ssn2 = watch("veterans_ssn_part2") || "";
+//   const ssn3 = watch("veterans_ssn_part3") || "";
 
 //   useEffect(() => {
 //     if (ssn1.length === 3) ssn2Ref.current?.focus();
@@ -121,9 +121,9 @@
 //   // Trigger validation on mount & when values change
 //   useEffect(() => {
 //     trigger([
-//       "veterans_social_security_no_1",
-//       "veterans_social_security_no_2",
-//       "veterans_social_security_no_3",
+//       "veterans_ssn_part1",
+//       "veterans_ssn_part2",
+//       "veterans_ssn_part3",
 //     ]);
 //   }, [ssn1, ssn2, ssn3, trigger]);
 
@@ -142,14 +142,14 @@
 //           value={internationalPhoneNumber || ""}
 //           onChange={(phone) => {
 //             const cleanedPhone = phone.replace(/[^0-9]/g, "");
-//             setValue("International_Phone_Number[0]", cleanedPhone, {
+//             setValue("veterans_international_phone", cleanedPhone, {
 //               shouldValidate: true,
 //               shouldDirty: true,
 //             });
-//             trigger("International_Phone_Number[0]");
+//             trigger("veterans_international_phone");
 //           }}
 //           inputProps={{
-//             name: "International_Phone_Number[0]",
+//             name: "veterans_international_phone",
 //             required: true,
 //             className:
 //               "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
@@ -162,15 +162,15 @@
 
 //         <input
 //           type="hidden"
-//           {...register("International_Phone_Number[0]", {
+//           {...register("veterans_international_phone", {
 //             required: "Input valid number",
 //           })}
 //         />
 
-//         {errors["International_Phone_Number[0]"] && (
+//         {errors["veterans_international_phone"] && (
 //           <label className="label">
 //             <span className="label-text-alt text-error text-sm pt-1">
-//               {errors["International_Phone_Number[0]"]?.message}
+//               {errors["veterans_international_phone"]?.message}
 //             </span>
 //           </label>
 //         )}
@@ -193,16 +193,16 @@
 //               value={ssn1}
 //               ref={ssn1Ref}
 //               className={`input input-bordered w-24 text-center text-lg  tracking-widest dark:bg-white text-[12px] dark:text-black dark:border-black remove-arrow ${
-//                 errors.veterans_social_security_no_1
+//                 errors.veterans_ssn_part1
 //                   ? "input-error border-red-500"
 //                   : ""
 //               }`}
 //               onChange={(e) =>
-//                 handleSSNInput(e, "veterans_social_security_no_1", 3, ssn2Ref)
+//                 handleSSNInput(e, "veterans_ssn_part1", 3, ssn2Ref)
 //               }
 //               onPaste={blockTextPaste}
 //               onKeyPress={blockNonNumericKeys}
-//               {...register("veterans_social_security_no_1", {
+//               {...register("veterans_ssn_part1", {
 //                 required: "First 3 digits required",
 //                 pattern: {
 //                   value: /^\d{3}$/,
@@ -221,16 +221,16 @@
 //               value={ssn2}
 //               ref={ssn2Ref}
 //               className={`input input-bordered w-20 text-center text-lg  dark:bg-white dark:text-black dark:border-black ${
-//                 errors.veterans_social_security_no_2
+//                 errors.veterans_ssn_part2
 //                   ? "input-error border-red-500"
 //                   : ""
 //               }`}
 //               onChange={(e) =>
-//                 handleSSNInput(e, "veterans_social_security_no_2", 2, ssn3Ref)
+//                 handleSSNInput(e, "veterans_ssn_part2", 2, ssn3Ref)
 //               }
 //               onPaste={blockTextPaste}
 //               onKeyPress={blockNonNumericKeys}
-//               {...register("veterans_social_security_no_2", {
+//               {...register("veterans_ssn_part2", {
 //                 required: "Middle 2 digits required",
 //                 pattern: {
 //                   value: /^\d{2}$/,
@@ -249,16 +249,16 @@
 //               value={ssn3}
 //               ref={ssn3Ref}
 //               className={`input input-bordered w-28 text-center text-lg  dark:bg-white dark:text-black dark:border-black ${
-//                 errors.veterans_social_security_no_3
+//                 errors.veterans_ssn_part3
 //                   ? "input-error border-red-500"
 //                   : ""
 //               }`}
 //               onChange={(e) =>
-//                 handleSSNInput(e, "veterans_social_security_no_3", 4, null)
+//                 handleSSNInput(e, "veterans_ssn_part3", 4, null)
 //               }
 //               onPaste={blockTextPaste}
 //               onKeyPress={blockNonNumericKeys}
-//               {...register("veterans_social_security_no_3", {
+//               {...register("veterans_ssn_part3", {
 //                 required: "Last 4 digits required",
 //                 pattern: {
 //                   value: /^\d{4}$/,
@@ -280,7 +280,7 @@
 //             type="text"
 //             placeholder="+1 234 567 890"
 //             className="input input-bordered w-full dark:bg-white dark:border-black dark:text-black"
-//             {...register("International_Phone_Number.0", {
+//             {...register("veterans_international_phone.0", {
 //               required: "Please enter a valid phone number",
 //               pattern: {
 //                 value: /^\+?[0-9\s\-]{7,20}$/,
@@ -289,21 +289,21 @@
 //             })}
 //           />
 
-//           {errors?.International_Phone_Number?.[0] && (
+//           {errors?.veterans_international_phone?.[0] && (
 //             <p className="text-red-500 text-xs mt-1">
-//               {errors.International_Phone_Number[0].message}
+//               {errors.veterans_international_phone.message}
 //             </p>
 //           )}
 //         </div>
 
-//         {(errors.veterans_social_security_no_1 ||
-//           errors.veterans_social_security_no_2 ||
-//           errors.veterans_social_security_no_3) && (
+//         {(errors.veterans_ssn_part1 ||
+//           errors.veterans_ssn_part2 ||
+//           errors.veterans_ssn_part3) && (
 //           <div className="mt-2">
 //             <span className="text-error text-sm font-medium">
-//               {errors.veterans_social_security_no_1?.message ||
-//                 errors.veterans_social_security_no_2?.message ||
-//                 errors.veterans_social_security_no_3?.message ||
+//               {errors.veterans_ssn_part1?.message ||
+//                 errors.veterans_ssn_part2?.message ||
+//                 errors.veterans_ssn_part3?.message ||
 //                 "Please complete all 9 digits of SSN"}
 //             </span>
 //           </div>
@@ -325,15 +325,15 @@
 //   trigger,
 //   control,
 // }) {
-//   const internationalPhoneNumber = watch("International_Phone_Number[0]");
+//   const internationalPhoneNumber = watch("veterans_international_phone");
 
 //   const ssn1Ref = useRef(null);
 //   const ssn2Ref = useRef(null);
 //   const ssn3Ref = useRef(null);
 
-//   const ssn1 = watch("veterans_social_security_no_1") || "";
-//   const ssn2 = watch("veterans_social_security_no_2") || "";
-//   const ssn3 = watch("veterans_social_security_no_3") || "";
+//   const ssn1 = watch("veterans_ssn_part1") || "";
+//   const ssn2 = watch("veterans_ssn_part2") || "";
+//   const ssn3 = watch("veterans_ssn_part3") || "";
 
 //   useEffect(() => {
 //     if (ssn1.length === 3) ssn2Ref.current?.focus();
@@ -367,16 +367,16 @@
 
 //   useEffect(() => {
 //     trigger([
-//       "veterans_social_security_no_1",
-//       "veterans_social_security_no_2",
-//       "veterans_social_security_no_3",
+//       "veterans_ssn_part1",
+//       "veterans_ssn_part2",
+//       "veterans_ssn_part3",
 //     ]);
 //   }, [ssn1, ssn2, ssn3, trigger]);
 
 //   const hasSSNError =
-//     errors.veterans_social_security_no_1 ||
-//     errors.veterans_social_security_no_2 ||
-//     errors.veterans_social_security_no_3;
+//     errors.veterans_ssn_part1 ||
+//     errors.veterans_ssn_part2 ||
+//     errors.veterans_ssn_part3;
 
 //   return (
 //     <div className="space-y-8">
@@ -393,14 +393,14 @@
 //           value={internationalPhoneNumber || ""}
 //           onChange={(phone) => {
 //             const cleanedPhone = phone.replace(/[^0-9]/g, "");
-//             setValue("International_Phone_Number[0]", cleanedPhone, {
+//             setValue("veterans_international_phone", cleanedPhone, {
 //               shouldValidate: true,
 //               shouldDirty: true,
 //             });
-//             trigger("International_Phone_Number[0]");
+//             trigger("veterans_international_phone");
 //           }}
 //           inputProps={{
-//             name: "International_Phone_Number[0]",
+//             name: "veterans_international_phone",
 //             required: true,
 //             className:
 //               "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
@@ -413,15 +413,15 @@
 
 //         <input
 //           type="hidden"
-//           {...register("International_Phone_Number[0]", {
+//           {...register("veterans_international_phone", {
 //             required: "Input valid number",
 //           })}
 //         />
 
-//         {errors["International_Phone_Number[0]"] && (
+//         {errors["veterans_international_phone"] && (
 //           <label className="label">
 //             <span className="label-text-alt text-error text-sm pt-1">
-//               {errors["International_Phone_Number[0]"]?.message}
+//               {errors["veterans_international_phone"]?.message}
 //             </span>
 //           </label>
 //         )}
@@ -436,15 +436,15 @@
 
 //         <input
 //           type="hidden"
-//           {...register("International_Phone_Number[0]", {
+//           {...register("veterans_international_phone", {
 //             required: "Input valid number",
 //           })}
 //         />
 
-//         {errors["International_Phone_Number[0]"] && (
+//         {errors["veterans_international_phone"] && (
 //           <label className="label">
 //             <span className="label-text-alt text-error text-sm pt-1">
-//               {errors["International_Phone_Number[0]"]?.message}
+//               {errors["veterans_international_phone"]?.message}
 //             </span>
 //           </label>
 //         )}
@@ -466,16 +466,16 @@
 //               value={ssn1}
 //               ref={ssn1Ref}
 //               className={`input input-bordered w-24 text-center text-lg tracking-widest dark:bg-white text-[12px] dark:text-black dark:border-black remove-arrow ${
-//                 errors.veterans_social_security_no_1
+//                 errors.veterans_ssn_part1
 //                   ? "input-error border-red-500"
 //                   : ""
 //               }`}
 //               onChange={(e) =>
-//                 handleSSNInput(e, "veterans_social_security_no_1", 3, ssn2Ref)
+//                 handleSSNInput(e, "veterans_ssn_part1", 3, ssn2Ref)
 //               }
 //               onPaste={blockTextPaste}
 //               onKeyDown={blockNonNumericKeys}
-//               {...register("veterans_social_security_no_1", {
+//               {...register("veterans_ssn_part1", {
 //                 required: "First 3 digits required",
 //                 pattern: {
 //                   value: /^\d{3}$/,
@@ -494,16 +494,16 @@
 //               value={ssn2}
 //               ref={ssn2Ref}
 //               className={`input input-bordered w-20 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-//                 errors.veterans_social_security_no_2
+//                 errors.veterans_ssn_part2
 //                   ? "input-error border-red-500"
 //                   : ""
 //               }`}
 //               onChange={(e) =>
-//                 handleSSNInput(e, "veterans_social_security_no_2", 2, ssn3Ref)
+//                 handleSSNInput(e, "veterans_ssn_part2", 2, ssn3Ref)
 //               }
 //               onPaste={blockTextPaste}
 //               onKeyDown={blockNonNumericKeys}
-//               {...register("veterans_social_security_no_2", {
+//               {...register("veterans_ssn_part2", {
 //                 required: "Middle 2 digits required",
 //                 pattern: {
 //                   value: /^\d{2}$/,
@@ -522,16 +522,16 @@
 //               value={ssn3}
 //               ref={ssn3Ref}
 //               className={`input input-bordered w-28 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-//                 errors.veterans_social_security_no_3
+//                 errors.veterans_ssn_part3
 //                   ? "input-error border-red-500"
 //                   : ""
 //               }`}
 //               onChange={(e) =>
-//                 handleSSNInput(e, "veterans_social_security_no_3", 4, null)
+//                 handleSSNInput(e, "veterans_ssn_part3", 4, null)
 //               }
 //               onPaste={blockTextPaste}
 //               onKeyDown={blockNonNumericKeys}
-//               {...register("veterans_social_security_no_3", {
+//               {...register("veterans_ssn_part3", {
 //                 required: "Last 4 digits required",
 //                 pattern: {
 //                   value: /^\d{4}$/,
@@ -545,9 +545,9 @@
 //           {hasSSNError && (
 //             <label className="label pt-2">
 //               <span className="label-text-alt text-error text-sm">
-//                 {errors.veterans_social_security_no_1?.message ||
-//                   errors.veterans_social_security_no_2?.message ||
-//                   errors.veterans_social_security_no_3?.message ||
+//                 {errors.veterans_ssn_part1?.message ||
+//                   errors.veterans_ssn_part2?.message ||
+//                   errors.veterans_ssn_part3?.message ||
 //                   "Please complete all 9 digits of SSN"}
 //               </span>
 //             </label>
@@ -599,7 +599,7 @@ export default function Step2PhoneNumbers({
   trigger,
   control,
 }) {
-  const internationalPhoneNumber = watch("International_Phone_Number[0]");
+  const internationalPhoneNumber = watch("veterans_international_phone");
   const localPhoneNumber = watch("local_phone_number") || "";
 
   const ssn1Ref = useRef(null);
@@ -609,20 +609,18 @@ export default function Step2PhoneNumbers({
   const phone2Ref = useRef(null);
   const phone3Ref = useRef(null);
 
-  const ssn1 = watch("veterans_social_security_no_1") || "";
-  const ssn2 = watch("veterans_social_security_no_2") || "";
-  const ssn3 = watch("veterans_social_security_no_3") || "";
-  const phone1 = watch("local_phone_1") || "";
-  const phone2 = watch("local_phone_2") || "";
-  const phone3 = watch("local_phone_3") || "";
+  const ssn1 = watch("veterans_ssn_part1") || "";
+  const ssn2 = watch("veterans_ssn_part2") || "";
+  const ssn3 = watch("veterans_ssn_part3") || "";
+  const phone1 = watch("veterans_telephone_area_code") || "";
+  const phone2 = watch("veterans_telephone_operator_code") || "";
+  const phone3 = watch("veterans_telephone_line_number") || "";
 
-  // Auto-focus for SSN fields
   useEffect(() => {
     if (ssn1.length === 3) ssn2Ref.current?.focus();
     if (ssn2.length === 2) ssn3Ref.current?.focus();
   }, [ssn1, ssn2]);
 
-  // Auto-focus for phone fields
   useEffect(() => {
     if (phone1.length === 3) phone2Ref.current?.focus();
     if (phone2.length === 3) phone3Ref.current?.focus();
@@ -653,7 +651,6 @@ export default function Step2PhoneNumbers({
     }
   };
 
-  // Combine phone parts into full number
   useEffect(() => {
     const fullPhone = `${phone1}${phone2}${phone3}`;
     if (fullPhone.length === 10) {
@@ -664,26 +661,25 @@ export default function Step2PhoneNumbers({
     }
   }, [phone1, phone2, phone3, setValue]);
 
-  // Trigger validation
   useEffect(() => {
     trigger([
-      "veterans_social_security_no_1",
-      "veterans_social_security_no_2",
-      "veterans_social_security_no_3",
-      "local_phone_1",
-      "local_phone_2",
-      "local_phone_3",
+      "veterans_ssn_part1",
+      "veterans_ssn_part2",
+      "veterans_ssn_part3",
+      "veterans_telephone_area_code",
+      "veterans_telephone_operator_code",
+      "veterans_telephone_line_number",
       "local_phone_number",
     ]);
   }, [ssn1, ssn2, ssn3, phone1, phone2, phone3, trigger]);
 
   const hasSSNError =
-    errors.veterans_social_security_no_1 ||
-    errors.veterans_social_security_no_2 ||
-    errors.veterans_social_security_no_3;
+    errors.veterans_ssn_part1 ||
+    errors.veterans_ssn_part2 ||
+    errors.veterans_ssn_part3;
 
   const hasPhoneError =
-    errors.local_phone_1 || errors.local_phone_2 || errors.local_phone_3;
+    errors.veterans_telephone_area_code || errors.veterans_telephone_operator_code || errors.veterans_telephone_line_number;
 
   return (
     <div className="space-y-8">
@@ -700,14 +696,14 @@ export default function Step2PhoneNumbers({
           value={internationalPhoneNumber || ""}
           onChange={(phone) => {
             const cleanedPhone = phone.replace(/[^0-9]/g, "");
-            setValue("International_Phone_Number[0]", cleanedPhone, {
+            setValue("veterans_international_phone", cleanedPhone, {
               shouldValidate: true,
               shouldDirty: true,
             });
-            trigger("International_Phone_Number[0]");
+            trigger("veterans_international_phone");
           }}
           inputProps={{
-            name: "International_Phone_Number[0]",
+            name: "veterans_international_phone",
             required: true,
             className:
               "input input-bordered w-full dark:bg-white dark:border-black dark:text-black py-5 pl-12",
@@ -720,15 +716,15 @@ export default function Step2PhoneNumbers({
 
         <input
           type="hidden"
-          {...register("International_Phone_Number[0]", {
+          {...register("veterans_international_phone", {
             required: "Input valid number",
           })}
         />
 
-        {errors["International_Phone_Number[0]"] && (
+        {errors["veterans_international_phone"] && (
           <label className="label">
             <span className="label-text-alt text-error text-sm pt-1">
-              {errors["International_Phone_Number[0]"]?.message}
+              {errors["veterans_international_phone"]?.message}
             </span>
           </label>
         )}
@@ -751,12 +747,12 @@ export default function Step2PhoneNumbers({
             value={phone1}
             ref={phone1Ref}
             className={`input input-bordered w-24 text-center text-lg tracking-widest dark:bg-white text-[12px] dark:text-black dark:border-black remove-arrow ${
-              errors.local_phone_1 ? "input-error border-red-500" : ""
+              errors.veterans_telephone_area_code ? "input-error border-red-500" : ""
             }`}
-            onChange={(e) => handleInput(e, "local_phone_1", 3, phone2Ref)}
+            onChange={(e) => handleInput(e, "veterans_telephone_area_code", 3, phone2Ref)}
             onPaste={blockTextPaste}
             onKeyDown={blockNonNumericKeys}
-            {...register("local_phone_1", {
+            {...register("veterans_telephone_area_code", {
               required: "First 3 digits required",
               pattern: {
                 value: /^\d{3}$/,
@@ -775,12 +771,12 @@ export default function Step2PhoneNumbers({
             value={phone2}
             ref={phone2Ref}
             className={`input input-bordered w-24 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-              errors.local_phone_2 ? "input-error border-red-500" : ""
+              errors.veterans_telephone_operator_code ? "input-error border-red-500" : ""
             }`}
-            onChange={(e) => handleInput(e, "local_phone_2", 3, phone3Ref)}
+            onChange={(e) => handleInput(e, "veterans_telephone_operator_code", 3, phone3Ref)}
             onPaste={blockTextPaste}
             onKeyDown={blockNonNumericKeys}
-            {...register("local_phone_2", {
+            {...register("veterans_telephone_operator_code", {
               required: "Middle 3 digits required",
               pattern: {
                 value: /^\d{3}$/,
@@ -799,12 +795,12 @@ export default function Step2PhoneNumbers({
             value={phone3}
             ref={phone3Ref}
             className={`input input-bordered w-28 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-              errors.local_phone_3 ? "input-error border-red-500" : ""
+              errors.veterans_telephone_line_number ? "input-error border-red-500" : ""
             }`}
-            onChange={(e) => handleInput(e, "local_phone_3", 4, null)}
+            onChange={(e) => handleInput(e, "veterans_telephone_line_number", 4, null)}
             onPaste={blockTextPaste}
             onKeyDown={blockNonNumericKeys}
-            {...register("local_phone_3", {
+            {...register("veterans_telephone_line_number", {
               required: "Last 4 digits required",
               pattern: {
                 value: /^\d{4}$/,
@@ -830,9 +826,9 @@ export default function Step2PhoneNumbers({
         {hasPhoneError && (
           <label className="label pt-2">
             <span className="label-text-alt text-error text-sm">
-              {errors.local_phone_1?.message ||
-                errors.local_phone_2?.message ||
-                errors.local_phone_3?.message ||
+              {errors.veterans_telephone_area_code?.message ||
+                errors.veterans_telephone_operator_code?.message ||
+                errors.veterans_telephone_line_number?.message ||
                 "Please complete all 10 digits of phone number"}
             </span>
           </label>
@@ -865,16 +861,16 @@ export default function Step2PhoneNumbers({
               value={ssn1}
               ref={ssn1Ref}
               className={`input input-bordered w-24 text-center text-lg tracking-widest dark:bg-white text-[12px] dark:text-black dark:border-black remove-arrow ${
-                errors.veterans_social_security_no_1
+                errors.veterans_ssn_part1
                   ? "input-error border-red-500"
                   : ""
               }`}
               onChange={(e) =>
-                handleInput(e, "veterans_social_security_no_1", 3, ssn2Ref)
+                handleInput(e, "veterans_ssn_part1", 3, ssn2Ref)
               }
               onPaste={blockTextPaste}
               onKeyDown={blockNonNumericKeys}
-              {...register("veterans_social_security_no_1", {
+              {...register("veterans_ssn_part1", {
                 required: "First 3 digits required",
                 pattern: {
                   value: /^\d{3}$/,
@@ -893,16 +889,16 @@ export default function Step2PhoneNumbers({
               value={ssn2}
               ref={ssn2Ref}
               className={`input input-bordered w-20 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-                errors.veterans_social_security_no_2
+                errors.veterans_ssn_part2
                   ? "input-error border-red-500"
                   : ""
               }`}
               onChange={(e) =>
-                handleInput(e, "veterans_social_security_no_2", 2, ssn3Ref)
+                handleInput(e, "veterans_ssn_part2", 2, ssn3Ref)
               }
               onPaste={blockTextPaste}
               onKeyDown={blockNonNumericKeys}
-              {...register("veterans_social_security_no_2", {
+              {...register("veterans_ssn_part2", {
                 required: "Middle 2 digits required",
                 pattern: {
                   value: /^\d{2}$/,
@@ -921,16 +917,16 @@ export default function Step2PhoneNumbers({
               value={ssn3}
               ref={ssn3Ref}
               className={`input input-bordered w-28 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-                errors.veterans_social_security_no_3
+                errors.veterans_ssn_part3
                   ? "input-error border-red-500"
                   : ""
               }`}
               onChange={(e) =>
-                handleInput(e, "veterans_social_security_no_3", 4, null)
+                handleInput(e, "veterans_ssn_part3", 4, null)
               }
               onPaste={blockTextPaste}
               onKeyDown={blockNonNumericKeys}
-              {...register("veterans_social_security_no_3", {
+              {...register("veterans_ssn_part3", {
                 required: "Last 4 digits required",
                 pattern: {
                   value: /^\d{4}$/,
@@ -944,9 +940,9 @@ export default function Step2PhoneNumbers({
           {hasSSNError && (
             <label className="label pt-2">
               <span className="label-text-alt text-error text-sm">
-                {errors.veterans_social_security_no_1?.message ||
-                  errors.veterans_social_security_no_2?.message ||
-                  errors.veterans_social_security_no_3?.message ||
+                {errors.veterans_ssn_part1?.message ||
+                  errors.veterans_ssn_part2?.message ||
+                  errors.veterans_ssn_part3?.message ||
                   "Please complete all 9 digits of SSN"}
               </span>
             </label>

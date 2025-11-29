@@ -59,7 +59,7 @@
 //           </label>
 //           <input
 //             type="text"
-//             {...register("MailingAddress_NumberAndStreet[0]", {
+//             {...register("veterans_mailing_address", {
 //               required: "Street Address is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
@@ -68,7 +68,7 @@
 //           {errors.MailingAddress_NumberAndStreet?.[0] && (
 //             <label className="label">
 //               <span className="label-text-alt text-error text-sm md:text-base pt-1">
-//                 {errors.MailingAddress_NumberAndStreet[0].message}
+//                 {errors.veterans_mailing_address.message}
 //               </span>
 //             </label>
 //           )}
@@ -81,16 +81,16 @@
 //           </label>
 //           <input
 //             type="text"
-//             {...register("apt_unit_number", {
+//             {...register("veterans_apt_unit", {
 //               required: "Apt./Unit number is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
 //             placeholder="Apt./Unit number"
 //           />
-//           {errors.apt_unit_number && (
+//           {errors.veterans_apt_unit && (
 //             <label className="label">
 //               <span className="label-text-alt text-error text-sm md:text-base pt-1">
-//                 {errors.apt_unit_number.message}
+//                 {errors.veterans_apt_unit.message}
 //               </span>
 //             </label>
 //           )}
@@ -106,7 +106,7 @@
 //         </label>
 //         <input
 //           type="text"
-//           {...register("MailingAddress_City[0]", {
+//           {...register("veterans_city", {
 //             required: "City is required",
 //           })}
 //           className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -115,7 +115,7 @@
 //         {errors.MailingAddress_City?.[0] && (
 //           <label className="label">
 //             <span className="label-text-alt text-error text-sm md:text-base pt-1">
-//               {errors.MailingAddress_City[0].message}
+//               {errors.veterans_city.message}
 //             </span>
 //           </label>
 //         )}
@@ -132,7 +132,7 @@
 //           <input
 //             type="text"
 //             maxLength="2"
-//             {...register("MailingAddress_StateOrProvince[0]", {
+//             {...register("veterans_state", {
 //               required: "State is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -141,7 +141,7 @@
 //           {errors.MailingAddress_StateOrProvince?.[0] && (
 //             <label className="label">
 //               <span className="label-text-alt text-error text-sm md:text-base pt-1">
-//                 {errors.MailingAddress_StateOrProvince[0].message}
+//                 {errors.veterans_state.message}
 //               </span>
 //             </label>
 //           )}
@@ -156,7 +156,7 @@
 //           <input
 //             type="text"
 //             maxLength="2"
-//             {...register("MailingAddress_Country[0]", {
+//             {...register("veterans_country", {
 //               required: "Country is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -165,7 +165,7 @@
 //           {errors.MailingAddress_Country?.[0] && (
 //             <label className="label">
 //               <span className="label-text-alt text-error text-sm md:text-base pt-1">
-//                 {errors.MailingAddress_Country[0].message}
+//                 {errors.veterans_country.message}
 //               </span>
 //             </label>
 //           )}
@@ -288,7 +288,7 @@
 //           </label>
 //           <input
 //             type="text"
-//             {...register("MailingAddress_NumberAndStreet[0]", {
+//             {...register("veterans_mailing_address", {
 //               required: "Street Address is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
@@ -296,7 +296,7 @@
 //           />
 //           {errors.MailingAddress_NumberAndStreet?.[0] && (
 //             <p className="text-error text-sm mt-1">
-//               {errors.MailingAddress_NumberAndStreet[0].message}
+//               {errors.veterans_mailing_address.message}
 //             </p>
 //           )}
 //         </div>
@@ -309,7 +309,7 @@
 //           </label>
 //           <input
 //             type="text"
-//             {...register("apt_unit_number")}
+//             {...register("veterans_apt_unit")}
 //             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
 //             placeholder="Apt./Unit number"
 //           />
@@ -324,7 +324,7 @@
 //         </label>
 //         <input
 //           type="text"
-//           {...register("MailingAddress_City[0]", {
+//           {...register("veterans_city", {
 //             required: "City is required",
 //           })}
 //           className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -332,7 +332,7 @@
 //         />
 //         {errors.MailingAddress_City?.[0] && (
 //           <p className="text-error text-sm mt-1">
-//             {errors.MailingAddress_City[0].message}
+//             {errors.veterans_city.message}
 //           </p>
 //         )}
 //       </div>
@@ -347,7 +347,7 @@
 //           <input
 //             type="text"
 //             maxLength={2}
-//             {...register("MailingAddress_StateOrProvince[0]", {
+//             {...register("veterans_state", {
 //               required: "State is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -355,7 +355,7 @@
 //           />
 //           {errors.MailingAddress_StateOrProvince?.[0] && (
 //             <p className="text-error text-sm mt-1">
-//               {errors.MailingAddress_StateOrProvince[0].message}
+//               {errors.veterans_state.message}
 //             </p>
 //           )}
 //         </div>
@@ -369,7 +369,7 @@
 //           <input
 //             type="text"
 //             defaultValue="US"
-//             {...register("MailingAddress_Country[0]")}
+//             {...register("veterans_country")}
 //             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
 //             placeholder="Country"
 //           />
@@ -470,7 +470,7 @@
 //           </label>
 //           <input
 //             type="text"
-//             {...register("MailingAddress_NumberAndStreet[0]", {
+//             {...register("veterans_mailing_address", {
 //               required: "Street Address is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
@@ -478,7 +478,7 @@
 //           />
 //           {errors.MailingAddress_NumberAndStreet?.[0] && (
 //             <p className="text-error text-sm mt-1">
-//               {errors.MailingAddress_NumberAndStreet[0].message}
+//               {errors.veterans_mailing_address.message}
 //             </p>
 //           )}
 //         </div>
@@ -491,7 +491,7 @@
 //           </label>
 //           <input
 //             type="text"
-//             {...register("apt_unit_number")}
+//             {...register("veterans_apt_unit")}
 //             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
 //             placeholder="Apt./Unit number"
 //           />
@@ -507,7 +507,7 @@
 //         </label>
 //         <input
 //           type="text"
-//           {...register("MailingAddress_City[0]", {
+//           {...register("veterans_city", {
 //             required: "City is required",
 //           })}
 //           className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -515,7 +515,7 @@
 //         />
 //         {errors.MailingAddress_City?.[0] && (
 //           <p className="text-error text-sm mt-1">
-//             {errors.MailingAddress_City[0].message}
+//             {errors.veterans_city.message}
 //           </p>
 //         )}
 //       </div>
@@ -531,7 +531,7 @@
 //           <input
 //             type="text"
 //             maxLength={2}
-//             {...register("MailingAddress_StateOrProvince[0]", {
+//             {...register("veterans_state", {
 //               required: "State is required",
 //             })}
 //             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -539,7 +539,7 @@
 //           />
 //           {errors.MailingAddress_StateOrProvince?.[0] && (
 //             <p className="text-error text-sm mt-1">
-//               {errors.MailingAddress_StateOrProvince[0].message}
+//               {errors.veterans_state.message}
 //             </p>
 //           )}
 //         </div>
@@ -553,7 +553,7 @@
 //           <input
 //             type="text"
 //             defaultValue="US"
-//             {...register("MailingAddress_Country[0]")}
+//             {...register("veterans_country")}
 //             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
 //             placeholder="Country"
 //           />
@@ -655,7 +655,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           </label>
           <input
             type="text"
-            {...register("MailingAddress_NumberAndStreet[0]", {
+            {...register("veterans_mailing_address", {
               required: "Street Address is required",
             })}
             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
@@ -663,7 +663,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           />
           {errors.MailingAddress_NumberAndStreet?.[0] && (
             <p className="text-error text-sm mt-1">
-              {errors.MailingAddress_NumberAndStreet[0].message}
+              {errors.veterans_mailing_address.message}
             </p>
           )}
         </div>
@@ -676,7 +676,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           </label>
           <input
             type="text"
-            {...register("apt_unit_number")}
+            {...register("veterans_apt_unit")}
             className="input input-bordered w-full py-5 dark:bg-white uppercase dark:border-black dark:text-black"
             placeholder="Apt./Unit number"
           />
@@ -692,7 +692,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
         </label>
         <input
           type="text"
-          {...register("MailingAddress_City[0]", {
+          {...register("veterans_city", {
             required: "City is required",
           })}
           className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -700,7 +700,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
         />
         {errors.MailingAddress_City?.[0] && (
           <p className="text-error text-sm mt-1">
-            {errors.MailingAddress_City[0].message}
+            {errors.veterans_city.message}
           </p>
         )}
       </div>
@@ -716,7 +716,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           <input
             type="text"
             maxLength={2}
-            {...register("MailingAddress_StateOrProvince[0]", {
+            {...register("veterans_state", {
               required: "State is required",
             })}
             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
@@ -724,7 +724,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           />
           {errors.MailingAddress_StateOrProvince?.[0] && (
             <p className="text-error text-sm mt-1">
-              {errors.MailingAddress_StateOrProvince[0].message}
+              {errors.veterans_state.message}
             </p>
           )}
         </div>
@@ -738,7 +738,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           <input
             type="text"
             defaultValue="US"
-            {...register("MailingAddress_Country[0]")}
+            {...register("veterans_country")}
             className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black uppercase"
             placeholder="Country"
           />
@@ -746,31 +746,60 @@ export default function Step5Address({ register, errors, watch, setValue }) {
       </div>
 
       {/* ZIP Code */}
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:text-black">
-            ZIP Code (First 5 digits)
-          </span>
-        </label>
-        <input
-          type="text"
-          inputMode="numeric"
-          maxLength={5}
-          placeholder="12345"
-          {...register("MailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0]", {
-            required: "ZIP Code is required",
-            pattern: { value: /^\d{5}$/, message: "Must be 5 digits" },
-          })}
-          className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black"
-          onInput={(e) => {
-            e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
-          }}
-        />
-        {errors.MailingAddress_ZIPOrPostalCode_FirstFiveNumbers?.[0] && (
-          <p className="text-error text-sm mt-1">
-            {errors.MailingAddress_ZIPOrPostalCode_FirstFiveNumbers[0].message}
-          </p>
-        )}
+      <div className="md:flex items-center gap-5">
+        <div className="form-control basis-6/12">
+          <label className="label">
+            <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:text-black">
+              ZIP Code (First 5 digits)
+            </span>
+          </label>
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={5}
+            placeholder="12345"
+            {...register("veterans_zip_code", {
+              required: "ZIP Code is required",
+              pattern: { value: /^\d{5}$/, message: "Must be 5 digits" },
+            })}
+            className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black"
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
+            }}
+          />
+          {errors.veterans_zip_code?.[0] && (
+            <p className="text-error text-sm mt-1">
+              {errors.veterans_zip_code.message}
+            </p>
+          )}
+        </div>
+
+        <div className="form-control basis-6/12">
+          <label className="label">
+            <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:text-black">
+              Postal Code
+            </span>
+          </label>
+          <input
+            type="text"
+            inputMode="numeric"
+            maxLength={5}
+            placeholder="1234"
+            {...register("veterans_postal_code", {
+              required: "Postal Code is required",
+              pattern: { value: /^\d{5}$/, message: "Must be 4 digits" },
+            })}
+            className="input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black"
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
+            }}
+          />
+          {errors.veterans_postal_code && (
+            <p className="text-error text-sm mt-1">
+              {errors.veterans_postal_code.message}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

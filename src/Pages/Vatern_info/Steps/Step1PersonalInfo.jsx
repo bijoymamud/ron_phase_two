@@ -14,7 +14,7 @@ export default function Step1PersonalInfo({ register, errors }) {
           <input
             id="firstName"
             type="text"
-            {...register("Veterans_Beneficiary_First_Name[0]", {
+            {...register("veteran_service_member_first_fname", {
               required: "First Name is required",
             })}
             className={`input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-0${
@@ -49,7 +49,7 @@ export default function Step1PersonalInfo({ register, errors }) {
           <input
             id="middleName"
             type="text"
-            {...register("member_middle_name", {
+            {...register("veteran_service_member_middle_mname", {
               required: "Middle Name is required",
             })}
             className={`input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-0${
@@ -81,23 +81,25 @@ export default function Step1PersonalInfo({ register, errors }) {
           <input
             id="lastName"
             type="text"
-            {...register("Last_Name[0]", {
+            {...register("veteran_service_member_last_lname", {
               required: "Last Name is required",
             })}
             className={`input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black ${
-              errors.Last_Name?.[0] ? "input-error" : ""
+              errors.veteran_service_member_last_lname ? "input-error" : ""
             }`}
             placeholder="Enter your last name"
-            aria-invalid={errors.Last_Name?.[0] ? "true" : "false"}
+            aria-invalid={
+              errors.veteran_service_member_last_lname ? "true" : "false"
+            }
           />
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
             <User size={18} />
           </span>
         </div>
-        {errors.Last_Name?.[0] && (
+        {errors.veteran_service_member_last_lname && (
           <label className="label">
             <span className="label-text-alt text-error">
-              {errors.Last_Name[0].message}
+              {errors.veteran_service_member_last_lname.message}
             </span>
           </label>
         )}
@@ -114,7 +116,7 @@ export default function Step1PersonalInfo({ register, errors }) {
           <input
             id="email"
             type="email"
-            {...register("EMAIL_ADDRESS[0]", {
+            {...register("veterans_email_primary", {
               required: "Email is required",
               pattern: {
                 value: /^\S+@\S+\.\S+$/i,
@@ -122,19 +124,19 @@ export default function Step1PersonalInfo({ register, errors }) {
               },
             })}
             className={`input input-bordered py-5 w-full pl-10 dark:bg-white dark:input-bordered dark:border-black dark:text-black focus:ring-0 ${
-              errors.EMAIL_ADDRESS?.[0] ? "input-error" : ""
+              errors.veterans_email_primary ? "input-error" : ""
             }`}
             placeholder="Enter your email address"
-            aria-invalid={errors.EMAIL_ADDRESS?.[0] ? "true" : "false"}
+            aria-invalid={errors.veterans_email_primary ? "true" : "false"}
           />
           <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
             <Mail size={18} />
           </span>
         </div>
-        {errors.EMAIL_ADDRESS?.[0] && (
+        {errors.veterans_email_primary && (
           <label className="label">
             <span className="label-text-alt text-error">
-              {errors.EMAIL_ADDRESS[0].message}
+              {errors.veterans_email_primary.message}
             </span>
           </label>
         )}
@@ -152,7 +154,7 @@ export default function Step1PersonalInfo({ register, errors }) {
           <input
             id="altEmail"
             type="email"
-            {...register("EMAIL_ADDRESS[1]", {
+            {...register("veterans_email_optional", {
               pattern: {
                 value: /^\S+@\S+\.\S+$/i,
                 message: "Invalid email format",
@@ -165,10 +167,10 @@ export default function Step1PersonalInfo({ register, errors }) {
             <Mail size={18} />
           </span>
         </div>
-        {errors.EMAIL_ADDRESS?.[1] && (
+        {errors.veterans_email_optional && (
           <label className="label">
             <span className="label-text-alt text-error">
-              {errors.EMAIL_ADDRESS[1].message}
+              {errors.veterans_email_optional.message}
             </span>
           </label>
         )}

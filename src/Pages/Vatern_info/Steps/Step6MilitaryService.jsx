@@ -122,7 +122,7 @@ export default function Step6MilitaryService() {
 
   const serviceUnder = watch("serviceUnder");
 
-  const showOtherNames = serviceUnder === "Yes";
+  const showOtherNames = serviceUnder === "serve_under_another_name_yes";
 
   return (
     <div className="space-y-6 ">
@@ -139,16 +139,18 @@ export default function Step6MilitaryService() {
           className="select select-bordered w-full  md:w-full uppercase  dark:bg-white dark:border-black dark:text-black"
         >
           <option value="">Select Branch</option>
-          <option value="Army">Army</option>
-          <option value="Navy">Navy</option>
-          <option value="Marine Corps">Marine Corps</option>
-          <option value="Air Force">Air Force</option>
-          <option value="Coast Guard">Coast Guard</option>
-          <option value="Space Force">Space Force</option>
-          <option value="NOAA">
+          <option value="branch_of_service_army">Army</option>
+          <option value="branch_of_service_navy">Navy</option>
+          <option value="branch_of_service_marinecorp">Marine Corps</option>
+          <option value="branch_of_service_airforce">Air Force</option>
+          <option value="branch_of_service_costguard">Coast Guard</option>
+          <option value="branch_of_service_spaceforce">Space Force</option>
+          <option value="branch_of_service_noaa">
             National Oceanic and Atmospheric Administration (NOAA)
           </option>
-          <option value="USPHS">U.S. Public Health Service (USPHS)</option>
+          <option value="branch_of_service_usphs">
+            U.S. Public Health Service (USPHS)
+          </option>
         </select>
         {errors.branchOfService && (
           <p className="text-error text-xs mt-1">
@@ -170,8 +172,8 @@ export default function Step6MilitaryService() {
           className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
         >
           <option value="">Select</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
+          <option value="serve_under_another_name_yes">Yes</option>
+          <option value="serve_under_another_name_no">No</option>
         </select>
         {errors.serviceUnder && (
           <p className="text-error text-xs mt-1">

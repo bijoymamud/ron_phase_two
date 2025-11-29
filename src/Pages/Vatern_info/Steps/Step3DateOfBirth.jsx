@@ -13,7 +13,7 @@ export default function Step3DateOfBirth({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={2}
-            {...register("DOB_Month[0]", {
+            {...register("veterans_dob_month", {
               required: "Month is required",
               pattern: {
                 value: /^(0[1-9]|1[0-2])$/,
@@ -44,7 +44,7 @@ export default function Step3DateOfBirth({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={2}
-            {...register("DOB_Day[0]", {
+            {...register("veterans_dob_day", {
               required: "Day is required",
               pattern: {
                 value: /^(0[1-9]|[12][0-9]|3[01])$/,
@@ -75,7 +75,7 @@ export default function Step3DateOfBirth({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={4}
-            {...register("DOB_Year[0]", {
+            {...register("veterans_dob_year", {
               required: "Year is required",
               pattern: {
                 value: /^\d{4}$/,

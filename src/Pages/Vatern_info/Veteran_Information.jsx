@@ -295,7 +295,6 @@ export default function VeteranInformationForm() {
   const navigate = useNavigate();
   const totalSteps = 7;
 
-
   const persisted = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
 
   const methods = useForm({
@@ -306,11 +305,10 @@ export default function VeteranInformationForm() {
       Ending_Date_Month: [""],
       Ending_Date_Day: [""],
       Ending_Date_Year: [""],
-      EMAIL_ADDRESS: ["", ""],
       phone: "",
       vaHealthCare: "",
       livingSituation: "",
-     
+
       ...persisted,
     },
   });
@@ -324,11 +322,9 @@ export default function VeteranInformationForm() {
     watch,
   } = methods;
 
- 
-  const formValues = watch(); 
+  const formValues = watch();
 
   useEffect(() => {
-   
     const timeout = setTimeout(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(formValues));
     }, 300);
@@ -377,7 +373,6 @@ export default function VeteranInformationForm() {
       : audioRef.current.play().catch(() => {});
   };
 
- 
   const getFieldsForStep = (step) => {
     switch (step) {
       case 0:
@@ -424,7 +419,7 @@ export default function VeteranInformationForm() {
 
   const onSubmit = (data) => {
     console.log("Submitted data →", data);
-   
+
     navigate("/issues");
   };
 

@@ -64,7 +64,6 @@ function Issues() {
     dispatch(clearAllIssues());
   }, [dispatch]);
 
-  // Flat list for checkbox rendering
   const conditionsList = Object.values(categories).flat();
 
   const getCategoryForCondition = (condition) => {
