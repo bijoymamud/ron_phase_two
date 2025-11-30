@@ -8,14 +8,12 @@ export default function Step4ServiceDates({ register, errors }) {
           </span>
         </label>
         <div className="flex space-x-2">
-        
-
           <input
             type="text"
             inputMode="numeric"
             pattern="\d*"
             maxLength={2}
-            {...register("Beginning_Date_Month[0]", {
+            {...register("most_recent_active_service_month_3", {
               required: "Month is required",
               pattern: {
                 value: /^(0[1-9]|1[0-2])$/,
@@ -44,7 +42,7 @@ export default function Step4ServiceDates({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={2}
-            {...register("Beginning_Date_Day[0]", {
+            {...register("most_recent_active_service_day_3", {
               required: "Day is required",
               pattern: {
                 value: /^(0[1-9]|[12][0-9]|3[01])$/,
@@ -73,7 +71,7 @@ export default function Step4ServiceDates({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={4}
-            {...register("Beginning_Date_Year[0]", {
+            {...register("most_recent_active_service_year_3", {
               required: "Year is required",
               pattern: {
                 value: /^\d{4}$/,
@@ -117,7 +115,7 @@ export default function Step4ServiceDates({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={2}
-            {...register("Ending_Date_Month[0]", {
+            {...register("most_recent_active_service_exit_date_month", {
               required: "Month is required",
               pattern: {
                 value: /^(0[1-9]|1[0-2])$/,
@@ -146,7 +144,7 @@ export default function Step4ServiceDates({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={2}
-            {...register("Ending_Date_Day[0]", {
+            {...register("most_recent_active_service_exit_date_day", {
               required: "Day is required",
               pattern: {
                 value: /^(0[1-9]|[12][0-9]|3[01])$/,
@@ -155,7 +153,7 @@ export default function Step4ServiceDates({ register, errors }) {
             })}
             onBeforeInput={(e) => {
               if (!/^\d$/.test(e.data)) {
-                e.preventDefault(); // block letters, symbols, spaces
+                e.preventDefault();
               }
             }}
             onInput={(e) => {
@@ -175,7 +173,7 @@ export default function Step4ServiceDates({ register, errors }) {
             inputMode="numeric"
             pattern="\d*"
             maxLength={4}
-            {...register("Ending_Date_Year[0]", {
+            {...register("most_recent_active_service_exit_date_year", {
               required: "Year is required",
               pattern: {
                 value: /^\d{4}$/,

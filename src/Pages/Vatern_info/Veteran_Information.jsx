@@ -296,21 +296,22 @@ export default function VeteranInformationForm() {
 
   const persisted = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "{}");
 
-  const methods = useForm({
-    defaultValues: {
-      Beginning_Date_Month: [""],
-      Beginning_Date_Day: [""],
-      Beginning_Date_Year: [""],
-      Ending_Date_Month: [""],
-      Ending_Date_Day: [""],
-      Ending_Date_Year: [""],
-      phone: "",
-      vaHealthCare: "",
-      livingSituation: "",
+  const methods = useForm();
+  //   {
+  //   defaultValues: {
+  //     Beginning_Date_Month: [""],
+  //     Beginning_Date_Day: [""],
+  //     Beginning_Date_Year: [""],
+  //     Ending_Date_Month: [""],
+  //     Ending_Date_Day: [""],
+  //     Ending_Date_Year: [""],
+  //     phone: "",
+  //     vaHealthCare: "",
+  //     livingSituation: "",
 
-      ...persisted,
-    },
-  });
+  //     ...persisted,
+  //   },
+  // }
 
   const {
     register,
@@ -324,8 +325,28 @@ export default function VeteranInformationForm() {
   const formValues = watch();
 
   useEffect(() => {
+    console.log(formValues);
+    const keyValueBackendDataLcoalStorage = {
+      ...formValues,
+      [formValues.currentlyHomeless]: formValues.currentlyHomeless ? "Yes" : "",
+      [formValues.branchOfService]: formValues.branchOfService ? "Yes" : "",
+      [formValues.serviceUnder]: formValues.serviceUnder ? "Yes" : "",
+      [formValues.servedInNationalGuardOrReserves]:
+        formValues.servedInNationalGuardOrReserves ? "Yes" : "",
+      [formValues.servedInCombatZoneSince911]:
+        formValues.servedInCombatZoneSince911 ? "Yes" : "",
+      [formValues.currentlyActivatedFederalOrders]:
+        formValues.currentlyActivatedFederalOrders ? "Yes" : "",
+      [formValues.livingSituation]: formValues.livingSituation ? "Yes" : "",
+      [formValues.riskSituation]: formValues.riskSituation ? "Yes" : "",
+    };
+
+    console.log(keyValueBackendDataLcoalStorage);
     const timeout = setTimeout(() => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(formValues));
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(keyValueBackendDataLcoalStorage)
+      );
     }, 300);
     return () => clearTimeout(timeout);
   }, [formValues]);

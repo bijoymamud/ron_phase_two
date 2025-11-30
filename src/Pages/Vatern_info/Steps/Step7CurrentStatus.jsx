@@ -635,17 +635,16 @@ export default function Step7CurrentStatus() {
     formState: { errors },
   } = useFormContext();
 
-  const currentlyHomeless = watch("currentlyHomeless");
-  const atRiskOfHomelessness = watch("atRiskOfHomelessness");
+  const currentlyHomeless = watch("currently_homeless_yes");
+  const atRiskOfHomelessness = watch("risk_of_becoming_homeless_yes");
   const livingSituation = watch("livingSituation");
   const riskSituation = watch("riskSituation");
 
-  const isCurrentlyHomeless = currentlyHomeless === "currently_homeless_yes";
+  const isCurrentlyHomeless = currentlyHomeless === "Yes";
   const showLivingSection = isCurrentlyHomeless;
   const showRiskQuestion = isCurrentlyHomeless;
-  const showRiskSection =
-    showRiskQuestion &&
-    atRiskOfHomelessness === "risk_of_becoming_homeless_yes";
+  const isAtRiskOfHomelessness = atRiskOfHomelessness === "Yes";
+  const showRiskSection = showRiskQuestion && isAtRiskOfHomelessness;
 
   const showLivingOther = livingSituation === "your_living-situation_other";
   const showRiskOther = riskSituation === "your_living-situation_2_other";
@@ -705,18 +704,18 @@ export default function Step7CurrentStatus() {
           </span>
         </label>
         <select
-          {...register("currentlyHomeless", {
+          {...register("currently_homeless_yes", {
             required: "This field is required",
           })}
           className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
         >
           <option value="">Select</option>
-          <option value="currently_homeless_yes">Yes</option>
-          <option value="currently_homeless_no">No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
-        {errors.currentlyHomeless && (
+        {errors.currently_homeless_yes && (
           <p className="text-error text-xs mt-1">
-            {errors.currentlyHomeless.message}
+            {errors.currently_homeless_yes.message}
           </p>
         )}
       </div>
@@ -729,19 +728,21 @@ export default function Step7CurrentStatus() {
 
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text font-medium text-sm md:text-base dark:text-black">
+              <span className="label-text font-medium pb-1 text-sm md:text-base dark:text-black">
                 Check the answer that most closely aligns to your living
                 situation:
               </span>
             </label>
             <select
               {...register("livingSituation", {
-                required: "Please select your current living situation",
+                required: showLivingSection
+                  ? "Please select your current living situation"
+                  : false,
               })}
               className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
             >
               <option value="">Select an option</option>
-              <option value="your_living-situation_homeless_shelter">
+              <option value="your_living-situation_shelter">
                 Living In A Homeless Shelter
               </option>
               <option value="your_living-situation_not_currently">
@@ -753,7 +754,6 @@ export default function Step7CurrentStatus() {
               <option value="your_living-situation_fleeing">
                 Fleeing Current Residence
               </option>
-
               <option value="your_living-situation_other">Others</option>
             </select>
             {errors.livingSituation && (
@@ -774,7 +774,9 @@ export default function Step7CurrentStatus() {
               <textarea
                 rows={4}
                 {...register("livingSituationDetails", {
-                  required: "Please describe your current living situation",
+                  required: showLivingOther
+                    ? "Please describe your current living situation"
+                    : false,
                 })}
                 className="textarea textarea-bordered w-full resize-none py-4 px-5 dark:bg-white dark:border-black dark:text-black placeholder:text-gray-400"
                 placeholder="Ex: Sleeping in car, staying with friends, etc..."
@@ -786,70 +788,47 @@ export default function Step7CurrentStatus() {
               )}
             </div>
           )}
-
-          {/* Point of Contact - Required when homeless */}
-          <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text font-medium text-sm md:text-base dark:text-black">
-                Point of Contact (Name of person VA can contact)
-              </span>
-            </label>
-            <input
-              type="text"
-              {...register("point_of_contact", {
-                required: "Point of contact is required",
-              })}
-              className={`input input-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black ${
-                errors.point_of_contact ? "input-error" : ""
-              }`}
-              placeholder="Enter name"
-            />
-            {errors.point_of_contact && (
-              <p className="text-error text-xs mt-1">
-                {errors.point_of_contact.message}
-              </p>
-            )}
-          </div>
         </div>
       )}
 
-      {/* Are You At Risk of Becoming Homeless? - Only if Currently Homeless = Yes */}
       {showRiskQuestion && (
         <div className="space-y-6 pt-6 border-t border-gray-300 animate-fade-in">
           <div className="form-control w-full">
             <label className="label">
-              <span className="label-text font-medium text-lg text-primary dark:text-black">
+              <span className="label-text font-medium text-lg pb-1 text-primary dark:text-black">
                 Are You At Risk of Becoming Homeless?
               </span>
             </label>
             <select
-              {...register("atRiskOfHomelessness", {
-                required: "This field is required",
+              {...register("risk_of_becoming_homeless_yes", {
+                required: showRiskQuestion ? "This field is required" : false,
               })}
               className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
             >
               <option value="">Select</option>
-              <option value="risk_of_becoming_homeless_yes">Yes</option>
-              <option value="risk_of_becoming_homeless_no">No</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
-            {errors.atRiskOfHomelessness && (
+            {errors.risk_of_becoming_homeless_yes && (
               <p className="text-error text-xs mt-1">
-                {errors.atRiskOfHomelessness.message}
+                {errors.risk_of_becoming_homeless_yes.message}
               </p>
             )}
           </div>
 
           {/* Risk Situation Details - Only if Yes */}
           {showRiskSection && (
-            <div className="space-y-4 animate-fade-in">
+            <div className=" animate-fade-in">
               <label className="label">
-                <span className="label-text font-medium text-sm md:text-base dark:text-black">
+                <span className="label-text pb-1 font-medium text-sm md:text-base dark:text-black">
                   Select the situation that applies to you:
                 </span>
               </label>
               <select
                 {...register("riskSituation", {
-                  required: "Please select your risk situation",
+                  required: showRiskSection
+                    ? "Please select your risk situation"
+                    : false,
                 })}
                 className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
               >
@@ -872,14 +851,16 @@ export default function Step7CurrentStatus() {
               {showRiskOther && (
                 <div className="mt-4 animate-fade-in">
                   <label className="label">
-                    <span className="label-text font-medium text-sm md:text-base dark:text-black">
+                    <span className="label-text pb-1 font-medium text-sm md:text-base dark:text-black">
                       Please Specify Your Risk Situation
                     </span>
                   </label>
                   <textarea
                     rows={5}
                     {...register("other_specify_2", {
-                      required: "Please specify your risk situation",
+                      required: showRiskOther
+                        ? "Please specify your risk situation"
+                        : false,
                     })}
                     className="textarea textarea-bordered w-full py-5 dark:bg-white dark:border-black dark:text-black placeholder:text-gray-400"
                     placeholder="Describe your situation..."

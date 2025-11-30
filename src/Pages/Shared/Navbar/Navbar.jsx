@@ -114,16 +114,13 @@ export default function Navbar() {
     try {
       setIsLoggingOut(true);
 
-      // সব localStorage data মুছে ফেলবে
       localStorage.clear();
 
-      // চাইলে refetch call রাখতেই পারো, দরকার হলে
       await refetch();
 
-      // ২ সেকেন্ড পর লগইন পেজে রিডাইরেক্ট করবে
       setTimeout(() => {
         setIsLoggingOut(false);
-        navigate("/");
+        navigate("/login");
       }, 2000);
     } catch (error) {
       console.error("Logout failed:", error);
