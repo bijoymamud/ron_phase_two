@@ -91,6 +91,9 @@ const Document = React.lazy(() => import("../Pages/AdminDashboard/Document"));
 const LiveChat = React.lazy(() => import("../Pages/AdminDashboard/LiveChat"));
 const Profile = React.lazy(() => import("../Pages/AdminDashboard/Profile"));
 const Issues = React.lazy(() => import("../Pages/Selected_Issue/Issues"));
+const PTSDDetails = React.lazy(
+  () => import("../Pages/Selected_Issue/PTSDDetails/PTSDDetails")
+);
 
 const NoSubscription = React.lazy(
   () => import("../Pages/NoSubcription/NoSubscription")
@@ -121,6 +124,16 @@ export const router = createBrowserRouter([
           <RouteSecure>
             <Suspense fallback={<Loading />}>
               <Issues />
+            </Suspense>
+          </RouteSecure>
+        ),
+      },
+      {
+        path: "/ptsd_details",
+        element: (
+          <RouteSecure>
+            <Suspense fallback={<Loading />}>
+              <PTSDDetails />
             </Suspense>
           </RouteSecure>
         ),
