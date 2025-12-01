@@ -13,39 +13,43 @@
 
 //   return (
 //     <div className="space-y-6">
+//       {/* COMPONENTS */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black">
 //             Components
 //           </span>
 //         </label>
+
 //         <select
-//           {...register("branchOfService", {
-//             required: "Branch of Service is required",
+//           {...register("componentType", {
+//             required: "Component is required",
 //           })}
 //           className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
 //         >
-//           <option value="">Select Branch</option>
-//           <option value="19b_component_active"> COMPONENT (Active)</option>
-//           <option value="19b_component_reserve"> COMPONENT (Reservers)</option>
+//           <option value="">Select Component</option>
+//           <option value="19b_component_active">COMPONENT (Active)</option>
+//           <option value="19b_component_reserve">COMPONENT (Reserve)</option>
 //           <option value="19b_component_national_guard">
-//             {" "}
 //             COMPONENT (National Guard)
 //           </option>
 //         </select>
-//         {errors.branchOfService && (
+
+//         {errors.componentType && (
 //           <p className="text-error text-xs mt-1">
-//             {errors.branchOfService.message}
+//             {errors.componentType.message}
 //           </p>
 //         )}
 //       </div>
 
+//       {/* BRANCH OF SERVICE */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black">
 //             Branch of Service
 //           </span>
 //         </label>
+
 //         <select
 //           {...register("branchOfService", {
 //             required: "Branch of Service is required",
@@ -57,15 +61,12 @@
 //           <option value="branch_of_service_navy">Navy</option>
 //           <option value="branch_of_service_marinecorp">Marine Corps</option>
 //           <option value="branch_of_service_airforce">Air Force</option>
-//           <option value="branch_of_service_costguard">Coast Guard</option>
+//           <option value="branch_of_service_coastguard">Coast Guard</option>
 //           <option value="branch_of_service_spaceforce">Space Force</option>
-//           <option value="branch_of_service_noaa">
-//             National Oceanic and Atmospheric Administration (NOAA)
-//           </option>
-//           <option value="branch_of_service_usphs">
-//             U.S. Public Health Service (USPHS)
-//           </option>
+//           <option value="branch_of_service_noaa">NOAA</option>
+//           <option value="branch_of_service_usphs">USPHS</option>
 //         </select>
+
 //         {errors.branchOfService && (
 //           <p className="text-error text-xs mt-1">
 //             {errors.branchOfService.message}
@@ -73,13 +74,13 @@
 //         )}
 //       </div>
 
-//       {/* Did you serve under another name? */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black">
 //             Did you ever serve under another name?
 //           </span>
 //         </label>
+
 //         <select
 //           {...register("serviceUnder", {
 //             required: "This field is required",
@@ -90,6 +91,7 @@
 //           <option value="serve_under_another_name_yes">Yes</option>
 //           <option value="serve_under_another_name_no">No</option>
 //         </select>
+
 //         {errors.serviceUnder && (
 //           <p className="text-error text-xs mt-1">
 //             {errors.serviceUnder.message}
@@ -97,7 +99,6 @@
 //         )}
 //       </div>
 
-//       {/* Conditional: Other Names */}
 //       {showOtherNames && (
 //         <div className="animate-fade-in form-control">
 //           <label className="label">
@@ -105,14 +106,16 @@
 //               List of other name(s) you served under
 //             </span>
 //           </label>
+
 //           <textarea
 //             rows={4}
 //             {...register("other_names_you_served_under", {
 //               required: "Please list the name(s) you served under",
 //             })}
 //             className="textarea textarea-bordered w-full resize-none py-4 px-5 dark:bg-white dark:border-black dark:text-black placeholder:text-gray-400 uppercase"
-//             placeholder="e.g. John A. Smith, Jane Marie Doe, etc..."
+//             placeholder="e.g. John A. Smith, Jane Marie Doe"
 //           />
+
 //           {errors.other_names_you_served_under && (
 //             <p className="text-error text-xs mt-1">
 //               {errors.other_names_you_served_under.message}
@@ -121,13 +124,13 @@
 //         </div>
 //       )}
 
-//       {/* Place of Separation */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black">
 //             Place of Separation
 //           </span>
 //         </label>
+
 //         <input
 //           type="text"
 //           {...register("place_of_last_or_anticipated_separation_1", {
@@ -136,6 +139,7 @@
 //           className="input input-bordered w-full py-5 uppercase dark:bg-white dark:border-black dark:text-black"
 //           placeholder="Enter place of separation"
 //         />
+
 //         {errors.place_of_last_or_anticipated_separation_1 && (
 //           <p className="text-error text-xs mt-1">
 //             {errors.place_of_last_or_anticipated_separation_1.message}
@@ -143,13 +147,13 @@
 //         )}
 //       </div>
 
-//       {/* Did You Serve in the National Guard or Reserves? */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black">
 //             Did You Serve in the National Guard or Reserves?
 //           </span>
 //         </label>
+
 //         <select
 //           {...register("component_national_guard_2", {
 //             required: "This field is required",
@@ -160,6 +164,7 @@
 //           <option value="Yes">Yes</option>
 //           <option value="No">No</option>
 //         </select>
+
 //         {errors.component_national_guard_2 && (
 //           <p className="text-error text-xs mt-1">
 //             {errors.component_national_guard_2.message}
@@ -167,13 +172,13 @@
 //         )}
 //       </div>
 
-//       {/* DID YOU SERVE IN A COMBAT ZONE SINCE 9-11-2001? */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black font-bold">
 //             DID YOU SERVE IN A COMBAT ZONE SINCE 9-11-2001?
 //           </span>
 //         </label>
+
 //         <select
 //           {...register("servedInCombatZoneSince911", {
 //             required: "This field is required",
@@ -184,6 +189,7 @@
 //           <option value="did_you_serve_since_9112001_yes">Yes</option>
 //           <option value="did_you_serve_since_9112001_no">No</option>
 //         </select>
+
 //         {errors.servedInCombatZoneSince911 && (
 //           <p className="text-error text-xs mt-1">
 //             {errors.servedInCombatZoneSince911.message}
@@ -191,14 +197,14 @@
 //         )}
 //       </div>
 
-//       {/* ARE YOU CURRENTLY ACTIVATED ON FEDERAL ORDERS? */}
+//       {/* Federal Orders */}
 //       <div className="form-control">
 //         <label className="label">
 //           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black font-bold">
-//             ARE YOU CURRENTLY ACTIVATED ON FEDERAL ORDERS WITHIN THE NATIONAL
-//             GUARD OR RESERVES?
+//             ARE YOU CURRENTLY ACTIVATED ON FEDERAL ORDERS?
 //           </span>
 //         </label>
+
 //         <select
 //           {...register("currentlyActivatedFederalOrders", {
 //             required: "This field is required",
@@ -209,6 +215,7 @@
 //           <option value="the_reserves_or_national_guard_yes">Yes</option>
 //           <option value="the_reserves_or_national_guard_no">No</option>
 //         </select>
+
 //         {errors.currentlyActivatedFederalOrders && (
 //           <p className="text-error text-xs mt-1">
 //             {errors.currentlyActivatedFederalOrders.message}
@@ -229,8 +236,11 @@ export default function Step6MilitaryService() {
   } = useFormContext();
 
   const serviceUnder = watch("serviceUnder");
+  const servedInCombatZone = watch("servedInCombatZoneSince911");
 
   const showOtherNames = serviceUnder === "serve_under_another_name_yes";
+  const showCombatDates =
+    servedInCombatZone === "did_you_serve_since_9112001_yes";
 
   return (
     <div className="space-y-6">
@@ -295,7 +305,7 @@ export default function Step6MilitaryService() {
         )}
       </div>
 
-      {/* Did you serve under another name? */}
+      {/* Serve under another name */}
       <div className="form-control">
         <label className="label">
           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black">
@@ -321,7 +331,6 @@ export default function Step6MilitaryService() {
         )}
       </div>
 
-      {/* Conditional */}
       {showOtherNames && (
         <div className="animate-fade-in form-control">
           <label className="label">
@@ -397,7 +406,7 @@ export default function Step6MilitaryService() {
         )}
       </div>
 
-      {/* Combat Zone */}
+      {/* COMBAT ZONE SINCE 9/11 */}
       <div className="form-control">
         <label className="label">
           <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:border-black dark:text-black font-bold">
@@ -422,6 +431,159 @@ export default function Step6MilitaryService() {
           </p>
         )}
       </div>
+
+      {/* Conditional Combat Dates */}
+      {showCombatDates && (
+        <div className="animate-fade-in space-y-6 border-l-4 border-[#0B2A52] pl-4">
+          {/* Start Date */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-bold text-[#0B2A52] mb-1">
+                Combat Start Date
+              </span>
+            </label>
+            <div className="flex gap-3">
+              <div className="w-24">
+                <input
+                  type="text"
+                  maxLength={2}
+                  placeholder="MM"
+                  {...register("from_month_4", {
+                    required: "Month is required",
+                    pattern: {
+                      value: /^(0?[1-9]|1[0-2])$/,
+                      message: "Invalid month",
+                    },
+                  })}
+                  className="input input-bordered w-full text-center uppercase dark:bg-white dark:border-black dark:text-black"
+                />
+                {errors.combatStartMonth && (
+                  <p className="text-error text-xs mt-1">
+                    {errors.combatStartMonth.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-24">
+                <input
+                  type="text"
+                  maxLength={2}
+                  placeholder="DD"
+                  {...register("from_day_4", {
+                    required: "Day is required",
+                    pattern: {
+                      value: /^(0?[1-9]|[12][0-9]|3[01])$/,
+                      message: "Invalid day",
+                    },
+                  })}
+                  className="input input-bordered w-full text-center uppercase dark:bg-white dark:border-black dark:text-black"
+                />
+                {errors.combatStartDay && (
+                  <p className="text-error text-xs mt-1">
+                    {errors.combatStartDay.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-32">
+                <input
+                  type="text"
+                  maxLength={4}
+                  placeholder="YYYY"
+                  {...register("from_year_4", {
+                    required: "Year is required",
+                    pattern: {
+                      value: /^(19|20)\d{2}$/,
+                      message: "Invalid year",
+                    },
+                    validate: (value) =>
+                      parseInt(value) >= 2001 || "Year must be 2001 or later",
+                  })}
+                  className="input input-bordered w-full text-center uppercase dark:bg-white dark:border-black dark:text-black"
+                />
+                {errors.combatStartYear && (
+                  <p className="text-error text-xs mt-1">
+                    {errors.combatStartYear.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* End Date */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-bold text-[#0B2A52] mb-1 ">
+                Combat End Date
+              </span>
+            </label>
+            <div className="flex gap-3">
+              <div className="w-24">
+                <input
+                  type="text"
+                  maxLength={2}
+                  placeholder="MM"
+                  {...register("to_month_4", {
+                    required: "Month is required",
+                    pattern: {
+                      value: /^(0?[1-9]|1[0-2])$/,
+                      message: "Invalid month",
+                    },
+                  })}
+                  className="input input-bordered w-full text-center uppercase dark:bg-white dark:border-black dark:text-black"
+                />
+                {errors.combatEndMonth && (
+                  <p className="text-error text-xs mt-1">
+                    {errors.combatEndMonth.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-24">
+                <input
+                  type="text"
+                  maxLength={2}
+                  placeholder="DD"
+                  {...register("to_day_4", {
+                    required: "Day is required",
+                    pattern: {
+                      value: /^(0?[1-9]|[12][0-9]|3[01])$/,
+                      message: "Invalid day",
+                    },
+                  })}
+                  className="input input-bordered w-full text-center uppercase dark:bg-white dark:border-black dark:text-black"
+                />
+                {errors.combatEndDay && (
+                  <p className="text-error text-xs mt-1">
+                    {errors.combatEndDay.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-32">
+                <input
+                  type="text"
+                  maxLength={4}
+                  placeholder="YYYY"
+                  {...register("to_year_4", {
+                    required: "Year is required",
+                    pattern: {
+                      value: /^(19|20)\d{2}$/,
+                      message: "Invalid year",
+                    },
+                  })}
+                  className="input input-bordered w-full text-center uppercase dark:bg-white dark:border-black dark:text-black"
+                />
+                {errors.combatEndYear && (
+                  <p className="text-error text-xs mt-1">
+                    {errors.combatEndYear.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Federal Orders */}
       <div className="form-control">

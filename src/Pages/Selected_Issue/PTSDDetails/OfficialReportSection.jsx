@@ -19,8 +19,8 @@ const OfficialReportSection = ({ register, control, setValue }) => {
       setValue("was_an_official_report_field_NEITHER", false);
       setValue("was_an_official_report_field_POLICE_REPORT", false);
       setValue("was_an_official_report_field_OTHER", false);
-      setValue("was_an_official_report_field_POLICE_REPORT_details", "");
-      setValue("was_an_official_report_field_OTHER_details", "");
+      setValue("iii_11_police_report_descrption", "");
+      setValue("iii_11_other_description", "");
       setShowPoliceReportInput(false);
       setShowOtherTextarea(false);
     }
@@ -38,8 +38,8 @@ const OfficialReportSection = ({ register, control, setValue }) => {
       setValue("was_an_official_report_field_NEITHER", false);
       setValue("was_an_official_report_field_POLICE_REPORT", false);
       setValue("was_an_official_report_field_OTHER", false);
-      setValue("was_an_official_report_field_POLICE_REPORT_details", "");
-      setValue("was_an_official_report_field_OTHER_details", "");
+      setValue("iii_11_police_report_descrption", "");
+      setValue("iii_11_other_description", "");
       setShowPoliceReportInput(false);
       setShowOtherTextarea(false);
     }
@@ -60,12 +60,12 @@ const OfficialReportSection = ({ register, control, setValue }) => {
       if (value !== "was_an_official_report_field_POLICE_REPORT") {
         setValue("was_an_official_report_field_POLICE_REPORT", false);
         setShowPoliceReportInput(false);
-        setValue("was_an_official_report_field_POLICE_REPORT_details", "");
+        setValue("iii_11_police_report_descrption", "");
       }
       if (value !== "was_an_official_report_field_OTHER") {
         setValue("was_an_official_report_field_OTHER", false);
         setShowOtherTextarea(false);
-        setValue("was_an_official_report_field_OTHER_details", "");
+        setValue("iii_11_other_description", "");
       }
     }
 
@@ -75,14 +75,14 @@ const OfficialReportSection = ({ register, control, setValue }) => {
     if (value === "was_an_official_report_field_POLICE_REPORT") {
       setShowPoliceReportInput(checked);
       if (!checked) {
-        setValue("was_an_official_report_field_POLICE_REPORT_details", "");
+        setValue("iii_11_police_report_descrption", "");
       }
     }
 
     if (value === "was_an_official_report_field_OTHER") {
       setShowOtherTextarea(checked);
       if (!checked) {
-        setValue("was_an_official_report_field_OTHER_details", "");
+        setValue("iii_11_other_description", "");
       }
     }
   };
@@ -183,9 +183,7 @@ const OfficialReportSection = ({ register, control, setValue }) => {
                 {showPoliceReportInput && (
                   <input
                     type="text"
-                    {...register(
-                      "was_an_official_report_field_POLICE_REPORT_details"
-                    )}
+                    {...register("iii_11_police_report_descrption")}
                     placeholder="Enter police report details"
                     className="w-full px-4 py-3 ml-8 border border-gray-300 dark:bg-white dark:text-gray-900 rounded-lg focus:ring-2 focus:ring-[#0B2A52] outline-none"
                   />
@@ -210,7 +208,7 @@ const OfficialReportSection = ({ register, control, setValue }) => {
 
                 {showOtherTextarea && (
                   <textarea
-                    {...register("was_an_official_report_field_OTHER_details")}
+                    {...register("iii_11_other_description")}
                     placeholder="Please specify..."
                     rows={3}
                     className="w-full px-4 py-3 ml-8 border border-gray-300 dark:bg-white dark:text-gray-900 rounded-lg focus:ring-2 focus:ring-[#0B2A52] outline-none resize-none"
@@ -242,3 +240,5 @@ const OfficialReportSection = ({ register, control, setValue }) => {
 };
 
 export default OfficialReportSection;
+
+

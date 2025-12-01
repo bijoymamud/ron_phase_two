@@ -1,5 +1,3 @@
-
-
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -68,7 +66,7 @@ const ServiceDetails = () => {
     console.log(data);
     localStorage.setItem("service_details", JSON.stringify(data));
     if (audioRef.current) {
-      audioRef.current.pause(); // Pause audio on form submission
+      audioRef.current.pause();
     }
     navigate("/shifts");
   };
