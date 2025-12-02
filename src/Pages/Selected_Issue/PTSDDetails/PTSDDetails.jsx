@@ -387,10 +387,8 @@ const PTSDDetails = () => {
       personal_traumatic_event_mst_yes: false,
       other_traumatic_event: false,
 
-      // Dynamic Traumatic Events
       traumaticEventDetails: [],
 
-      // Official Report
       was_an_official_report_field_YES: false,
       was_an_official_report_field_NO: false,
       was_an_official_report_field_RESTRICTED: false,
@@ -401,7 +399,6 @@ const PTSDDetails = () => {
       was_an_official_report_field_OTHER: false,
       iii_11_other_description: "",
 
-      // Behavioral Changes (PTSDOthers)
       increased_decreased_visits_to_a_healthcare_professional_counselor_or_treatment_facility_checkbox: false,
       request_for_a_change_in_occupational_series_or_duty_assignment_checkbox: false,
       behavioral_changes_experienced_following_the_traumatic_event_1: false,

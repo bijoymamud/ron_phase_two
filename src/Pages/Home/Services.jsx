@@ -52,13 +52,14 @@ export default function Services() {
                 </div>
                 <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-8 py-6 rounded-xl shadow-xl max-w-xl">
                   <h3 className="font-bold text-xl mb-3 ms-10">
-                    Benefits Eligibility Assessment
+                    BENEFITS ELIGIBILITY ASSESSMENT
                   </h3>
                   <p className="text-sm leading-relaxed opacity-90 ms-10">
-                    Discover your eligibility for VA benefits with our detailed
-                    assessments. We analyze your service history and unique
-                    circumstances to determine the benefits you’ve earned and
-                    guide you through the next steps.
+                    We review your military service, medical history, and
+                    current symptoms to determine what VA benefits you may
+                    qualify for. VALR provides a clear, accurate eligibility
+                    overview so you know exactly where you stand before moving
+                    forward.
                   </p>
                 </div>
               </div>
@@ -71,13 +72,14 @@ export default function Services() {
                 </div>
                 <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-8 py-6 rounded-xl shadow-xl max-w-xl">
                   <h3 className="font-bold text-xl mb-3 ms-10">
-                    Application Assistance
+                    APPLICATION ASSISTANCE
                   </h3>
                   <p className="text-sm leading-relaxed opacity-90 ms-10">
-                    Discover your eligibility for VA benefits with our detailed
-                    assessments. We analyze your service history and unique
-                    circumstances to determine the benefits you’ve earned and
-                    guide you through the next steps.
+                    Once you’re eligible, VALR helps you prepare and submit a
+                    strong, properly documented VA claim. Our team guides you
+                    through every step—forms, evidence, medical exams—ensuring
+                    your application is complete and positioned for the highest
+                    possible rating.
                   </p>
                 </div>
               </div>
@@ -90,13 +92,14 @@ export default function Services() {
                 </div>
                 <div className="bg-gradient-to-r from-[#0B2A52] to-blue-800 text-white px-8 py-6 rounded-xl shadow-xl max-w-xl">
                   <h3 className="font-bold text-xl mb-3 ms-10">
-                    Appeal Support
+                    APPEAL SUPPORT
                   </h3>
                   <p className="text-sm leading-relaxed opacity-90 ms-10">
-                    Discover your eligibility for VA benefits with our detailed
-                    assessments. We analyze your service history and unique
-                    circumstances to determine the benefits you’ve earned and
-                    guide you through the next steps.
+                    If you were denied or underrated, VALR supports you through
+                    the appeals process. We review your previous claim, identify
+                    missing evidence, connect you with medical providers when
+                    needed, and help you build a stronger case to fight for the
+                    benefits you deserve.
                   </p>
                 </div>
               </div>

@@ -184,8 +184,8 @@ import { useEffect } from "react";
 const PTSDOthers = () => {
   const { register, control, watch, getValues } = useForm({
     defaultValues: {
-      increased_decreased_visits_to_a_healthcare_professional_counselor_or_treatment_facility_checkbox: false,
-      request_for_a_change_in_occupational_series_or_duty_assignment_checkbox: false,
+      increased_decreased_visits_to_a_healthcare_professional_counselor_or_treatment_facility: false,
+      request_for_a_change_in_occupational_series_or_duty_assignment: false,
       behavioral_changes_experienced_following_the_traumatic_event_1: false,
       behavioral_changes_experienced_following_the_traumatic_event_2: false,
       behavioral_changes_experienced_following_the_traumatic_event_3: false,
@@ -234,12 +234,12 @@ const PTSDOthers = () => {
 
   const items = [
     {
-      key: "increased_decreased_visits_to_a_healthcare_professional_counselor_or_treatment_facility_checkbox",
+      key: "increased_decreased_visits_to_a_healthcare_professional_counselor_or_treatment_facility",
       label:
         "Increased/Decreased visits to a healthcare professional, counselor, or treatment facility",
     },
     {
-      key: "request_for_a_change_in_occupational_series_or_duty_assignment_checkbox",
+      key: "request_for_a_change_in_occupational_series_or_duty_assignment",
       label: "Request for a change in occupational series or duty assignment",
     },
     {
