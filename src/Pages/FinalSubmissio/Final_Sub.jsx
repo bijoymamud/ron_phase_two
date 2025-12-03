@@ -17,7 +17,13 @@ function Final_Sub() {
       return;
     }
 
-    const excludedKeys = ["access_token", "refresh_token"];
+    const excludedKeys = [
+      "access_token",
+      "refresh_token",
+      "chatUser",
+      "user_role",
+      "signatureImage",
+    ];
 
     const payload = {};
 
@@ -27,36 +33,25 @@ function Final_Sub() {
 
       try {
         const value = JSON.parse(localStorage.getItem(key));
-        payload[key] = value;
-      } catch (err) {
-        payload[key] = localStorage.getItem(key);
-      }
+        payload.pdf_data = { ...payload.pdf_data, ...value };
+      } catch (err) {}
     }
 
-    const finalPayload = {};
+    payload.signatureImage = localStorage.getItem("signatureImage") || null;
+    payload.evidenceData = localStorage.getItem("evidenceData") || null;
+    payload.generate_narration =
+      localStorage.getItem("generatedNotation") || null;
 
-    finalPayload.pdf_data = { ...payload.issues };
-    console.log("Final payload: ", finalPayload);
-    return;
-
-    // payload.issues = Object.assign(
-    //   {},
-    //   ...(payload?.issues?.CURRENTDISABILITY?.map((e, i) => ({
-    //     [`current_disabilityiesrow${i + 1}`]: e,
-    //   })) ?? [])
-    // );
-
-    // console.log("Final payload: ", payload);
-    // return;
-
+    console.log("Final payload: ", payload.pdf_data);
     payload.document = {
       discharge_condition: payload["discharge_condition"] || {},
       evidenceData: payload["evidenceData"] || {},
+      generatedNotation: payload["generatedNotation"] || {},
     };
 
     try {
       const response = await fetch(
-        "https://backend.valrpro.com/api/va/vaform/submit/",
+        "http://10.10.13.73:5000/api/va/vaform/submit/",
         {
           method: "POST",
           headers: {
@@ -67,7 +62,7 @@ function Final_Sub() {
         }
       );
 
-      console.log(JSON.stringify(payload), "Payload being sent for Rafi vai");
+      console.log(JSON.stringify(payload));
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -89,11 +84,11 @@ function Final_Sub() {
         "refresh_token",
         "user_role",
       ];
-      Object.keys(localStorage).forEach((key) => {
-        if (!keysToKeep.includes(key)) {
-          localStorage.removeItem(key);
-        }
-      });
+      // Object.keys(localStorage).forEach((key) => {
+      //   if (!keysToKeep.includes(key)) {
+      //     localStorage.removeItem(key);
+      //   }
+      // });
 
       navigate("/va_form");
     } catch (error) {

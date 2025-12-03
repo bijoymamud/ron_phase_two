@@ -11,13 +11,13 @@ import Step7CurrentStatus from "./Steps/Step7CurrentStatus";
 import ProgressBar from "./Steps/ProgressBar";
 import FormNavigation from "./Steps/FormNavigation";
 
-import Veterans_info_voice from "../../../src/cris_voice/Personal_Information_chris.mp3";
-import Veterans_contact_voice from "../../../src/cris_voice/Contact_Numbers_chris.mp3";
-import Veterans_dob_voice from "../../../src/cris_voice/Date_of_Birth_chris.mp3";
-import Veterans_service_voice from "../../../src/cris_voice/Service_Dates_chris.mp3";
-import Veterans_address_voice from "../../../src/cris_voice/Address_Information_chris.mp3";
-import Veterans_military_service_voice from "../../../src/cris_voice/Military_Service_Details_chris.mp3";
-import Veterans_current_status_voice from "../../../src/cris_voice/Current_Status_chris.mp3";
+import Veterans_info_voice from "../../../src/cris_voice/personal_information.mp3";
+import Veterans_contact_voice from "../../../src/cris_voice/contact_numbers.mp3";
+import Veterans_dob_voice from "../../../src/cris_voice/date_of_birth.mp3";
+import Veterans_service_voice from "../../../src/cris_voice/service_dates.mp3";
+import Veterans_address_voice from "../../../src/cris_voice/address_information.mp3";
+import Veterans_military_service_voice from "../../../src/cris_voice/military_service_details_chris_balanced.mp3";
+import Veterans_current_status_voice from "../../../src/cris_voice/current_status_chris.mp3";
 import { Pause, Play } from "lucide-react";
 import audioWave from "../../../public/Voice.json";
 import Lottie from "lottie-react";
@@ -47,11 +47,14 @@ export default function VeteranInformationForm() {
   const formValues = watch();
 
   useEffect(() => {
-    console.log(formValues);
+    console.log(formValues.atRiskOfHomelessness);
     const keyValueBackendDataLcoalStorage = {
       ...formValues,
       [formValues.currentlyHomeless]: formValues.currentlyHomeless ? "Yes" : "",
       [formValues.branchOfService]: formValues.branchOfService ? "Yes" : "",
+      [formValues.atRiskOfHomelessness]: formValues.atRiskOfHomelessness
+        ? "Yes"
+        : "",
       [formValues.serviceUnder]: formValues.serviceUnder ? "Yes" : "",
       [formValues.servedInNationalGuardOrReserves]:
         formValues.servedInNationalGuardOrReserves ? "Yes" : "",
@@ -61,9 +64,12 @@ export default function VeteranInformationForm() {
         formValues.currentlyActivatedFederalOrders ? "Yes" : "",
       [formValues.livingSituation]: formValues.livingSituation ? "Yes" : "",
       [formValues.componentType]: formValues.componentType ? "Yes" : "",
+      [formValues["federalOrders"]]: formValues["federalOrders"] ? "Yes" : "",
     };
 
     console.log(keyValueBackendDataLcoalStorage);
+    const d = localStorage.getItem("veteranFormData");
+    console.log(d, "lksdjlfgsljgljslgdflsfdjgl");
     const timeout = setTimeout(() => {
       localStorage.setItem(
         STORAGE_KEY,

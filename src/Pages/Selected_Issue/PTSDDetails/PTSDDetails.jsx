@@ -370,6 +370,7 @@ import PTSDOthers from "./PTSDOthers";
 import OfficialReportSection from "./OfficialReportSection";
 import TreatmentInformation from "./TreatmentInformation";
 import PTSDEvidence from "./PTSDEvidence";
+import { useNavigate } from "react-router";
 
 const PTSDDetails = () => {
   const {
@@ -440,6 +441,7 @@ const PTSDDetails = () => {
     },
   });
 
+  const navigate = useNavigate();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "traumaticEventDetails",
@@ -576,7 +578,6 @@ const PTSDDetails = () => {
         return acc;
       }, {}),
 
-      // === Evidence Sources ===
       a_rape_crisis_center_or_center_for_domestic_abuse:
         data.a_rape_crisis_center_or_center_for_domestic_abuse || false,
       a_counseling_facility_or_health_clinic:
@@ -595,8 +596,7 @@ const PTSDDetails = () => {
     };
 
     localStorage.setItem("ptsdDetailsInfo", JSON.stringify(finalData));
-    alert("All PTSD data saved successfully!");
-    console.log("Final Saved Data →", finalData);
+    navigate("/gulf_war_location");
   };
 
   return (
@@ -738,7 +738,7 @@ const PTSDDetails = () => {
         <PTSDEvidence register={register} watch={watch} setValue={setValue} />
 
         {/* Final Buttons */}
-        <div className="flex justify-between items-center pt-10 pb-20">
+        {/* <div className="flex justify-between items-center pt-10 pb-20">
           <button
             type="button"
             onClick={() => window.history.back()}
@@ -749,6 +749,23 @@ const PTSDDetails = () => {
           <button
             type="submit"
             className="px-10 uppercase py-4 bg-[#B31942] text-white font-bold rounded-xl hover:bg-[#a0153a] transition shadow-lg"
+          >
+            Continue
+          </button>
+        </div> */}
+
+        <div className="flex justify-center gap-4 md:gap-10 mt-10 pt-10 md:mt-6 md:pt-10 md:pb-10">
+          <button
+            type="button"
+            className="w-[150px] md:w-[200px] bg-white text-blue-800 py-2 border uppercase border-blue-800 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-semibold"
+            onClick={() => window.history.back()}
+          >
+            Back
+          </button>
+
+          <button
+            type="submit"
+            className="w-[150px] md:w-[200px] bg-[#B31942] text-white py-2 rounded-md hover:bg-[#aa2b4d] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-semibold uppercase"
           >
             Continue
           </button>

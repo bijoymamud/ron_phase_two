@@ -24,12 +24,11 @@ const AiNarrativeGen = () => {
           }
         }
       }
-
+      // window.location.reload();
       const response = await generateNarration(payload).unwrap();
 
       if (response?.notation) {
         localStorage.setItem("generatedNotation", response.notation);
-        window.location.reload();
       }
     } catch (err) {
       console.error("Failed to generate narration:", err);

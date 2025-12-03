@@ -1,11 +1,10 @@
-
 import { useState, useCallback, memo } from "react";
 import { useGetPdfsQuery } from "../../redux/features/baseApi";
 import { FaRegEye, FaDownload, FaTimes } from "react-icons/fa";
 import PropTypes from "prop-types";
 
 const ITEMS_PER_PAGE = 10;
-const BASE_URL = "https://backend.valrpro.com";
+const BASE_URL = "http://10.10.13.73:5000";
 
 const VAForm = memo(() => {
   const { data: pdfs, isLoading } = useGetPdfsQuery();

@@ -33,9 +33,9 @@ export default function Dashboard() {
   } = useGetLoggedUserQuery();
 
   const role = localStorage.getItem("role");
-  console.log("Current role:", role); 
+  console.log("Current role:", role);
 
-  const baseURL = "https://backend.valrpro.com";
+  const baseURL = "http://10.10.13.73:5000";
   const location = useLocation();
   const navigate = useNavigate();
 

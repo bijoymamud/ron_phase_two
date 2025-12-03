@@ -9,7 +9,7 @@ export default function SubmissionsModal({ submissions, isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const baseApi = "https://backend.valrpro.com";
+  const baseApi = "http://10.10.13.73:5000";
 
   return (
     <div

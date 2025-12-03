@@ -10,10 +10,10 @@ import Loading from "./Loading/Loading";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <StrictMode>
-      <Suspense fallback={<Loading />}>
-        <RouterProvider router={router} />
-      </Suspense>
-    </StrictMode>
+    {/* <StrictMode> */}
+    <Suspense fallback={<Loading />}>
+      <RouterProvider router={router} />
+    </Suspense>
+    {/* </StrictMode> */}
   </Provider>
 );

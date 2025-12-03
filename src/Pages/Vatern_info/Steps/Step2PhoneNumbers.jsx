@@ -679,7 +679,9 @@ export default function Step2PhoneNumbers({
     errors.veterans_ssn_part3;
 
   const hasPhoneError =
-    errors.veterans_telephone_area_code || errors.veterans_telephone_operator_code || errors.veterans_telephone_line_number;
+    errors.veterans_telephone_area_code ||
+    errors.veterans_telephone_operator_code ||
+    errors.veterans_telephone_line_number;
 
   return (
     <div className="space-y-8">
@@ -687,7 +689,7 @@ export default function Step2PhoneNumbers({
       <div className="form-control">
         <label className="label">
           <span className="label-text font-medium md:text-base dark:text-black text-[12px] pb-1">
-            International Phone Number
+            Phone Number
           </span>
         </label>
 
@@ -747,9 +749,13 @@ export default function Step2PhoneNumbers({
             value={phone1}
             ref={phone1Ref}
             className={`input input-bordered w-24 text-center text-lg tracking-widest dark:bg-white text-[12px] dark:text-black dark:border-black remove-arrow ${
-              errors.veterans_telephone_area_code ? "input-error border-red-500" : ""
+              errors.veterans_telephone_area_code
+                ? "input-error border-red-500"
+                : ""
             }`}
-            onChange={(e) => handleInput(e, "veterans_telephone_area_code", 3, phone2Ref)}
+            onChange={(e) =>
+              handleInput(e, "veterans_telephone_area_code", 3, phone2Ref)
+            }
             onPaste={blockTextPaste}
             onKeyDown={blockNonNumericKeys}
             {...register("veterans_telephone_area_code", {
@@ -771,9 +777,13 @@ export default function Step2PhoneNumbers({
             value={phone2}
             ref={phone2Ref}
             className={`input input-bordered w-24 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-              errors.veterans_telephone_operator_code ? "input-error border-red-500" : ""
+              errors.veterans_telephone_operator_code
+                ? "input-error border-red-500"
+                : ""
             }`}
-            onChange={(e) => handleInput(e, "veterans_telephone_operator_code", 3, phone3Ref)}
+            onChange={(e) =>
+              handleInput(e, "veterans_telephone_operator_code", 3, phone3Ref)
+            }
             onPaste={blockTextPaste}
             onKeyDown={blockNonNumericKeys}
             {...register("veterans_telephone_operator_code", {
@@ -795,9 +805,13 @@ export default function Step2PhoneNumbers({
             value={phone3}
             ref={phone3Ref}
             className={`input input-bordered w-28 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-              errors.veterans_telephone_line_number ? "input-error border-red-500" : ""
+              errors.veterans_telephone_line_number
+                ? "input-error border-red-500"
+                : ""
             }`}
-            onChange={(e) => handleInput(e, "veterans_telephone_line_number", 4, null)}
+            onChange={(e) =>
+              handleInput(e, "veterans_telephone_line_number", 4, null)
+            }
             onPaste={blockTextPaste}
             onKeyDown={blockNonNumericKeys}
             {...register("veterans_telephone_line_number", {
@@ -861,13 +875,9 @@ export default function Step2PhoneNumbers({
               value={ssn1}
               ref={ssn1Ref}
               className={`input input-bordered w-24 text-center text-lg tracking-widest dark:bg-white text-[12px] dark:text-black dark:border-black remove-arrow ${
-                errors.veterans_ssn_part1
-                  ? "input-error border-red-500"
-                  : ""
+                errors.veterans_ssn_part1 ? "input-error border-red-500" : ""
               }`}
-              onChange={(e) =>
-                handleInput(e, "veterans_ssn_part1", 3, ssn2Ref)
-              }
+              onChange={(e) => handleInput(e, "veterans_ssn_part1", 3, ssn2Ref)}
               onPaste={blockTextPaste}
               onKeyDown={blockNonNumericKeys}
               {...register("veterans_ssn_part1", {
@@ -889,13 +899,9 @@ export default function Step2PhoneNumbers({
               value={ssn2}
               ref={ssn2Ref}
               className={`input input-bordered w-20 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-                errors.veterans_ssn_part2
-                  ? "input-error border-red-500"
-                  : ""
+                errors.veterans_ssn_part2 ? "input-error border-red-500" : ""
               }`}
-              onChange={(e) =>
-                handleInput(e, "veterans_ssn_part2", 2, ssn3Ref)
-              }
+              onChange={(e) => handleInput(e, "veterans_ssn_part2", 2, ssn3Ref)}
               onPaste={blockTextPaste}
               onKeyDown={blockNonNumericKeys}
               {...register("veterans_ssn_part2", {
@@ -917,13 +923,9 @@ export default function Step2PhoneNumbers({
               value={ssn3}
               ref={ssn3Ref}
               className={`input input-bordered w-28 text-center text-base dark:bg-white dark:text-black dark:border-black ${
-                errors.veterans_ssn_part3
-                  ? "input-error border-red-500"
-                  : ""
+                errors.veterans_ssn_part3 ? "input-error border-red-500" : ""
               }`}
-              onChange={(e) =>
-                handleInput(e, "veterans_ssn_part3", 4, null)
-              }
+              onChange={(e) => handleInput(e, "veterans_ssn_part3", 4, null)}
               onPaste={blockTextPaste}
               onKeyDown={blockNonNumericKeys}
               {...register("veterans_ssn_part3", {

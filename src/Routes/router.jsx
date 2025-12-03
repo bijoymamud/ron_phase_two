@@ -74,6 +74,7 @@ import AdminManagment from "../Pages/AdminDashboard/AdminManagment";
 import PackageManagment from "../Pages/AdminDashboard/PackageManagment";
 import Loading from "../Loading/Loading";
 import ChatInterface from "../Pages/AdminDashboard/ChatInterface";
+import BankInformation from "../Pages/BankInformation/BankInformation";
 
 const Home = React.lazy(() => import("../Pages/Home/Home"));
 const AboutUs = React.lazy(() => import("../Pages/AboutUs/AboutUs"));
@@ -424,6 +425,16 @@ export const router = createBrowserRouter([
           </RouteSecure>
         ),
       },
+
+      {
+        path: "/bank_information",
+        element: (
+          <RouteSecure>
+            <BankInformation />
+          </RouteSecure>
+        ),
+      },
+
       {
         path: "/e_signature",
         element: (

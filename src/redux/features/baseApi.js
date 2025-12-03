@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-export const baseUrlToBackend = "https://backend.valrpro.com/"
+export const baseUrlToBackend = "http://10.10.13.73:5000/"
 export const baseApi = createApi({
 	reducerPath: "baseApi",
 	baseQuery: fetchBaseQuery({
-		baseUrl: "https://backend.valrpro.com/",
+		baseUrl: "http://10.10.13.73:5000/",
 
 
 
@@ -357,6 +357,6 @@ export const {
 	useApproveChatMutation,
 	useGetHistoryQuery,
 
-	
+
 
 } = baseApi;

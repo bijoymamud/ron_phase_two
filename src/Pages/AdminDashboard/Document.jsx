@@ -12,7 +12,7 @@ export default function Document() {
   const [isActionTaken, setIsActionTaken] = useState(false);
   const { data: allDocuments, isLoading } = useGetDocumentsQuery();
 
-  const baseURL = "https://backend.valrpro.com";
+  const baseURL = "http://10.10.13.73:5000";
 
   console.log("documents", allDocuments);
 
@@ -166,7 +166,7 @@ export default function Document() {
                 ) : (
                   <span className="text-white/80">No document available.</span>
                 )}
-              </div> */} 
+              </div> */}
             </div>
             <div className="modal-action mt-6 w-full flex justify-end gap-4">
               <button

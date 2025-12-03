@@ -26,7 +26,7 @@
 //   const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
 //   const tolname = loggedInUser?.name;
 
-//   const baseURL = "https://backend.valrpro.com";
+//   const baseURL = "http://10.10.13.73:5000";
 
 //   const [isEditing, setIsEditing] = useState(false);
 //   const [formData, setFormData] = useState({
@@ -396,7 +396,7 @@ export default function Navbar() {
   const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
   const tolname = loggedInUser?.name;
 
-  const baseURL = "https://backend.valrpro.com";
+  const baseURL = "http://10.10.13.73:5000";
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -469,14 +469,12 @@ export default function Navbar() {
       setIsLoggingOut(true);
       localStorage.clear();
 
-      // Force refetch to update UI immediately (even if token gone)
-      await refetch();
-
       setTimeout(() => {
         setIsLoggingOut(false);
-        navigate("/");
-        refetch();
-      }, 8000);
+        const modal = document.getElementById("logout_modal");
+        modal?.close();
+        window.location.href = "/";
+      }, 1000);
     } catch (error) {
       console.error("Logout failed:", error);
       setIsLoggingOut(false);
