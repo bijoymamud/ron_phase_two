@@ -243,7 +243,7 @@ const PTSDEvidence = ({ register, watch, setValue }) => {
                 type="checkbox"
                 checked={!!values[item.key]}
                 onChange={() => handleCheckboxChange(item.key)}
-                className="w-5 h-5 text-[#0B2A52] rounded border-2 border-gray-400 focus:ring-[#0B2A52] mt-1"
+                className="w-4 h-4 text-[#0B2A52] rounded border-2 border-gray-400 focus:ring-[#0B2A52] mt-1"
               />
               <span className="ml-5 text-lg text-gray-800 leading-relaxed font-medium">
                 {item.label}

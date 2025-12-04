@@ -99,7 +99,7 @@
 //             {...register(
 //               "have_you_received_treatment_related_to_the_impact_of_the_traumatic_event_listed_in_item_9a"
 //             )}
-//             className="w-6 h-6 text-[#0B2A52] focus:ring-[#0B2A52]"
+//             className="w-4 h-4 text-[#0B2A52] focus:ring-[#0B2A52]"
 //           />
 //           <span className="ml-4 text-xl font-semibold text-gray-800">YES</span>
 //         </label>
@@ -111,7 +111,7 @@
 //             {...register(
 //               "have_you_received_treatment_related_to_the_impact_of_the_traumatic_event_listed_in_item_9a"
 //             )}
-//             className="w-6 h-6 text-[#0B2A52] focus:ring-[#0B2A52]"
+//             className="w-4 h-4 text-[#0B2A52] focus:ring-[#0B2A52]"
 //           />
 //           <span className="ml-4 text-xl font-semibold text-gray-800">NO</span>
 //         </label>
@@ -133,7 +133,7 @@
 //                 <input
 //                   type="checkbox"
 //                   {...register(source.key)}
-//                   className="w-6 h-6 mt-0.5 text-[#0B2A52] rounded focus:ring-[#0B2A52]"
+//                   className="w-4 h-4 mt-0.5 text-[#0B2A52] rounded focus:ring-[#0B2A52]"
 //                 />
 //                 <span className="ml-4 font-medium text-gray-800 leading-relaxed">
 //                   {source.label}
@@ -214,9 +214,9 @@ const TreatmentInformation = ({ register, control, watch, setValue }) => {
               type="radio"
               value={value}
               {...register(
-                "have_you_received_treatment_related_to_the_impact_of_the_traumatic_event_listed_in_item_9a"
+                `have_you_received_treatment_related_to_the_impact_of_the_traumatic_event_listed_in_item_9a`
               )}
-              className="w-6 h-6 text-[#0B2A52] focus:ring-[#0B2A52]"
+              className="w-4 h-4 text-[#0B2A52] focus:ring-[#0B2A52]"
             />
             <span className="ml-4 text-xl font-semibold text-gray-800 uppercase">
               {value}
@@ -241,7 +241,7 @@ const TreatmentInformation = ({ register, control, watch, setValue }) => {
                   <input
                     type="checkbox"
                     {...register(source.key)}
-                    className="w-6 h-6 mt-0.5 text-[#0B2A52] rounded focus:ring-[#0B2A52]"
+                    className="w-4 h-4 mt-0.5 text-[#0B2A52] rounded focus:ring-[#0B2A52]"
                   />
                   <span className="ml-4 font-medium text-gray-800 leading-relaxed">
                     {source.label}
@@ -336,7 +336,7 @@ const TreatmentInformation = ({ register, control, watch, setValue }) => {
                         <input
                           type="checkbox"
                           {...register(`treatmentEvents.${index}.dontHaveDate`)}
-                          className="w-6 h-6 text-[#0B2A52] rounded"
+                          className="w-4 h-4 text-[#0B2A52] rounded"
                         />
                         <span className="text-sm font-medium text-gray-700">
                           I don't have date(s)

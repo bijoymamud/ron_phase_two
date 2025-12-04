@@ -4,7 +4,7 @@ import { FaRegEye, FaDownload, FaTimes } from "react-icons/fa";
 import PropTypes from "prop-types";
 
 const ITEMS_PER_PAGE = 10;
-const BASE_URL = "http://10.10.13.73:5000";
+const BASE_URL = "https://backend.valrpro.com";
 
 const VAForm = memo(() => {
   const { data: pdfs, isLoading } = useGetPdfsQuery();
@@ -209,13 +209,13 @@ const VAForm = memo(() => {
                       <td className="p-2">{pdfName}</td>
                       <td className="p-2">
                         <div className="flex gap-2">
-                          <button
+                          {/* <button
                             onClick={() => openPdfViewer(pdfUrl, pdfName)}
                             className="btn btn-sm bg-[#0B2A52] dark:border-none text-white hover:bg-[#0B2A52] flex items-center gap-1"
                           >
                             <FaRegEye />
                             <span className="hidden sm:inline">View</span>
-                          </button>
+                          </button> */}
                           <button
                             onClick={() => downloadPdf(pdfUrl, pdfName)}
                             className="btn btn-sm bg-green-600 dark:border-none text-white hover:bg-green-700 flex items-center gap-1"

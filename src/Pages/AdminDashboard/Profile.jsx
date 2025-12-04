@@ -20,7 +20,7 @@ const Profile = () => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const baseURL = "http://10.10.13.73:5000";
+  const baseURL = "https://backend.valrpro.com";
   const {
     data: loggedUser,
     isLoading: isUserLoading,

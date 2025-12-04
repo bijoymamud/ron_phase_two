@@ -65,6 +65,8 @@ export default function VeteranInformationForm() {
       [formValues.livingSituation]: formValues.livingSituation ? "Yes" : "",
       [formValues.componentType]: formValues.componentType ? "Yes" : "",
       [formValues["federalOrders"]]: formValues["federalOrders"] ? "Yes" : "",
+      [formValues.livingSituation]:formValues.livingSituation ? "Yes":"",
+      [formValues.riskSituation]:formValues.riskSituation ? "Yes":""
     };
 
     console.log(keyValueBackendDataLcoalStorage);

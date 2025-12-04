@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function Step7CurrentStatus() {
@@ -36,7 +37,6 @@ export default function Step7CurrentStatus() {
     }
   };
 
-  // Date validation helper
   const validateDay = (value) => {
     const num = parseInt(value, 10);
     if (isNaN(num)) return "Enter a valid day";
@@ -58,15 +58,12 @@ export default function Step7CurrentStatus() {
     return true;
   };
 
-  // Input restriction helper - prevents typing invalid values
   const handleNumberInput = (e, max) => {
     const value = e.target.value;
     const num = parseInt(value, 10);
 
-    // Allow empty or single digit
     if (value === "" || value.length === 1) return;
 
-    // Restrict to max value
     if (num > max) {
       e.target.value = value.slice(0, -1);
     }
@@ -74,9 +71,8 @@ export default function Step7CurrentStatus() {
 
   return (
     <div className="space-y-8 pb-14">
-      {/* === ARE YOU CURRENTLY ACTIVATED ON FEDERAL ORDERS === */}
-      <div className="form-control w-full">
-        <label className="label">
+      <div className="form-control md:w-full">
+        <label className="label ">
           <span className="label-text font-medium text-lg pb-1 text-primary dark:text-black ">
             ARE YOU CURRENTLY ACTIVATED ON FEDERAL ORDERS WITHIN THE NATIONAL{" "}
             <br />
@@ -427,19 +423,19 @@ export default function Step7CurrentStatus() {
               className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
             >
               <option value="">Select an option</option>
-              <option value="your_living-situation_shelter">
+              <option value="your_living_situation_living">
                 Living In A Homeless Shelter
               </option>
-              <option value="your_living-situation_not-sheltered">
+              <option value="your_living_situation_not_currently">
                 Not Currently In A Sheltered Environment (e.g., car, tent)
               </option>
-              <option value="your_living-situation_another-person">
+              <option value="your_living_situation_staying">
                 Staying With Another Person
               </option>
               <option value="your_living-situation_fleeing">
                 Fleeing Current Residence
               </option>
-              <option value="your_living-situation_other">Others</option>
+              <option value="your_living_situation_other">Others</option>
             </select>
             {errors.livingSituation && (
               <p className="text-error text-xs mt-1">
@@ -517,13 +513,13 @@ export default function Step7CurrentStatus() {
                 className="select select-bordered w-full uppercase dark:bg-white dark:border-black dark:text-black"
               >
                 <option value="">Select an option</option>
-                <option value="your_living-situation_2_housing">
+                <option value="your_living_situation_2_housing">
                   Housing Will Be Lost In 30 Days
                 </option>
                 <option value="your_living-situation_2_homeless">
                   Leaving Publicly Funded System Of Care
                 </option>
-                <option value="your_living-situation_2_other">Others</option>
+                <option value="your_living_situation_2_other">Others</option>
               </select>
               {errors.riskSituation && (
                 <p className="text-error text-xs mt-1">

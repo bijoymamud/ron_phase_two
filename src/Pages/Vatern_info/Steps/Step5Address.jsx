@@ -77,7 +77,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
 
         <div className="basis-6/12">
           <label className="label">
-            <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:text-black">
+            <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:text-black md:pt-0 pt-3">
               APT./UNIT NUMBER
             </span>
           </label>
@@ -181,7 +181,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           )}
         </div>
 
-        <div className="form-control basis-6/12">
+        <div className="form-control basis-6/12 md:pt-0 pt-3">
           <label className="label">
             <span className="label-text font-medium md:text-base text-[12px] pb-1 dark:text-black">
               Postal Code
@@ -190,7 +190,7 @@ export default function Step5Address({ register, errors, watch, setValue }) {
           <input
             type="text"
             inputMode="numeric"
-            maxLength={5}
+            maxLength={4}
             placeholder="1234"
             {...register("veterans_postal_code", {
               required: "Postal Code is required",

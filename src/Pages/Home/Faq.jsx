@@ -51,7 +51,7 @@ export default function FAQ() {
   return (
     <section
       id="faqs"
-      className="md:py-16 py-10 bg-no-repeat bg-cover bg-center relative px-5 dark:bg-[#1a2332]"
+      className="md:py-16 py-10 bg-no-repeat bg-cover bg-center relative px-5 bg-[#1a2332]"
       // style={{ backgroundImage: "url('https://i.ibb.co/v6qYf4X4/faq-bg.png')" }}
     >
       <div className="absolute inset-0 bg-black/20"></div>

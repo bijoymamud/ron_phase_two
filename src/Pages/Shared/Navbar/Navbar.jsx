@@ -26,7 +26,7 @@
 //   const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
 //   const tolname = loggedInUser?.name;
 
-//   const baseURL = "http://10.10.13.73:5000";
+//   const baseURL = "https://backend.valrpro.com";
 
 //   const [isEditing, setIsEditing] = useState(false);
 //   const [formData, setFormData] = useState({
@@ -396,7 +396,7 @@ export default function Navbar() {
   const { data: loggedInUser, isLoading, refetch } = useGetLoggedUserQuery();
   const tolname = loggedInUser?.name;
 
-  const baseURL = "http://10.10.13.73:5000";
+  const baseURL = "https://backend.valrpro.com";
 
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({

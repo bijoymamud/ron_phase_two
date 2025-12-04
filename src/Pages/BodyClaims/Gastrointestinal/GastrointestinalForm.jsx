@@ -270,7 +270,7 @@ import Lottie from "lottie-react";
 import { Play, Pause } from "lucide-react";
 import useCategoryNavigation from "../../../hooks/useCategoryNavigation";
 import { useSelector } from "react-redux";
-import backgroundMusic from "../../../henas_voice/Gastrointestinal_Issues_GERD_IBS_Claim_Information_henna.mp3";
+import backgroundMusic from "../../../henas_voice/hannah_gerd_ibs_section_short.mp3";
 import audioWave from "../../../../public/Voice.json";
 
 const GastrointestinalForm = () => {

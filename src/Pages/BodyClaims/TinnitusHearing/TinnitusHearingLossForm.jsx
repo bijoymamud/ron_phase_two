@@ -259,7 +259,7 @@ import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import { Play, Pause } from "lucide-react";
 import useCategoryNavigation from "../../../hooks/useCategoryNavigation";
-import backgroundMusic from "../../../henas_voice/Tinnitus_Hearing_Loss_Claim_Information_henna.mp3";
+import backgroundMusic from "../../../henas_voice/hannah_tinnitus_section_short.mp3";
 import audioWave from "../../../../public/Voice.json";
 
 const TinnitusHearingLossForm = () => {
