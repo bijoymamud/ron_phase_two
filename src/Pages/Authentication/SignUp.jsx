@@ -39,10 +39,13 @@ const SignUp = () => {
         navigate("/login");
       }, 1500);
     } catch (err) {
-      toast.error(`Something went worng! ${err}`, {
-        id: toastId,
-        duration: 2000,
-      });
+      toast.error(
+        `Something went worng! ${err.data.email[0] || "Failed to signup"}`,
+        {
+          id: toastId,
+          duration: 2000,
+        }
+      );
       console.error("Error creating user:", err);
     }
   };

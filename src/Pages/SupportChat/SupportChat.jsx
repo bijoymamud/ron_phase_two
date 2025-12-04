@@ -190,9 +190,17 @@ const SupportChat = ({ onClose }) => {
   };
 
   const connectWebSocket = () => {
-    if (!websocketChatId || isChatClosedRef.current) {
+    console.log(
+      !websocketChatId || isChatClosedRef.current,
+      " hello ",
+      !websocketChatId,
+      isChatClosedRef
+    );
+    if (!websocketChatId || !isChatClosedRef.current) {
       console.log(
-        "No WebSocket chat ID or chat is closed, skipping connection"
+        "No WebSocket chat ID or chat is closed, skipping connection",
+        websocketChatId,
+        isChatClosedRef
       );
       return;
     }
@@ -272,7 +280,9 @@ const SupportChat = ({ onClose }) => {
   };
 
   useEffect(() => {
+    console.log("hello form out");
     if (websocketChatId && !isLoadingMessages) {
+      console.log("hello form in");
       connectWebSocket();
     }
 
@@ -359,7 +369,7 @@ const SupportChat = ({ onClose }) => {
   if (showSubjectInput) {
     return (
       <div className="flex flex-col h-[80vh]">
-        <div className="flex-1 flex items-center justify-center p-6">
+        <div className="flex-1 flex items-end justify-center p-6">
           <div className="w-full md:max-w-md">
             <div className="bg-white rounded-3xl shadow-md p-6">
               <div className="flex justify-center mb-6">
