@@ -69,7 +69,7 @@ const MentalHealthIndicators = () => {
   return (
     <div className="flex justify-center items-center min-h-[85vh]  md:min-h-screen bg-gray-100 pt-14 pb-10 md:pt-32">
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
-        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-20 md:pt-0">
+        <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-1 flex flex-col items-center mt-20 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
             <img
               src={mentalLogo}

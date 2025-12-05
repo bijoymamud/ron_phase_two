@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import { Play, Pause } from "lucide-react";
 import useCategoryNavigation from "../../hooks/useCategoryNavigation";
 import { useSelector } from "react-redux";
-import backgroundMusic from "../../henas_voice/hannah_other_conditions_short.mp3";
+// import backgroundMusic from "../../henas_voice/hannah_other_conditions_short.mp3";
 import audioWave from "../../../public/Voice.json";
 
 const OthersIssues = () => {

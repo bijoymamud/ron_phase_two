@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 import { Play, Pause } from "lucide-react";
-import backgroundMusic from "../../../henas_voice/hannah_mental_body_section.mp3";
+import backgroundMusic from "../../../henas_voice/hannah_mental_body_section (1).mp3";
 import audioWave from "../../../../public/Voice.json";
 
 const ServiceDetails = () => {

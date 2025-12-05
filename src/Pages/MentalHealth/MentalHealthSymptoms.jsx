@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mentalLogo from "../../assets/mental_health_logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import backgroundMusic from "../../henas_voice/hannah_mental_health_section_checkbox (1).mp3";
+import audioWave from "/public/Voice.json";
+import { Pause, Play } from "lucide-react";
+import Lottie from "lottie-react";
 const MentalHealthSymptoms = () => {
   const {
     register,
@@ -16,6 +19,9 @@ const MentalHealthSymptoms = () => {
 
   const [submittedData, setSubmittedData] = useState(null);
   const navigate = useNavigate();
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioError, setAudioError] = useState(null);
 
   const symptomQuestions = [
     "Do You Have A Hard Time Motivating Yourself?",
@@ -38,6 +44,48 @@ const MentalHealthSymptoms = () => {
     "Do You Ever Wonder Why You Are Still Here Or Question Your Purpose?",
     "Do You Feel Like You Deal With That You Want To Add?",
   ];
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Error playing audio:", error);
+          setIsPlaying(false);
+          setAudioError(
+            "Audio playback was blocked. Click the play button to start."
+          );
+        });
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  }, []);
+  const toggleAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        setAudioError(null);
+      } else {
+        audioRef.current
+          .play()
+          .then(() => {
+            setIsPlaying(true);
+            setAudioError(null);
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            setAudioError("Failed to play audio. Please try again.");
+          });
+      }
+    }
+  };
 
   const onSubmit = (data) => {
     const responses = symptomQuestions.reduce((acc, question, index) => {
@@ -56,6 +104,7 @@ const MentalHealthSymptoms = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[85vh]  md:min-h-screen bg-gray-100 pt-14 pb-10 md:pt-32">
+      <audio ref={audioRef} src={backgroundMusic} loop />
       <div className="md:p-6 p-2 rounded-lg w-full max-w-4xl flex flex-col justify-between">
         <div className="bg-[#002B5C] w-full rounded-lg p-6 mb-6 flex flex-col items-center mt-20 md:pt-0">
           <div className="w-52 h-52 bg-purple-600 rounded-full flex items-center justify-center mb-3">
@@ -68,6 +117,35 @@ const MentalHealthSymptoms = () => {
           <h1 className="text-white text-2xl font-medium mt-2">
             Mental Health
           </h1>
+        </div>
+        {/* Play/Pause Button */}
+        <div className="flex justify-end mb-0">
+          <button
+            type="button"
+            onClick={toggleAudio}
+            aria-label={isPlaying ? "Pause audio" : "Play audio"}
+            className="flex items-center gap-2 py-0  text-white rounded-lg  transition-colors"
+          >
+            {isPlaying ? (
+              <>
+                <Lottie
+                  animationData={audioWave}
+                  loop
+                  autoplay
+                  className="w-20 h-14"
+                />
+                <div className="bg-gray-200 p-2 shadow-md border border-gray-400 rounded-full">
+                  <Pause size={16} className="text-gray-900" />
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="bg-gray-200 p-2 shadow-md border border-gray-400 rounded-full">
+                  <Play size={14} className="text-gray-900" />
+                </div>
+              </>
+            )}
+          </button>
         </div>
 
         <form
